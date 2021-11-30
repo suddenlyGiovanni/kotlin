@@ -39,7 +39,7 @@ class Fir2IrLazyProperty(
     override val endOffset: Int,
     override var origin: IrDeclarationOrigin,
     override val fir: FirProperty,
-    internal val containingClass: FirRegularClass,
+    internal val containingClass: FirRegularClass?,
     override val symbol: Fir2IrPropertySymbol,
     override val isFakeOverride: Boolean
 ) : IrProperty(), AbstractFir2IrLazyDeclaration<FirProperty, IrProperty>, Fir2IrComponents by components {
@@ -168,7 +168,7 @@ class Fir2IrLazyProperty(
             },
             fir.getter, isSetter = false, fir, containingClass,
             Fir2IrSimpleFunctionSymbol(
-                signatureComposer.composeAccessorSignature(fir, isSetter = false, containingClass.symbol.toLookupTag())!!
+                signatureComposer.composeAccessorSignature(fir, isSetter = false, containingClass?.symbol?.toLookupTag())!!
             ),
             isFakeOverride
         ).apply {
@@ -196,7 +196,7 @@ class Fir2IrLazyProperty(
             },
             fir.setter, isSetter = true, fir, containingClass,
             Fir2IrSimpleFunctionSymbol(
-                signatureComposer.composeAccessorSignature(fir, isSetter = true, containingClass.symbol.toLookupTag())!!
+                signatureComposer.composeAccessorSignature(fir, isSetter = true, containingClass?.symbol?.toLookupTag())!!
             ),
             isFakeOverride
         ).apply {
@@ -214,6 +214,7 @@ class Fir2IrLazyProperty(
     }
 
     override var overriddenSymbols: List<IrPropertySymbol> by lazyVar(lock) {
+        if (containingClass == null) return@lazyVar emptyList()
         fir.generateOverriddenPropertySymbols(
             containingClass,
             session,
