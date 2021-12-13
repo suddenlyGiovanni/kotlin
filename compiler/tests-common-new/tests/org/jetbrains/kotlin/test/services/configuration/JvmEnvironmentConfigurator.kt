@@ -367,6 +367,7 @@ class JvmEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfig
         if (phases.isNotEmpty()) {
             val phaseConfig = PhaseConfig(
                 jvmPhases,
+                toDumpStateBefore = phases,
                 toDumpStateAfter = phases,
                 dumpToDirectory = dumpDirectory.absolutePath
             )
