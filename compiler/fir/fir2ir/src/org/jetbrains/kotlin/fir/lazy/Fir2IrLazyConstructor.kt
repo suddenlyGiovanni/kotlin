@@ -91,11 +91,7 @@ class Fir2IrLazyConstructor(
         } else null
     }
 
-    override var extensionReceiverParameter: IrValueParameter?
-        get() = null
-        set(_) {
-            error("Mutating Fir2Ir lazy elements is not possible")
-        }
+    override var extensionReceiverParameter: IrValueParameter? = null
 
     override var contextReceiverParametersCount: Int = 0
 
