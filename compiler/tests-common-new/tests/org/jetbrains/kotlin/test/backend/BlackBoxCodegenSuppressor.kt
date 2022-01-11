@@ -77,7 +77,8 @@ class BlackBoxCodegenSuppressor(
             val targetBackend = testServices.defaultsProvider.defaultTargetBackend ?: module.targetBackend
             return when {
                 ignoredBackends.isEmpty() -> SuppressionResult.NO_MUTE
-                targetBackend in ignoredBackends -> SuppressionResult(true, targetBackend)
+                targetBackend in ignoredBackends || ignoredBackends.any { targetBackend?.compatibleWith == it } ->
+                    SuppressionResult(true, targetBackend)
                 TargetBackend.ANY in ignoredBackends -> SuppressionResult(true, null)
                 else -> SuppressionResult.NO_MUTE
             }
