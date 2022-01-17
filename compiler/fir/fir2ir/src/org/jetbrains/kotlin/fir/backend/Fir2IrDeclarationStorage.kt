@@ -1183,7 +1183,7 @@ class Fir2IrDeclarationStorage(
                     getCachedIrDeclaration = ::getCachedIrFunction,
                     createIrDeclaration = { parent, origin -> createIrFunction(fir, parent, predefinedOrigin = origin) },
                     createIrLazyDeclaration = { signature, lazyParent, declarationOrigin ->
-                        val symbol = Fir2IrSimpleFunctionSymbol(signature, fir.containerSource)
+                        val symbol = symbolTable.referenceSimpleFunction(signature)
                         val irFunction = fir.convertWithOffsets { startOffset, endOffset ->
                             symbolTable.declareSimpleFunction(signature, { symbol }) {
                                 val isFakeOverride =

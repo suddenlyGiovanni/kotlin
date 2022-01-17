@@ -248,6 +248,79 @@ class FakeOverrideGenerator(
         result += irDeclaration
     }
 
+    private inline fun <D : FirCallableDeclaration, reified S : FirCallableSymbol<D>> createFirFakeOverride(
+        klass: FirClass,
+        irClass: IrClass,
+        originalSymbol: S,
+        createFakeOverrideSymbol: (firDeclaration: D, baseSymbol: S) -> S,
+        computeDirectOverridden: FirTypeScope.(S) -> List<S>,
+        scope: FirTypeScope,
+    ): Pair<D, List<S>>? {
+        val classLookupTag = klass.symbol.toLookupTag()
+        val originalDeclaration = originalSymbol.fir
+        val baseSymbol = originalSymbol.unwrapSubstitutionAndIntersectionOverrides() as S
+        return when {
+            originalSymbol.shouldHaveComputedBaseSymbolsForClass(classLookupTag) -> {
+                // Substitution or intersection case
+                // We have already a FIR declaration for such fake override
+                originalDeclaration to computeBaseSymbols(
+                    originalSymbol,
+                    computeDirectOverridden,
+                    scope, classLookupTag
+                )
+            }
+            originalDeclaration.allowsToHaveFakeOverrideIn(klass) -> {
+                // Trivial fake override case
+                // We've got no relevant declaration in FIR world for such a fake override in current class, thus we're creating it here
+                val fakeOverrideSymbol = createFakeOverrideSymbol(originalDeclaration, baseSymbol)
+                declarationStorage.saveFakeOverrideInClass(irClass, originalDeclaration, fakeOverrideSymbol.fir)
+                classifierStorage.preCacheTypeParameters(originalDeclaration)
+                fakeOverrideSymbol.fir to listOf(originalSymbol)
+            }
+            else -> {
+                null
+            }
+        }
+    }
+
+    fun createFirFunctionFakeOverride(
+        klass: FirClass,
+        irClass: IrClass,
+        originalSymbol: FirNamedFunctionSymbol,
+        scope: FirTypeScope
+    ) = createFirFakeOverride(
+        klass, irClass, originalSymbol,
+        createFakeOverrideSymbol = { firFunction, callableSymbol ->
+            FirFakeOverrideGenerator.createSubstitutionOverrideFunction(
+                session, firFunction, callableSymbol,
+                newDispatchReceiverType = klass.defaultType(),
+                derivedClassId = klass.symbol.classId,
+                isExpect = (klass as? FirRegularClass)?.isExpect == true
+            )
+        },
+        computeDirectOverridden = FirTypeScope::getDirectOverriddenFunctions,
+        scope
+    )
+
+    fun createFirPropertyFakeOverride(
+        klass: FirClass,
+        irClass: IrClass,
+        originalSymbol: FirPropertySymbol,
+        scope: FirTypeScope
+    ) = createFirFakeOverride(
+        klass, irClass, originalSymbol,
+        createFakeOverrideSymbol = { firProperty, callableSymbol ->
+            FirFakeOverrideGenerator.createSubstitutionOverrideProperty(
+                session, firProperty, callableSymbol,
+                newDispatchReceiverType = klass.defaultType(),
+                derivedClassId = klass.symbol.classId,
+                isExpect = (klass as? FirRegularClass)?.isExpect == true
+            )
+        },
+        computeDirectOverridden = FirTypeScope::getDirectOverriddenProperties,
+        scope
+    )
+
     private inline fun <reified S : FirCallableSymbol<*>> computeBaseSymbols(
         symbol: S,
         directOverridden: FirTypeScope.(S) -> List<S>,
