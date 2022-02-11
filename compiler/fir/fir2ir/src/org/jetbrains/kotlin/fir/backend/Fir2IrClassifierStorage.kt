@@ -95,14 +95,15 @@ class Fir2IrClassifierStorage(
     }
 
     internal fun preCacheTypeParameters(owner: FirTypeParameterRefsOwner) {
+        val ownerSig = signatureComposer.composeSignature(owner as FirDeclaration) // containingClass?
         for ((index, typeParameter) in owner.typeParameters.withIndex()) {
             val original = typeParameter.symbol.fir
             getCachedIrTypeParameter(original, index)
-                ?: createIrTypeParameterWithoutBounds(original, index)
+                ?: createIrTypeParameterWithoutBounds(original, index, containerSignature = ownerSig)
             if (owner is FirProperty && owner.isVar) {
                 val context = ConversionTypeContext.DEFAULT.inSetter()
                 getCachedIrTypeParameter(original, index, context)
-                    ?: createIrTypeParameterWithoutBounds(original, index, context)
+                    ?: createIrTypeParameterWithoutBounds(original, index, context, containerSignature = ownerSig)
             }
         }
     }
@@ -343,13 +344,28 @@ class Fir2IrClassifierStorage(
     private fun createIrTypeParameterWithoutBounds(
         typeParameter: FirTypeParameter,
         index: Int,
-        typeContext: ConversionTypeContext = ConversionTypeContext.DEFAULT
+        typeContext: ConversionTypeContext = ConversionTypeContext.DEFAULT,
+        containerSignature: IdSignature? = null
     ): IrTypeParameter {
         require(index >= 0)
         val origin = typeParameter.computeIrOrigin()
         val irTypeParameter = with(typeParameter) {
             convertWithOffsets { startOffset, endOffset ->
-                irFactory.createTypeParameter(
+                signatureComposer.composeTypeParameterSignature(
+                    typeParameter, index, containerSignature
+                )?.let { signature ->
+                    symbolTable.declareGlobalTypeParameter(
+                        signature,
+                        symbolFactory = { IrTypeParameterPublicSymbolImpl(signature) }
+                    ) { symbol ->
+                        irFactory.createTypeParameter(
+                            startOffset, endOffset, origin, symbol,
+                            name, if (index < 0) 0 else index,
+                            isReified,
+                            variance
+                        )
+                    }
+                } ?: irFactory.createTypeParameter(
                     startOffset, endOffset, origin, IrTypeParameterSymbolImpl(),
                     name, if (index < 0) 0 else index,
                     isReified,
