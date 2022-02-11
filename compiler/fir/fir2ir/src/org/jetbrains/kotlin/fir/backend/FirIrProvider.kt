@@ -11,6 +11,7 @@ import org.jetbrains.kotlin.fir.backend.generators.FakeOverrideGenerator
 import org.jetbrains.kotlin.fir.declarations.*
 import org.jetbrains.kotlin.fir.declarations.utils.classId
 import org.jetbrains.kotlin.fir.resolve.providers.symbolProvider
+import org.jetbrains.kotlin.fir.scopes.getProperties
 import org.jetbrains.kotlin.fir.scopes.unsubstitutedScope
 import org.jetbrains.kotlin.fir.symbols.SymbolInternals
 import org.jetbrains.kotlin.fir.symbols.impl.FirPropertySymbol
@@ -125,6 +126,15 @@ class FirIrProvider(val fir2IrComponents: Fir2IrComponents) : IrProvider {
                         properties.add(property)
                     }
                     firCandidates = properties
+                }
+                SymbolKind.FIELD_SYMBOL -> {
+                    parent = classifierStorage.getIrClassSymbol(firClass.symbol).owner
+                    val lastName = Name.guessByFirstCharacter(nameSegments.last())
+                    val fields = mutableListOf<FirVariable>()
+                    scope.processPropertiesByName(lastName) { propertySymbol ->
+                        33
+                    }
+                    firCandidates = fields
                 }
                 else -> {
                     val lastName = nameSegments.last()
