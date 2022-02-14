@@ -1,10 +1,8 @@
 fun test(i: Int): Int {
   return when {
     greater(arg0 = i, arg1 = 0) -> 1
-    else -> when {
-      less(arg0 = i, arg1 = 0) -> -1
-      else -> 0
-    }
+    less(arg0 = i, arg1 = 0) -> -1
+    else -> 0
   }
 }
 
@@ -37,3 +35,14 @@ fun testEmptyBranches3(flag: Boolean) {
     else -> true
   } /*~> Unit */
 }
+
+fun testIfElseInElseBlock(first: Boolean, second: Boolean): Int {
+  when {
+    first -> return 4
+    else -> when {
+      second -> return 2
+      else -> return -1
+    }
+  }
+}
+

@@ -37,3 +37,20 @@ fun testEmptyBranches3(flag: Boolean) {
     else -> true /*~> Unit */
   }
 }
+
+fun testIfElseInElseBlock(first: Boolean, second: Boolean): Int {
+  when {
+    first -> { // BLOCK
+      return 4
+    }
+    else -> { // BLOCK
+      when {
+        second -> { // BLOCK
+          return 2
+        }
+        else -> return -1
+      }
+    }
+  }
+}
+

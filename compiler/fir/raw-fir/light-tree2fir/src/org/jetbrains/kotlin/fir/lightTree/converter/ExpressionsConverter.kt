@@ -1217,36 +1217,46 @@ class ExpressionsConverter(
      * @see org.jetbrains.kotlin.fir.builder.RawFirBuilder.Visitor.visitIfExpression
      */
     private fun convertIfExpression(ifExpression: LighterASTNode): FirExpression {
-        var firCondition: FirExpression? = null
-        var thenBlock: LighterASTNode? = null
-        var elseBlock: LighterASTNode? = null
-        ifExpression.forEachChildren {
-            when (it.tokenType) {
-                CONDITION -> firCondition = getAsFirExpression(it, "If statement should have condition")
-                THEN -> thenBlock = it
-                ELSE -> elseBlock = it
-            }
-        }
-
         return buildWhenExpression {
             source = ifExpression.toFirSourceElement()
-            val trueBranch = convertLoopBody(thenBlock)
-            branches += buildWhenBranch {
-                source = thenBlock?.toFirSourceElement()
-                condition = firCondition ?: buildErrorExpression(
-                    null,
-                    ConeSimpleDiagnostic("If statement should have condition", DiagnosticKind.Syntax)
-                )
-                result = trueBranch
-            }
-            if (elseBlock != null) {
-                val elseBranch = convertLoopBody(elseBlock)
+
+            var lastIfExpression: LighterASTNode = ifExpression
+            whenBranches@ while (true) {
+                var conditionNode: LighterASTNode? = null
+                var thenBlock: LighterASTNode? = null
+                var elseBlock: LighterASTNode? = null
+                lastIfExpression.forEachChildren {
+                    when (it.tokenType) {
+                        CONDITION -> conditionNode = it
+                        THEN -> thenBlock = it
+                        ELSE -> elseBlock = it
+                    }
+                }
+                val trueBranch = convertLoopBody(thenBlock)
                 branches += buildWhenBranch {
-                    source = elseBlock?.toFirSourceElement()
-                    condition = buildElseIfTrueCondition()
-                    result = elseBranch
+                    source = conditionNode?.toFirSourceElement(KtFakeSourceElementKind.WhenCondition)
+                    condition = getAsFirExpression(conditionNode, "If statement should have condition")
+                    result = trueBranch
+                }
+                if (elseBlock != null) {
+                    val childOfElseBlock = elseBlock?.getFirstChild()
+                    when (childOfElseBlock?.tokenType) {
+                        IF -> lastIfExpression = childOfElseBlock!!
+                        else -> {
+                            val elseBranch = convertLoopBody(elseBlock)
+                            branches += buildWhenBranch {
+                                source = elseBlock?.toFirSourceElement()
+                                condition = buildElseIfTrueCondition()
+                                result = elseBranch
+                            }
+                            break@whenBranches
+                        }
+                    }
+                } else {
+                    break@whenBranches
                 }
             }
+
             usedAsExpression = ifExpression.usedAsExpression
         }
     }

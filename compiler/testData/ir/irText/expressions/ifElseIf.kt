@@ -17,3 +17,13 @@ fun testEmptyBranches3(flag: Boolean) {
     if (flag)
     else true
 }
+
+fun testIfElseInElseBlock(first: Boolean, second: Boolean): Int {
+    if (first) {
+        return 4
+    } else {
+        if (second) {
+            return 2
+        } else return -1
+    }
+}

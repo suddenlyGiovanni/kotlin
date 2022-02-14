@@ -16,9 +16,9 @@
 fun case1() {
     val b = true
     val c = true
-    val a = if (b) {
+    val a = <!INVALID_IF_AS_EXPRESSION!>if<!> (b) {
         "first true"
-    } else <!INVALID_IF_AS_EXPRESSION!>if<!> (c) {
+    } else if (c) {
         "else if true"
     }
 }
