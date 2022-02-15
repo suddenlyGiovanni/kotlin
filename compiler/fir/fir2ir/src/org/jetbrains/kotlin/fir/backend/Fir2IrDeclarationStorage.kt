@@ -476,7 +476,6 @@ class Fir2IrDeclarationStorage(
                     function.origin == FirDeclarationOrigin.Enhancement -> IrDeclarationOrigin.IR_EXTERNAL_JAVA_DECLARATION_STUB
             else -> function.computeIrOrigin(predefinedOrigin)
         }
-        classifierStorage.preCacheTypeParameters(function)
         val name = simpleFunction?.name
             ?: if (isLambda) SpecialNames.ANONYMOUS else Name.special("<no name provided>")
         val visibility = simpleFunction?.visibility ?: Visibilities.Local
@@ -486,6 +485,7 @@ class Fir2IrDeclarationStorage(
         val signature = if (isLocal) null else signatureComposer.composeSignature(function, containingClass)
         val created = function.convertWithOffsets { startOffset, endOffset ->
             val result = declareIrSimpleFunction(signature, simpleFunction?.containerSource) { symbol ->
+                classifierStorage.preCacheTypeParameters(function, symbol)
                 irFactory.createFunction(
                     startOffset, endOffset, updatedOrigin, symbol,
                     name, components.visibilityConverter.convertToDescriptorVisibility(visibility),
@@ -570,10 +570,10 @@ class Fir2IrDeclarationStorage(
     ): IrConstructor = convertCatching(constructor) {
         val origin = constructor.computeIrOrigin(predefinedOrigin)
         val isPrimary = constructor.isPrimary
-        classifierStorage.preCacheTypeParameters(constructor)
         val signature = if (isLocal) null else signatureComposer.composeSignature(constructor)
         val created = constructor.convertWithOffsets { startOffset, endOffset ->
             declareIrConstructor(signature) { symbol ->
+                classifierStorage.preCacheTypeParameters(constructor, symbol)
                 irFactory.createConstructor(
                     startOffset, endOffset, origin, symbol,
                     SpecialNames.INIT, components.visibilityConverter.convertToDescriptorVisibility(constructor.visibility),
@@ -792,15 +792,15 @@ class Fir2IrDeclarationStorage(
         containingClass: ConeClassLikeLookupTag? = (irParent as? IrClass)?.classId?.let { ConeClassLikeLookupTagImpl(it) },
     ): IrProperty = convertCatching(property) {
         val origin = property.computeIrOrigin(predefinedOrigin)
-        classifierStorage.preCacheTypeParameters(property)
-        if (property.delegate != null) {
-            ((property.delegate as? FirQualifiedAccess)?.calleeReference?.resolvedSymbol?.fir as? FirTypeParameterRefsOwner)?.let {
-                classifierStorage.preCacheTypeParameters(it)
-            }
-        }
+//        if (property.delegate != null) {
+//            ((property.delegate as? FirQualifiedAccess)?.calleeReference?.resolvedSymbol?.fir as? FirTypeParameterRefsOwner)?.let {
+//                classifierStorage.preCacheTypeParameters(it)
+//            }
+//        }
         val signature = if (isLocal) null else signatureComposer.composeSignature(property, containingClass)
         return property.convertWithOffsets { startOffset, endOffset ->
             val result = declareIrProperty(signature, property.containerSource) { symbol ->
+                classifierStorage.preCacheTypeParameters(property, symbol)
                 irFactory.createProperty(
                     startOffset, endOffset, origin, symbol,
                     property.name, components.visibilityConverter.convertToDescriptorVisibility(property.visibility), property.modality!!,
