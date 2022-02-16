@@ -83,6 +83,7 @@ class KotlinMetadataTargetConfigurator :
                     // Clear the dependencies of the compilation so that they don't take time resolving during task graph construction:
                     compileDependencyFiles = target.project.files()
                 }
+                fixConfigurationForLegacyMetadata()
                 compileKotlinTaskProvider.configure { it.onlyIf { isCompatibilityMetadataVariantEnabled } }
             }
 
@@ -310,6 +311,8 @@ class KotlinMetadataTargetConfigurator :
             (compilationDetails as DefaultCompilationDetails<*>).addExactSourceSetsEagerly(setOf(sourceSet))
 
             configureMetadataDependenciesForCompilation(this@apply)
+
+            fixConfigurationForLegacyMetadata()
 
             if (!isHostSpecific) {
                 val metadataContent = project.filesWithUnpackedArchives(this@apply.output.allOutputs, setOf("klib"))
@@ -629,4 +632,22 @@ internal fun Project.filesWithUnpackedArchives(from: FileCollection, extensions:
 
 internal fun Project.getMetadataCompilationForSourceSet(sourceSet: KotlinSourceSet): AbstractKotlinCompilation<*>? {
     return multiplatformExtension.metadata().compilations.findByName(sourceSet.name)
+}
+
+/**
+ * @see KT-50925
+ * Configurations with following attributes is used for resolving Legacy Metadata Variants
+ *
+ * * org.gradle.usage=kotlin-api
+ * * org.jetbrains.kotlin.platform.type=common
+ *
+ * and now considered deprecated in favor of kotlin-metadata KLIB format.
+ * Manual resolution of such configurations in HMPP projects without Compatibility Metadata Variant may fail due to lack of such variant.
+ */
+private fun AbstractKotlinCompilation<*>.fixConfigurationForLegacyMetadata() {
+    if (project.isCompatibilityMetadataVariantEnabled) return
+
+    project.configurations.getByName(compileDependencyConfigurationName).apply {
+        attributes.attribute(USAGE_ATTRIBUTE, project.usageByName(KotlinUsages.KOTLIN_METADATA))
+    }
 }
