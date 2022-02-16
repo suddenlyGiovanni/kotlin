@@ -41,4 +41,4 @@ internal annotation class PlatformDependent
 @Target(AnnotationTarget.CONSTRUCTOR, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.BINARY)
 @SinceKotlin("1.6")
-public annotation class IntrinsicConstEvaluation
+internal annotation class IntrinsicConstEvaluation
