@@ -280,9 +280,11 @@ private val kotlinNothingValueExceptionPhase = makeIrFilePhase<CommonBackendCont
 private val jvmFilePhases = listOf(
     typeAliasAnnotationMethodsPhase,
     provisionalFunctionExpressionPhase,
+    makeFakePhase(),
 
     jvmOverloadsAnnotationPhase,
     mainMethodGenerationPhase,
+    makeFakePhase(),
 
     inventNamesForLocalClassesPhase,
     kCallableNamePropertyPhase,
@@ -290,8 +292,10 @@ private val jvmFilePhases = listOf(
     annotationImplementationPhase,
     polymorphicSignaturePhase,
     varargPhase,
+    makeFakePhase(),
 
     jvmLateinitLowering,
+    makeFakePhase(),
 
     inlineCallableReferenceToLambdaPhase,
     functionReferencePhase,
@@ -300,15 +304,18 @@ private val jvmFilePhases = listOf(
     propertyReferencePhase,
     arrayConstructorPhase,
     constPhase1,
+    makeFakePhase(),
 
     // TODO: merge the next three phases together, as visitors behave incorrectly between them
     //  (backing fields moved out of companion objects are reachable by two paths):
     moveOrCopyCompanionObjectFieldsPhase,
     propertiesPhase,
     remapObjectFieldAccesses,
+    makeFakePhase(),
 
     anonymousObjectSuperConstructorPhase,
     jvmBuiltInsPhase,
+    makeFakePhase(),
 
     rangeContainsLoweringPhase,
     forLoopsPhase,
@@ -317,29 +324,36 @@ private val jvmFilePhases = listOf(
     jvmInlineClassPhase,
     tailrecPhase,
     // makePatchParentsPhase(),
+    makeFakePhase(),
 
     enumWhenPhase,
     singletonReferencesPhase,
+    makeFakePhase(),
 
     assertionPhase,
     returnableBlocksPhase,
     sharedVariablesPhase,
     localDeclarationsPhase,
     // makePatchParentsPhase(),
+    makeFakePhase(),
 
     jvmLocalClassExtractionPhase,
     staticCallableReferencePhase,
+    makeFakePhase(),
 
     jvmDefaultConstructorPhase,
+    makeFakePhase(),
 
     flattenStringConcatenationPhase,
     foldConstantLoweringPhase,
     computeStringTrimPhase,
     jvmStringConcatenationLowering,
+    makeFakePhase(),
 
     defaultArgumentStubPhase,
     defaultArgumentInjectorPhase,
     defaultArgumentCleanerPhase,
+    makeFakePhase(),
 
     // makePatchParentsPhase(),
     interfacePhase,
@@ -348,14 +362,17 @@ private val jvmFilePhases = listOf(
     interfaceSuperCallsPhase,
     interfaceDefaultCallsPhase,
     interfaceObjectCallsPhase,
+    makeFakePhase(),
 
     tailCallOptimizationPhase,
     addContinuationPhase,
     constPhase2, // handle const properties in default arguments of "original" suspend funs
+    makeFakePhase(),
 
     innerClassesPhase,
     innerClassesMemberBodyPhase,
     innerClassConstructorCallsPhase,
+    makeFakePhase(),
 
     // makePatchParentsPhase(),
 
@@ -369,6 +386,7 @@ private val jvmFilePhases = listOf(
     staticDefaultFunctionPhase,
     bridgePhase,
     syntheticAccessorPhase,
+    makeFakePhase(),
 
     jvmArgumentNullabilityAssertions,
     toArrayPhase,
@@ -379,9 +397,11 @@ private val jvmFilePhases = listOf(
     replaceKFunctionInvokeWithFunctionInvokePhase,
     kotlinNothingValueExceptionPhase,
     makePropertyDelegateMethodsStaticPhase,
+    makeFakePhase(),
 
     renameFieldsPhase,
     fakeInliningLocalVariablesLowering,
+    makeFakePhase(),
 
     // makePatchParentsPhase()
 )
