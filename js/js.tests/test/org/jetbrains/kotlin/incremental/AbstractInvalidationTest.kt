@@ -255,17 +255,12 @@ abstract class AbstractInvalidationTest : KotlinTestWithEnvironment() {
         executor: CacheExecutor
     ): CacheUpdateStatus {
         val modulePath = moduleName.toCanonicalPath()
-
-        val icCacheMap: Map<ModulePath, CacheInfo> = loadCacheInfo(icCachePaths).also {
-            it[modulePath] = CacheInfo.loadOrCreate(cachePath, modulePath)
-        }
-
         val statuses = mutableMapOf<String, CacheUpdateStatus>()
         actualizeCaches(
             modulePath,
             compilerConfiguration,
             dependencies,
-            icCacheMap.map { it.value.path },
+            icCachePaths + cachePath,
             { irFactory },
             mainArguments,
             executor

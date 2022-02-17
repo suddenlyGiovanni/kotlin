@@ -18,7 +18,7 @@ private const val fileBinaryAst = "binary.ast"
 private const val fileBinaryDts = "binary.dst"
 private const val fileSourceMap = "source.map"
 
-typealias Hash = Long // Any long hash
+typealias Hash = ULong // Any long hash
 typealias FlatHash = Hash // Hash of inline function without its underlying inline call tree
 typealias TransHash = Hash // Hash of inline function including its underlying inline call tree
 
@@ -27,8 +27,6 @@ private val md5 = MessageDigest.getInstance("MD5")
 private fun ByteArray.toHex(): String = joinToString(separator = "") { eachByte -> "%02x".format(eachByte) }
 
 private fun createFileCacheId(fileName: String): String = md5.digest(fileName.encodeToByteArray()).toHex()
-
-class ICCache()
 
 class FileCache(val name: String, var ast: ByteArray?, var dts: ByteArray?, var sourceMap: ByteArray?)
 class ModuleCache(val name: String, val asts: Map<String, FileCache>)
@@ -55,7 +53,7 @@ interface PersistentCacheProvider {
     companion object {
         val EMPTY = object : PersistentCacheProvider {
             override fun fileFingerPrint(path: String): Hash {
-                return 0
+                return 0UL
             }
 
             override fun inlineGraphForFile(path: String, sigResolver: (Int) -> IdSignature): Collection<Pair<IdSignature, TransHash>> {
@@ -100,14 +98,12 @@ class PersistentCacheProviderImpl(private val cachePath: String) : PersistentCac
             return File(File(cachePath), fileId)
         }
 
-    private fun String.parseHash(): Hash = java.lang.Long.parseUnsignedLong(this, 16)
-
     override fun fileFingerPrint(path: String): Hash {
         val dataFile = File(path.fileDir, fileInfoFile)
         return if (dataFile.exists()) {
             val hashLine = dataFile.readLines()[1]
-            hashLine.parseHash()
-        } else 0
+            hashLine.toULong(16)
+        } else 0UL
     }
 
     private fun parseHashList(
@@ -124,7 +120,7 @@ class PersistentCacheProviderImpl(private val cachePath: String) : PersistentCac
                 val sigId = Integer.parseInt(sigIdS)
                 try {
                     val idSig = sigResolver(sigId)
-                    val tHash = hashString.parseHash()
+                    val tHash = hashString.toULong(16)
                     idSig to tHash
                 } catch (ex: IndexOutOfBoundsException) {
                     // println("Signature [$sigId] has been removed")
@@ -268,7 +264,7 @@ class PersistentCacheConsumerImpl(private val cachePath: String) : PersistentCac
             for (hashData in hashes) {
                 val (sig, hash) = hashData
                 val sigId = sigResolver(sig)
-                val hashString = hash.toULong().toString(16)
+                val hashString = hash.toString(16)
                 it.println("$sigId:$hashString")
             }
         }
@@ -287,7 +283,7 @@ class PersistentCacheConsumerImpl(private val cachePath: String) : PersistentCac
         infoFile.createNewFile()
         PrintWriter(infoFile).use {
             it.println(path)
-            it.println(fingerprint.toULong().toString(16))
+            it.println(fingerprint.toString(16))
         }
     }
 

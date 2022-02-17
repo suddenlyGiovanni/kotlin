@@ -228,7 +228,7 @@ class K2JsIrCompiler : CLICompiler<K2JSCompilerArguments>() {
                 messageCollector.report(INFO, "IC per-file is $strStatus duration ${now - start}ms; module [${File(updatedModule).name}]")
                 start = now
             }
-        } else emptyList()
+        } else emptyMap()
 
         // Run analysis if main module is sources
         lateinit var sourceModule: ModulesStructure

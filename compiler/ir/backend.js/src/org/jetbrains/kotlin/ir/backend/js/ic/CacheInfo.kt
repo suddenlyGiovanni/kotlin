@@ -11,7 +11,7 @@ import java.io.File
 data class CacheInfo(
     val path: String,
     val libPath: String,
-    val moduleName: String?,
+    var moduleName: String?,
     var flatHash: ULong,
     var transHash: ULong,
     var configHash: ULong

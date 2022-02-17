@@ -34,7 +34,7 @@ class TestModuleCache(val files: MutableMap<String, FileCache>) {
     fun cacheProvider(): PersistentCacheProvider {
         return object : PersistentCacheProvider {
             override fun fileFingerPrint(path: String): Hash {
-                return 0L
+                return 0UL
             }
 
             override fun inlineGraphForFile(path: String, sigResolver: (Int) -> IdSignature): Collection<Pair<IdSignature, TransHash>> {
