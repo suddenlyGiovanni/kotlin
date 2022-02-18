@@ -672,6 +672,10 @@ open class SymbolTable(
         }
     }
 
+    fun declareFieldWithSignature(sig: IdSignature, symbol: IrFieldSymbol) {
+        fieldSymbolTable.set(sig, symbol)
+    }
+
     override fun referenceField(descriptor: PropertyDescriptor): IrFieldSymbol =
         fieldSymbolTable.referenced(descriptor) { signature -> createFieldSymbol(descriptor, signature) }
 
@@ -747,6 +751,10 @@ open class SymbolTable(
                 declare(descriptor, { IrPropertySymbolImpl(descriptor) }, factory)
             }
         }
+    }
+
+    fun declarePropertyWithSignature(sig: IdSignature, symbol: IrPropertySymbol) {
+        propertySymbolTable.set(sig, symbol)
     }
 
     override fun referenceProperty(descriptor: PropertyDescriptor): IrPropertySymbol =
