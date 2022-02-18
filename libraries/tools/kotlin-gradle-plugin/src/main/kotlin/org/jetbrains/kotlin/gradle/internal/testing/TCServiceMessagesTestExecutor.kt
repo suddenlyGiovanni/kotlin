@@ -52,10 +52,43 @@ class TCServiceMessagesTestExecutor(
 
             try {
                 if (spec.dryRunArg != null) {
-                    exec(spec, client, rootOperation, spec.dryRunArg)
+                    val exec = execHandleFactory.newExec()
+                    spec.forkOptions.copyTo(exec)
+                    execHandle = exec.build()
+                    exec.args = spec.args + spec.dryRunArg
+                    execHandle.start()
+                    val result = execHandle.waitForFinish()
+                    if (result.exitValue != 0) {
+                        error(client.testFailedMessage(execHandle, result.exitValue))
+                    }
                 }
 
-                exec(spec, client, rootOperation)
+                val exec = execHandleFactory.newExec()
+                spec.forkOptions.copyTo(exec)
+                exec.args = spec.args
+                exec.standardOutput = TCServiceMessageOutputStreamHandler(
+                    client,
+                    { spec.showSuppressedOutput() },
+                    log,
+                    ignoreTcsmOverflow
+                )
+                exec.errorOutput = TCServiceMessageOutputStreamHandler(
+                    client,
+                    { spec.showSuppressedOutput() },
+                    log,
+                    ignoreTcsmOverflow
+                )
+                execHandle = exec.build()
+
+                lateinit var result: ExecResult
+                client.root(rootOperation) {
+                    execHandle.start()
+                    result = execHandle.waitForFinish()
+                }
+
+                if (spec.checkExitCode && result.exitValue != 0) {
+                    error(client.testFailedMessage(execHandle, result.exitValue))
+                }
             } catch (e: Throwable) {
                 spec.showSuppressedOutput()
 
@@ -71,41 +104,6 @@ class TCServiceMessagesTestExecutor(
                     throw e
                 }
             }
-        }
-    }
-
-    private fun exec(
-        spec: TCServiceMessagesTestExecutionSpec,
-        client: TCServiceMessagesClient,
-        rootOperation: OperationIdentifier,
-        dryRunArg: String? = null,
-    ) {
-        val exec = execHandleFactory.newExec()
-        spec.forkOptions.copyTo(exec)
-        exec.args = spec.args
-        exec.standardOutput = TCServiceMessageOutputStreamHandler(
-            client,
-            { spec.showSuppressedOutput() },
-            log,
-            ignoreTcsmOverflow
-        )
-        exec.errorOutput = TCServiceMessageOutputStreamHandler(
-            client,
-            { spec.showSuppressedOutput() },
-            log,
-            ignoreTcsmOverflow
-        )
-        execHandle = exec.build()
-        dryRunArg?.let { exec.args = spec.args + it }
-
-        lateinit var result: ExecResult
-        client.root(rootOperation) {
-            execHandle.start()
-            result = execHandle.waitForFinish()
-        }
-
-        if ((dryRunArg != null || spec.checkExitCode) && result.exitValue != 0) {
-            error(client.testFailedMessage(execHandle, result.exitValue))
         }
     }
 
