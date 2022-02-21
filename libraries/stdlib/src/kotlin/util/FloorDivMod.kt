@@ -5,6 +5,7 @@
 
 // Auto-generated file. DO NOT EDIT!
 
+@file:Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 @file:kotlin.jvm.JvmName("NumbersKt")
 @file:kotlin.jvm.JvmMultifileClass
 package kotlin

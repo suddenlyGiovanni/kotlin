@@ -476,7 +476,7 @@ class GeneratePrimitives(out: PrintWriter) : BuiltInsSourceGenerator(out) {
     }
 }
 
-class GenerateFloorDivMod(out: PrintWriter) : BuiltInsSourceGenerator(out) {
+class GenerateFloorDivMod(out: PrintWriter) : BuiltInsSourceGenerator(out, suppressInvisibleReference = true) {
 
     override fun getMultifileClassName() = "NumbersKt"
     override fun generateBody() {

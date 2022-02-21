@@ -30,7 +30,7 @@ val RUNTIME_JVM_DIR = File("libraries/stdlib/jvm/runtime/")
 val UNSIGNED_TYPES_DIR = File("libraries/stdlib/unsigned/src")
 val STDLIB_DIR = File("libraries/stdlib/src")
 
-abstract class BuiltInsSourceGenerator(val out: PrintWriter) {
+abstract class BuiltInsSourceGenerator(val out: PrintWriter, private val suppressInvisibleReference: Boolean = false) {
     protected abstract fun generateBody(): Unit
 
     protected open fun getPackage(): String = "kotlin"
@@ -43,6 +43,9 @@ abstract class BuiltInsSourceGenerator(val out: PrintWriter) {
         // and we don't want to scare users with any internal information about our project
         out.println("// Auto-generated file. DO NOT EDIT!")
         out.println()
+        if (suppressInvisibleReference) {
+            out.println("@file:Suppress(\"INVISIBLE_MEMBER\", \"INVISIBLE_REFERENCE\")")
+        }
         getMultifileClassName()?.let { name ->
             out.println("@file:kotlin.jvm.JvmName(\"$name\")")
             out.println("@file:kotlin.jvm.JvmMultifileClass")

@@ -2,6 +2,7 @@
 // ALLOW_KOTLIN_PACKAGE
 
 // FILE: uint.kt
+@file:Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 
 package kotlin
 

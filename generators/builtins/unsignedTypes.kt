@@ -32,7 +32,7 @@ fun generateUnsignedTypes(
 
 }
 
-class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltInsSourceGenerator(out) {
+class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltInsSourceGenerator(out, suppressInvisibleReference = true) {
     val className = type.capitalized
     val storageType = type.asSigned.capitalized
 
