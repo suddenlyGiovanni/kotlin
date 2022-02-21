@@ -3697,6 +3697,16 @@ public class LazyBodyIsNotTouchedTilContractsPhaseTestGenerated extends Abstract
             KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/fir/analysis-tests/testData/resolve/unqualifiedEnum"), Pattern.compile("^([^.]+)\\.kt$"), null, true);
         }
 
+        @TestMetadata("correctJava.kt")
+        public void testCorrectJava() throws Exception {
+            runTest("compiler/fir/analysis-tests/testData/resolve/unqualifiedEnum/correctJava.kt");
+        }
+
+        @TestMetadata("incorrectJava.kt")
+        public void testIncorrectJava() throws Exception {
+            runTest("compiler/fir/analysis-tests/testData/resolve/unqualifiedEnum/incorrectJava.kt");
+        }
+
         @TestMetadata("nested.kt")
         public void testNested() throws Exception {
             runTest("compiler/fir/analysis-tests/testData/resolve/unqualifiedEnum/nested.kt");

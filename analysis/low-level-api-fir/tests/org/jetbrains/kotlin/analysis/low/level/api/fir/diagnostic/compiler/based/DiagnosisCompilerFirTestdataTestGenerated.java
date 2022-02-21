@@ -4132,6 +4132,18 @@ public class DiagnosisCompilerFirTestdataTestGenerated extends AbstractDiagnosis
             }
 
             @Test
+            @TestMetadata("correctJava.kt")
+            public void testCorrectJava() throws Exception {
+                runTest("compiler/fir/analysis-tests/testData/resolve/unqualifiedEnum/correctJava.kt");
+            }
+
+            @Test
+            @TestMetadata("incorrectJava.kt")
+            public void testIncorrectJava() throws Exception {
+                runTest("compiler/fir/analysis-tests/testData/resolve/unqualifiedEnum/incorrectJava.kt");
+            }
+
+            @Test
             @TestMetadata("nested.kt")
             public void testNested() throws Exception {
                 runTest("compiler/fir/analysis-tests/testData/resolve/unqualifiedEnum/nested.kt");
