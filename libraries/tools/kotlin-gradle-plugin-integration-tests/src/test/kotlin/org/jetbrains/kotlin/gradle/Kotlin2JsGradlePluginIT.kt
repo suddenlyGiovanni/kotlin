@@ -1116,10 +1116,14 @@ abstract class AbstractKotlin2JsGradlePluginIT(protected val irBackend: Boolean)
             projectPath.resolve("src/test/kotlin/Tests.kt").appendText(
                 "\n" + """
                 |
+                |@JsModule("foo")
+                |@JsNonModule
+                |external val foo: dynamic
+                |
                 |class Tests2 {
                 |   @Test
                 |   fun testHello() {
-                |       js("require")("foo")
+                |       foo
                 |   }
                 |}
                 """.trimMargin()

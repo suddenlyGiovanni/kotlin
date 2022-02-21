@@ -9,7 +9,6 @@ import org.gradle.api.internal.tasks.testing.TestExecuter
 import org.gradle.api.internal.tasks.testing.TestExecutionSpec
 import org.gradle.api.internal.tasks.testing.TestResultProcessor
 import org.gradle.internal.operations.BuildOperationExecutor
-import org.gradle.internal.operations.OperationIdentifier
 import org.gradle.process.ExecResult
 import org.gradle.process.ProcessForkOptions
 import org.gradle.process.internal.ExecHandle
@@ -54,10 +53,11 @@ class TCServiceMessagesTestExecutor(
                 if (spec.dryRunArg != null) {
                     val exec = execHandleFactory.newExec()
                     spec.forkOptions.copyTo(exec)
-                    execHandle = exec.build()
                     exec.args = spec.args + spec.dryRunArg
+                    execHandle = exec.build()
+
                     execHandle.start()
-                    val result = execHandle.waitForFinish()
+                    val result: ExecResult = execHandle.waitForFinish()
                     if (result.exitValue != 0) {
                         error(client.testFailedMessage(execHandle, result.exitValue))
                     }
