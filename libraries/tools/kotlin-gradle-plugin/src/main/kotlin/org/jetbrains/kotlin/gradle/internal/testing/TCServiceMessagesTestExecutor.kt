@@ -49,20 +49,20 @@ class TCServiceMessagesTestExecutor(
 
             val client = spec.createClient(testResultProcessor, log)
 
-            try {
-                if (spec.dryRunArg != null) {
-                    val exec = execHandleFactory.newExec()
-                    spec.forkOptions.copyTo(exec)
-                    exec.args = spec.args + spec.dryRunArg
-                    execHandle = exec.build()
+            if (spec.dryRunArg != null) {
+                val exec = execHandleFactory.newExec()
+                spec.forkOptions.copyTo(exec)
+                exec.args = spec.args
+                execHandle = exec.build()
 
-                    execHandle.start()
-                    val result: ExecResult = execHandle.waitForFinish()
-                    if (result.exitValue != 0) {
-                        error(client.testFailedMessage(execHandle, result.exitValue))
-                    }
+                execHandle.start()
+                val result: ExecResult = execHandle.waitForFinish()
+                if (result.exitValue != 0) {
+                    error(client.testFailedMessage(execHandle, result.exitValue))
                 }
+            }
 
+            try {
                 val exec = execHandleFactory.newExec()
                 spec.forkOptions.copyTo(exec)
                 exec.args = spec.args
