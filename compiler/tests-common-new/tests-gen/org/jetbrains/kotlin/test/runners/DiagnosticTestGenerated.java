@@ -33642,6 +33642,12 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
         }
 
         @Test
+        @TestMetadata("labelClashesWithContextReceivers.kt")
+        public void testLabelClashesWithContextReceivers() throws Exception {
+            runTest("compiler/testData/diagnostics/testsWithStdLib/labelClashesWithContextReceivers.kt");
+        }
+
+        @Test
         @TestMetadata("outstar.kt")
         public void testOutstar() throws Exception {
             runTest("compiler/testData/diagnostics/testsWithStdLib/outstar.kt");
