@@ -5,7 +5,6 @@
 
 package org.jetbrains.kotlin.fir.resolve.transformers.body.resolve
 
-import org.jetbrains.kotlin.descriptors.ClassKind
 import org.jetbrains.kotlin.fir.FirTargetElement
 import org.jetbrains.kotlin.fir.diagnostics.ConeSimpleDiagnostic
 import org.jetbrains.kotlin.fir.diagnostics.DiagnosticKind
@@ -18,7 +17,6 @@ import org.jetbrains.kotlin.fir.resolve.calls.isUnitOrFlexibleUnit
 import org.jetbrains.kotlin.fir.resolve.transformers.FirSyntheticCallGenerator
 import org.jetbrains.kotlin.fir.resolve.transformers.FirWhenExhaustivenessTransformer
 import org.jetbrains.kotlin.fir.resolvedTypeFromPrototype
-import org.jetbrains.kotlin.fir.scopes.impl.FirUnqualifiedEnumImportingScope
 import org.jetbrains.kotlin.fir.types.*
 import org.jetbrains.kotlin.fir.types.builder.buildErrorTypeRef
 import org.jetbrains.kotlin.fir.visitors.transformSingle
@@ -66,7 +64,7 @@ class FirControlFlowStatementsResolveTransformer(transformer: FirBodyResolveTran
             @Suppress("NAME_SHADOWING")
             var whenExpression = whenExpression.transformSubject(transformer, ResolutionMode.ContextIndependent)
             val subjectType = whenExpression.subject?.typeRef?.coneType?.fullyExpandedType(session)
-            context.withUnqualifiedEnumImportingScope(subjectType, components) {
+            context.withWhenSubjectType(subjectType, components) {
                 when {
                     whenExpression.branches.isEmpty() -> {}
                     whenExpression.isOneBranch() -> {
@@ -82,7 +80,7 @@ class FirControlFlowStatementsResolveTransformer(transformer: FirBodyResolveTran
                             whenExpression.resultType = buildErrorTypeRef {
                                 diagnostic = ConeSimpleDiagnostic("Can't resolve when expression", DiagnosticKind.InferenceError)
                             }
-                            return@withUnqualifiedEnumImportingScope whenExpression
+                            return@withWhenSubjectType whenExpression
                         }
 
                         val completionResult = callCompleter.completeCall(whenExpression, data)
@@ -112,9 +110,10 @@ class FirControlFlowStatementsResolveTransformer(transformer: FirBodyResolveTran
     }
 
     override fun transformWhenBranch(whenBranch: FirWhenBranch, data: ResolutionMode): FirWhenBranch {
-        return whenBranch.also { dataFlowAnalyzer.enterWhenBranchCondition(whenBranch) }
-            .transformCondition(transformer, withExpectedType(session.builtinTypes.booleanType))
-            .also { dataFlowAnalyzer.exitWhenBranchCondition(it) }
+        dataFlowAnalyzer.enterWhenBranchCondition(whenBranch)
+        return context.withWhenSubjectImportingScope {
+            whenBranch.transformCondition(transformer, withExpectedType(session.builtinTypes.booleanType))
+        }.also { dataFlowAnalyzer.exitWhenBranchCondition(it) }
             .transformResult(transformer, data)
             .also { dataFlowAnalyzer.exitWhenBranchResult(it) }
 
@@ -188,6 +187,7 @@ class FirControlFlowStatementsResolveTransformer(transformer: FirBodyResolveTran
     ): FirStatement {
         val labeledElement = returnExpression.target.labeledElement
         val expectedTypeRef = labeledElement.returnTypeRef
+
         @Suppress("IntroduceWhenSubject")
         val mode = when {
             labeledElement.symbol in context.anonymousFunctionsAnalyzedInDependentContext -> {

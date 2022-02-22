@@ -4150,6 +4150,12 @@ public class FirDiagnosticsWithLightTreeTestGenerated extends AbstractFirDiagnos
             }
 
             @Test
+            @TestMetadata("notInsideBranches.kt")
+            public void testNotInsideBranches() throws Exception {
+                runTest("compiler/fir/analysis-tests/testData/resolve/unqualifiedEnum/notInsideBranches.kt");
+            }
+
+            @Test
             @TestMetadata("priority.kt")
             public void testPriority() throws Exception {
                 runTest("compiler/fir/analysis-tests/testData/resolve/unqualifiedEnum/priority.kt");

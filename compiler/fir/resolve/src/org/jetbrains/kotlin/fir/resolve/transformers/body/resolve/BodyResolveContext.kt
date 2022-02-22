@@ -33,7 +33,7 @@ import org.jetbrains.kotlin.fir.scopes.FirScope
 import org.jetbrains.kotlin.fir.scopes.createImportingScopes
 import org.jetbrains.kotlin.fir.scopes.impl.FirLocalScope
 import org.jetbrains.kotlin.fir.scopes.impl.FirMemberTypeParameterScope
-import org.jetbrains.kotlin.fir.scopes.impl.FirUnqualifiedEnumImportingScope
+import org.jetbrains.kotlin.fir.scopes.impl.FirWhenSubjectImportingScope
 import org.jetbrains.kotlin.fir.symbols.impl.FirAnonymousFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirClassLikeSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirFunctionSymbol
@@ -78,6 +78,8 @@ class BodyResolveContext(
 
     @set:PrivateForInline
     var containers: ArrayDeque<FirDeclaration> = ArrayDeque()
+
+    private val whenSubjectImportingScopes: ArrayDeque<FirWhenSubjectImportingScope?> = ArrayDeque()
 
     @set:PrivateForInline
     var containingClass: FirRegularClass? = null
@@ -492,18 +494,28 @@ class BodyResolveContext(
         }
     }
 
-    fun <T> withUnqualifiedEnumImportingScope(
+    fun <T> withWhenSubjectType(
         subjectType: ConeKotlinType?,
         sessionHolder: SessionHolder,
         f: () -> T
     ): T {
-        if (subjectType !is ConeClassLikeType) return f()
         val session = sessionHolder.session
-        val subjectClassSymbol = subjectType.lookupTag.toFirRegularClassSymbol(session)
-        if (subjectClassSymbol?.fir?.classKind != ClassKind.ENUM_CLASS) return f()
-        val newTowerDataContext = towerDataContext.addNonLocalScope(
-            FirUnqualifiedEnumImportingScope(subjectClassSymbol.classId, session, sessionHolder.scopeSession)
-        )
+        val subjectClassSymbol = (subjectType as? ConeClassLikeType)
+            ?.lookupTag?.toFirRegularClassSymbol(session)?.takeIf { it.fir.classKind == ClassKind.ENUM_CLASS }
+        val whenSubjectImportingScope = subjectClassSymbol?.let {
+            FirWhenSubjectImportingScope(it.classId, session, sessionHolder.scopeSession)
+        }
+        whenSubjectImportingScopes.add(whenSubjectImportingScope)
+        return try {
+            f()
+        } finally {
+            whenSubjectImportingScopes.removeLast()
+        }
+    }
+
+    fun <T> withWhenSubjectImportingScope(f: () -> T): T {
+        val whenSubjectImportingScope = whenSubjectImportingScopes.lastOrNull() ?: return f()
+        val newTowerDataContext = towerDataContext.addNonLocalScope(whenSubjectImportingScope)
         val newContexts = FirRegularTowerDataContexts(newTowerDataContext)
         return withNewTowerDataForClass(newContexts) {
             f()

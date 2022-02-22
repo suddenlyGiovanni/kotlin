@@ -3712,6 +3712,11 @@ public class LazyBodyIsNotTouchedTilContractsPhaseTestGenerated extends Abstract
             runTest("compiler/fir/analysis-tests/testData/resolve/unqualifiedEnum/nested.kt");
         }
 
+        @TestMetadata("notInsideBranches.kt")
+        public void testNotInsideBranches() throws Exception {
+            runTest("compiler/fir/analysis-tests/testData/resolve/unqualifiedEnum/notInsideBranches.kt");
+        }
+
         @TestMetadata("priority.kt")
         public void testPriority() throws Exception {
             runTest("compiler/fir/analysis-tests/testData/resolve/unqualifiedEnum/priority.kt");

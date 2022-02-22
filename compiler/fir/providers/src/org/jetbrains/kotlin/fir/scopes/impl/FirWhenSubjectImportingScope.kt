@@ -17,10 +17,12 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirVariableSymbol
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
 
-class FirUnqualifiedEnumImportingScope(
-    enumClassId: ClassId, session: FirSession, scopeSession: ScopeSession
+// Note: at this moment we create this scope for enum classes only,
+// and only enum entry symbols are allowed to be processed
+class FirWhenSubjectImportingScope(
+    classId: ClassId, session: FirSession, scopeSession: ScopeSession
 ) : FirExplicitStarImportingScope(
-    listOf(buildResolvedImportByEnumClassId(enumClassId)),
+    listOf(buildResolvedImportByClassId(classId)),
     session, scopeSession, FirImportingScopeFilter.ALL
 ) {
     override fun processPropertiesByName(name: Name, processor: (FirVariableSymbol<*>) -> Unit) {
@@ -38,13 +40,13 @@ class FirUnqualifiedEnumImportingScope(
     }
 
     companion object {
-        private fun buildResolvedImportByEnumClassId(enumClassId: ClassId) = buildResolvedImport {
+        private fun buildResolvedImportByClassId(classId: ClassId) = buildResolvedImport {
             delegate = buildImport {
-                importedFqName = enumClassId.asSingleFqName()
+                importedFqName = classId.asSingleFqName()
                 isAllUnder = true
             }
-            packageFqName = enumClassId.packageFqName
-            relativeParentClassName = enumClassId.relativeClassName
+            packageFqName = classId.packageFqName
+            relativeParentClassName = classId.relativeClassName
         }
     }
 }

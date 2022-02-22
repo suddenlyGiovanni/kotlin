@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.fir.resolve.BodyResolveComponents
 import org.jetbrains.kotlin.fir.resolve.DoubleColonLHS
 import org.jetbrains.kotlin.fir.resolve.calls.*
 import org.jetbrains.kotlin.fir.scopes.FirScope
-import org.jetbrains.kotlin.fir.scopes.impl.FirUnqualifiedEnumImportingScope
+import org.jetbrains.kotlin.fir.scopes.impl.FirWhenSubjectImportingScope
 import org.jetbrains.kotlin.fir.types.builder.buildResolvedTypeRef
 import org.jetbrains.kotlin.fir.types.impl.FirImplicitBuiltinTypeRef
 import org.jetbrains.kotlin.name.Name
@@ -109,7 +109,7 @@ internal abstract class FirBaseTowerResolveTask(
             if (!lexical.isLocal && scope != null) {
                 onScope(
                     scope,
-                    if (scope is FirUnqualifiedEnumImportingScope) TowerGroup.UnqualifiedEnum(depth)
+                    if (scope is FirWhenSubjectImportingScope) TowerGroup.UnqualifiedEnum(depth)
                     else parentGroup.NonLocal(depth)
                 )
             }
