@@ -15,6 +15,8 @@ sealed class KotlinExternalModelContainer : Serializable {
     fun <T : Any> getOrThrow(key: KotlinExternalModelKey<T>): T = get(key)
         ?: throw NoSuchElementException("Missing external model for ${key.id}")
 
+    abstract operator fun plus(other: KotlinExternalModelContainer): KotlinExternalModelContainer
+
     fun isEmpty(): Boolean = ids.isEmpty()
     fun isNotEmpty(): Boolean = ids.isNotEmpty()
 
@@ -38,6 +40,7 @@ sealed class KotlinExternalModelContainer : Serializable {
         override val ids: Set<KotlinExternalModelId<*>> = emptySet()
         override fun <T : Any> contains(key: KotlinExternalModelKey<T>): Boolean = false
         override fun <T : Any> get(key: KotlinExternalModelKey<T>): T? = null
+        override fun plus(other: KotlinExternalModelContainer): KotlinExternalModelContainer = other
 
         /* Necessary for stable serialization */
         @Suppress("unused")

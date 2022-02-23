@@ -92,6 +92,7 @@ dependencies {
             because("Functional tests are using APIs from Android. Latest Version is used to avoid NoClassDefFoundError")
         }
         "functionalTestImplementation"(gradleKotlinDsl())
+        "functionalTestImplementation"(project(":kotlin-gradle-plugin-kpm-android"))
     }
 
     testImplementation(commonDependency("org.jetbrains.teamcity:serviceMessages"))
@@ -146,6 +147,7 @@ tasks {
         dependsOn(named("dokkaJavadoc"))
     }
 }
+
 
 projectTest {
     dependsOn(tasks.named("validatePlugins"))

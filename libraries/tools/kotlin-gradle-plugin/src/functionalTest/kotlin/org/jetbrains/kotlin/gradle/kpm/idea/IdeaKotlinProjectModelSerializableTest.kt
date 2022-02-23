@@ -26,7 +26,9 @@ class IdeaKotlinProjectModelSerializableTest : AbstractKpmExtensionTest() {
     @Test
     fun `test - serialize and deserialize - empty project`() {
         project.evaluate()
-        assertSerializeAndDeserializeEquals(kotlin.toIdeaKotlinProjectModel())
+        assertSerializeAndDeserializeEquals(
+            kotlin.buildIdeaKotlinProjectModel()
+        )
     }
 
     @Test
@@ -47,7 +49,7 @@ class IdeaKotlinProjectModelSerializableTest : AbstractKpmExtensionTest() {
         }
 
         project.evaluate()
-        assertSerializeAndDeserializeEquals(kotlin.toIdeaKotlinProjectModel())
+        assertSerializeAndDeserializeEquals(kotlin.buildIdeaKotlinProjectModel())
     }
 
     private fun assertSerializeAndDeserializeEquals(model: IdeaKotlinProjectModel) {

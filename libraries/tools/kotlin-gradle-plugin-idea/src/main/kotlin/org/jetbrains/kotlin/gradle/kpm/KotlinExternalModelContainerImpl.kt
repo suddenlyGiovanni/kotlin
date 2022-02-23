@@ -34,6 +34,18 @@ internal class KotlinMutableExternalModelContainerImpl private constructor(
         return values[key]?.let { it as T }
     }
 
+    override fun plus(other: KotlinExternalModelContainer): KotlinExternalModelContainer {
+        return when (other) {
+            is Empty -> this
+            is KotlinMutableExternalModelContainerImpl -> KotlinMutableExternalModelContainerImpl(
+                this.values.plus(other.values).toMutableMap()
+            )
+            is SerializedKotlinExternalModelContainer -> SerializedKotlinExternalModelContainer(
+                serializedValues = other.serializedValues.filterKeys { key -> key !in ids }.toMutableMap(),
+            ).also { container -> container.deserializedValues.putAll(this.values) }
+        }
+    }
+
     @Synchronized
     private fun writeReplace(): Any {
         return SerializedKotlinExternalModelContainerCarrier(serialize(values))
@@ -46,10 +58,10 @@ internal class KotlinMutableExternalModelContainerImpl private constructor(
 
 @WriteReplacedModel(SerializedKotlinExternalModelContainerCarrier::class)
 private class SerializedKotlinExternalModelContainer(
-    private val serializedValues: MutableMap<KotlinExternalModelId<*>, ByteArray>
+    val serializedValues: MutableMap<KotlinExternalModelId<*>, ByteArray>
 ) : KotlinExternalModelContainer(), Serializable {
 
-    private val deserializedValues = mutableMapOf<KotlinExternalModelKey<*>, Any>()
+    val deserializedValues = mutableMapOf<KotlinExternalModelKey<*>, Any>()
 
     override val ids: Set<KotlinExternalModelId<*>>
         @Synchronized get() = serializedValues.keys + deserializedValues.keys.map { it.id }
@@ -68,6 +80,23 @@ private class SerializedKotlinExternalModelContainer(
         deserializedValues[key] = deserializedValue
         serializedValues.remove(key.id)
         return deserializedValue
+    }
+
+    override fun plus(other: KotlinExternalModelContainer): KotlinExternalModelContainer {
+        return when (other) {
+            is Empty -> return this
+            is KotlinMutableExternalModelContainerImpl -> return other + this
+            is SerializedKotlinExternalModelContainer -> {
+                val thisDeserializedIds = this.deserializedValues.keys.map { it.id }.toSet()
+                val otherDeserializedIds = other.deserializedValues.keys.map { it.id }.toSet()
+                val container = SerializedKotlinExternalModelContainer(
+                    (serializedValues.filterKeys { it !in otherDeserializedIds } +
+                            other.serializedValues.filterKeys { it !in thisDeserializedIds }).toMutableMap()
+                )
+                container.deserializedValues.putAll(other.deserializedValues)
+                container
+            }
+        }
     }
 
     @Synchronized

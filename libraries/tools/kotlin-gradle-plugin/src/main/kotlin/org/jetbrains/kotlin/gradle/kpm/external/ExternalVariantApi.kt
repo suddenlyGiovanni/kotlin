@@ -6,8 +6,14 @@
 package org.jetbrains.kotlin.gradle.kpm.external
 
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.support.serviceOf
+import org.gradle.tooling.provider.model.ToolingModelBuilder
+import org.gradle.tooling.provider.model.ToolingModelBuilderRegistry
 import org.jetbrains.kotlin.gradle.dsl.KotlinTopLevelExtension
 import org.jetbrains.kotlin.gradle.kpm.KotlinMutableExternalModelContainer
+import org.jetbrains.kotlin.gradle.kpm.idea.IdeaKotlinCompilationOutput
+import org.jetbrains.kotlin.gradle.kpm.idea.IdeaKotlinProjectModel
+import org.jetbrains.kotlin.gradle.kpm.idea.IdeaKotlinProjectModelBuilder
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.*
 
 @RequiresOptIn("API is intended to build external Kotlin Targets.")
@@ -16,6 +22,10 @@ annotation class ExternalVariantApi
 @ExternalVariantApi
 val KotlinTopLevelExtension.project: Project
     get() = this.project
+
+@ExternalVariantApi
+val KotlinPm20ProjectExtension.ideaKotlinProjectModelBuilder: IdeaKotlinProjectModelBuilder
+    get() = this.ideaKotlinProjectModelBuilder
 
 @ExternalVariantApi
 fun KotlinGradleModule.createExternalJvmVariant(

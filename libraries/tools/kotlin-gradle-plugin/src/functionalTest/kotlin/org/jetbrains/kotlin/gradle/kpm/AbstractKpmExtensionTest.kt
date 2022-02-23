@@ -6,22 +6,26 @@
 package org.jetbrains.kotlin.gradle.kpm
 
 import org.gradle.api.Project
+import org.gradle.api.artifacts.verification.DependencyVerificationMode
 import org.gradle.api.internal.project.ProjectInternal
 import org.gradle.testfixtures.ProjectBuilder
 import org.jetbrains.kotlin.gradle.addBuildEventsListenerRegistryMock
+import org.jetbrains.kotlin.gradle.kpm.external.ExternalVariantApi
+import org.jetbrains.kotlin.gradle.kpm.external.ideaKotlinProjectModelBuilder
+import org.jetbrains.kotlin.gradle.kpm.idea.IdeaKotlinProjectModel
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.KotlinPm20ProjectExtension
 import kotlin.test.BeforeTest
 
 abstract class AbstractKpmExtensionTest {
-    protected val project: ProjectInternal = ProjectBuilder.builder().build() as ProjectInternal
-    protected lateinit var kotlin: KotlinPm20ProjectExtension
-        private set
-
-    @BeforeTest
-    open fun setup() {
-        kotlin = project.applyKpmPlugin()
+    protected val project: ProjectInternal = (ProjectBuilder.builder().build() as ProjectInternal).also { project ->
+        project.gradle.startParameter.dependencyVerificationMode = DependencyVerificationMode.OFF
     }
 
+    protected val kotlin: KotlinPm20ProjectExtension by lazy { project.applyKpmPlugin() }
+
+    fun KotlinPm20ProjectExtension.buildIdeaKotlinProjectModel(): IdeaKotlinProjectModel {
+        return ideaKotlinProjectModelBuilder.buildIdeaKotlinProjectModel()
+    }
 }
 
 fun Project.applyKpmPlugin(): KotlinPm20ProjectExtension {
