@@ -5,6 +5,7 @@
 
 package org.jetbrains.kotlin.gradle.tasks
 
+import groovy.lang.Closure
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.Project
@@ -19,10 +20,12 @@ import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.services.BuildService
 import org.gradle.api.services.BuildServiceParameters
+import org.gradle.api.specs.Spec
 import org.gradle.api.tasks.*
 import org.gradle.api.tasks.compile.AbstractCompile
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.util.PatternFilterable
+import org.gradle.api.tasks.util.PatternSet
 import org.gradle.work.ChangeType
 import org.gradle.work.Incremental
 import org.gradle.work.InputChanges
@@ -77,24 +80,30 @@ const val USING_JVM_INCREMENTAL_COMPILATION_MESSAGE = "Using Kotlin/JVM incremen
 const val USING_JS_INCREMENTAL_COMPILATION_MESSAGE = "Using Kotlin/JS incremental compilation"
 const val USING_JS_IR_BACKEND_MESSAGE = "Using Kotlin/JS IR backend"
 
-abstract class AbstractKotlinCompileTool<T : CommonToolArguments>
-    : DefaultTask(),
-    //PatternFilterable,
+abstract class AbstractKotlinCompileTool<T : CommonToolArguments> @Inject constructor(
+    objectFactory: ObjectFactory
+) : DefaultTask(),
+    PatternFilterable,
     CompilerArgumentAwareWithInput<T>,
     TaskWithLocalState {
+
+    private val patternFilterable = PatternSet()
+
+    private val sourceFiles = objectFactory.fileCollection()
 
     @get:InputFiles
     @get:SkipWhenEmpty
     @get:IgnoreEmptyDirectories
     @get:PathSensitive(PathSensitivity.RELATIVE)
-    abstract val sources: ConfigurableFileCollection
+    val sources: FileCollection = objectFactory.fileCollection()
+        .from({ sourceFiles.asFileTree.matching(patternFilterable) })
 
     /**
      * Sets the source for this task.
      * The given source object is evaluated as per [org.gradle.api.Project.files].
      */
     open fun setSource(source: Any) {
-        sources.from(source)
+        sourceFiles.from(source)
     }
 
     /**
@@ -102,7 +111,57 @@ abstract class AbstractKotlinCompileTool<T : CommonToolArguments>
      * The given source object is evaluated as per [org.gradle.api.Project.files].
      */
     open fun setSource(vararg source: Any) {
-        sources.from(source)
+        sourceFiles.from(source)
+    }
+
+    fun disallowSourceChanges() {
+        sourceFiles.disallowChanges()
+    }
+
+    @Internal
+    override fun getIncludes(): Set<String> = patternFilterable.includes
+
+    @Internal
+    override fun getExcludes(): Set<String> = patternFilterable.excludes
+
+    override fun setIncludes(includes: Iterable<String>): PatternFilterable = also {
+        patternFilterable.setIncludes(includes)
+    }
+
+    override fun setExcludes(excludes: Iterable<String>): PatternFilterable = also {
+        patternFilterable.setExcludes(excludes)
+    }
+
+    override fun include(vararg includes: String?): PatternFilterable = also {
+        patternFilterable.include(*includes)
+    }
+
+    override fun include(includes: Iterable<String>): PatternFilterable = also {
+        patternFilterable.include(includes)
+    }
+
+    override fun include(includeSpec: Spec<FileTreeElement>): PatternFilterable = also {
+        patternFilterable.include(includeSpec)
+    }
+
+    override fun include(includeSpec: Closure<*>): PatternFilterable = also {
+        patternFilterable.include(includeSpec)
+    }
+
+    override fun exclude(vararg excludes: String?): PatternFilterable = also {
+        patternFilterable.exclude(*excludes)
+    }
+
+    override fun exclude(excludes: Iterable<String>): PatternFilterable = also {
+        patternFilterable.exclude(excludes)
+    }
+
+    override fun exclude(excludeSpec: Spec<FileTreeElement>): PatternFilterable = also {
+        patternFilterable.exclude(excludeSpec)
+    }
+
+    override fun exclude(excludeSpec: Closure<*>): PatternFilterable = also {
+        patternFilterable.exclude(excludeSpec)
     }
 
     @get:Classpath
@@ -187,7 +246,9 @@ abstract class GradleCompileTaskProvider @Inject constructor(
     )
 }
 
-abstract class AbstractKotlinCompile<T : CommonCompilerArguments> : AbstractKotlinCompileTool<T>(),
+abstract class AbstractKotlinCompile<T : CommonCompilerArguments> @Inject constructor(
+    objectFactory: ObjectFactory
+) : AbstractKotlinCompileTool<T>(objectFactory),
     CompileUsingKotlinDaemonWithNormalization {
 
     open class Configurator<T : AbstractKotlinCompile<*>>(protected val compilation: KotlinCompilationData<*>) : TaskConfigurator<T> {
@@ -536,8 +597,9 @@ internal inline val <reified T : Task> T.thisTaskProvider: TaskProvider<out T>
 @CacheableTask
 abstract class KotlinCompile @Inject constructor(
     override val kotlinOptions: KotlinJvmOptions,
-    workerExecutor: WorkerExecutor
-) : AbstractKotlinCompile<K2JVMCompilerArguments>(),
+    workerExecutor: WorkerExecutor,
+    objectFactory: ObjectFactory
+) : AbstractKotlinCompile<K2JVMCompilerArguments>(objectFactory),
     KotlinJvmCompile,
     UsesKotlinJavaToolchain {
 
@@ -845,7 +907,7 @@ abstract class KotlinCompile @Inject constructor(
                 if (it is AbstractCompile &&
                     it !is JavaCompile &&
                     it !is AbstractKotlinCompile<*> &&
-                    javaOutputDir.get().asFile.isParentOf(it.destinationDir)
+                    javaOutputDir.get().asFile.isParentOf(it.destinationDirectory.get().asFile)
                 ) {
                     illegalTaskOrNull = illegalTaskOrNull ?: it
                 }
@@ -854,7 +916,7 @@ abstract class KotlinCompile @Inject constructor(
                 val illegalTask = illegalTaskOrNull!!
                 logger.info(
                     "Kotlin inter-project IC is disabled: " +
-                            "unknown task '$illegalTask' destination dir ${illegalTask.destinationDir} " +
+                            "unknown task '$illegalTask' destination dir ${illegalTask.destinationDirectory.get().asFile} " +
                             "intersects with java destination dir $javaOutputDir"
                 )
             }
@@ -904,7 +966,8 @@ abstract class Kotlin2JsCompile @Inject constructor(
     override val kotlinOptions: KotlinJsOptions,
     objectFactory: ObjectFactory,
     workerExecutor: WorkerExecutor
-) : AbstractKotlinCompile<K2JSCompilerArguments>(), KotlinJsCompile {
+) : AbstractKotlinCompile<K2JSCompilerArguments>(objectFactory),
+    KotlinJsCompile {
 
     init {
         incremental = true

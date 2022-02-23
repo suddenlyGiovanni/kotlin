@@ -19,6 +19,7 @@ package org.jetbrains.kotlin.gradle.internal
 import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.Directory
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.*
@@ -39,10 +40,12 @@ import javax.inject.Inject
 
 @CacheableTask
 abstract class KaptGenerateStubsTask @Inject constructor(
-    workerExecutor: WorkerExecutor
+    workerExecutor: WorkerExecutor,
+    objectFactory: ObjectFactory
 ): KotlinCompile(
     KotlinJvmOptionsImpl(),
-    workerExecutor
+    workerExecutor,
+    objectFactory
 ) {
 
     internal class Configurator(

@@ -16,6 +16,7 @@
 
 package org.jetbrains.kotlin.gradle.tasks
 
+import org.gradle.api.model.ObjectFactory
 import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
@@ -32,9 +33,13 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJsDceOptionsImpl
 import org.jetbrains.kotlin.gradle.logging.GradleKotlinLogger
 import org.jetbrains.kotlin.gradle.utils.canonicalPathWithoutExtension
 import java.io.File
+import javax.inject.Inject
 
 @CacheableTask
-abstract class KotlinJsDce : AbstractKotlinCompileTool<K2JSDceArguments>(), KotlinJsDce {
+abstract class KotlinJsDce @Inject constructor(
+    objectFactory: ObjectFactory
+) : AbstractKotlinCompileTool<K2JSDceArguments>(objectFactory),
+    KotlinJsDce {
 
     init {
         cacheOnlyIfEnabledForKotlin()

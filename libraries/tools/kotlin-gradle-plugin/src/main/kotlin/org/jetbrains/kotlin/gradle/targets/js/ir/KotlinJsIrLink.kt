@@ -57,6 +57,11 @@ abstract class KotlinJsIrLink @Inject constructor(
         }
     }
 
+    init {
+        // Not check sources, only klib module
+        disallowSourceChanges()
+    }
+
     @Transient
     @get:Internal
     internal lateinit var compilation: KotlinCompilationData<*>
@@ -81,10 +86,6 @@ abstract class KotlinJsIrLink @Inject constructor(
     @Input
     lateinit var mode: KotlinJsBinaryMode
 
-    // Not check sources, only klib module
-    @get:Internal
-    abstract override val sources: ConfigurableFileCollection
-
     private val buildDir = project.buildDir
 
     @get:SkipWhenEmpty
@@ -105,10 +106,6 @@ abstract class KotlinJsIrLink @Inject constructor(
                 }
             )
         }
-
-    override fun skipCondition(): Boolean {
-        return !entryModule.get().asFile.exists()
-    }
 
     @get:Internal
     val rootCacheDirectory by lazy {

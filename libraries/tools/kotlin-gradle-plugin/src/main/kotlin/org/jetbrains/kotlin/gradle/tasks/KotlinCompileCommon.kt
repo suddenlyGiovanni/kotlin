@@ -18,6 +18,7 @@ package org.jetbrains.kotlin.gradle.tasks
 
 import org.gradle.api.Project
 import org.gradle.api.file.ConfigurableFileCollection
+import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.*
 import org.gradle.work.InputChanges
@@ -46,8 +47,10 @@ import javax.inject.Inject
 @CacheableTask
 abstract class KotlinCompileCommon @Inject constructor(
     override val kotlinOptions: KotlinMultiplatformCommonOptions,
-    workerExecutor: WorkerExecutor
-) : AbstractKotlinCompile<K2MetadataCompilerArguments>(), KotlinCommonCompile {
+    workerExecutor: WorkerExecutor,
+    objectFactory: ObjectFactory
+) : AbstractKotlinCompile<K2MetadataCompilerArguments>(objectFactory),
+    KotlinCommonCompile {
 
     class Configurator(compilation: KotlinCompilationData<*>) : AbstractKotlinCompile.Configurator<KotlinCompileCommon>(compilation) {
         override fun configure(task: KotlinCompileCommon) {
