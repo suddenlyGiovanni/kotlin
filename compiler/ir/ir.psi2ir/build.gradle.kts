@@ -7,6 +7,7 @@ dependencies {
     api(project(":compiler:util"))
     api(project(":compiler:frontend"))
     api(project(":compiler:backend-common"))
+    compileOnly(project(":compiler:ir.backend.common"))
     api(project(":compiler:ir.tree"))
     compileOnly(intellijCore())
 }
