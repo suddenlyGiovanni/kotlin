@@ -33,7 +33,6 @@ import org.jetbrains.kotlin.fir.visibilityChecker
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.StandardClassIds
 import org.jetbrains.kotlin.resolve.calls.tower.CandidateApplicability
-import org.jetbrains.kotlin.resolve.deprecation.DeprecationLevelValue
 
 @ThreadSafeMutableState
 class FirTypeResolverImpl(private val session: FirSession) : FirTypeResolver() {
@@ -119,12 +118,6 @@ class FirTypeResolverImpl(private val session: FirSession) : FirTypeResolver() {
             if (!symbol.isVisible(useSiteFile, containingDeclarations, supertypeSupplier)) {
                 symbolApplicability = minOf(CandidateApplicability.VISIBILITY_ERROR, symbolApplicability)
                 diagnostic = ConeVisibilityError(symbol)
-            }
-
-            val deprecation = symbol.getDeprecation(useSiteFile)
-            if (deprecation != null && deprecation.deprecationLevel == DeprecationLevelValue.HIDDEN) {
-                symbolApplicability = minOf(CandidateApplicability.HIDDEN, symbolApplicability)
-                diagnostic = null
             }
 
             if (applicability == null || symbolApplicability > applicability!!) {
