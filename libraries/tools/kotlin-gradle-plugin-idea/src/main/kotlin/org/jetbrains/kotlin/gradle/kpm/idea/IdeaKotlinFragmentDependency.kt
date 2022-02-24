@@ -46,7 +46,6 @@ sealed interface IdeaKotlinFragmentUnresolvedBinaryDependency : IdeaKotlinFragme
 }
 
 sealed interface IdeaKotlinFragmentResolvedBinaryDependency : IdeaKotlinFragmentBinaryDependency {
-    override val coordinates: BinaryCoordinates
     val binaryType: String
     val binaryFile: File
 }
@@ -89,7 +88,7 @@ data class BinaryCoordinatesImpl(
 
 @InternalKotlinGradlePluginApi
 data class IdeaKotlinFragmentResolvedBinaryDependencyImpl(
-    override val coordinates: BinaryCoordinates,
+    override val coordinates: BinaryCoordinates?,
     override val binaryType: String,
     override val binaryFile: File,
     override val external: KotlinExternalModelContainer = KotlinExternalModelContainer.Empty

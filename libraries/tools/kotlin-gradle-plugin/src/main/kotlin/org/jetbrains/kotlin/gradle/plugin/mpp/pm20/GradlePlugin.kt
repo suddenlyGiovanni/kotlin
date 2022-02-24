@@ -20,6 +20,8 @@ import org.jetbrains.kotlin.gradle.dsl.pm20Extension
 import org.jetbrains.kotlin.gradle.internal.customizeKotlinDependencies
 import org.jetbrains.kotlin.gradle.kpm.idea.IdeaKotlinProjectModelBuilderImpl
 import org.jetbrains.kotlin.gradle.utils.checkGradleCompatibility
+import java.io.ByteArrayOutputStream
+import java.io.ObjectOutputStream
 import javax.inject.Inject
 
 abstract class KotlinPm20GradlePlugin @Inject constructor(
@@ -81,6 +83,22 @@ abstract class KotlinPm20GradlePlugin @Inject constructor(
 
     private fun setupToolingModelBuilder(project: Project) {
         toolingModelBuilderRegistry.register(project.pm20Extension.ideaKotlinProjectModelBuilder)
+        project.tasks.register("buildIdeaKotlinProjectModel") { task ->
+            val outputDir = project.buildDir.resolve("ideaKotlinProjectModel")
+            task.outputs.dir(outputDir)
+            task.doLast {
+                outputDir.mkdirs()
+                val model = project.pm20Extension.ideaKotlinProjectModelBuilder.buildIdeaKotlinProjectModel()
+                val textFile = outputDir.resolve("model.txt")
+                textFile.writeText(model.toString())
+
+                val binaryFile = outputDir.resolve("model.bin")
+                binaryFile.writeBytes(ByteArrayOutputStream().use { byteArrayOutputStream ->
+                    ObjectOutputStream(byteArrayOutputStream).use { objectOutputStream -> objectOutputStream.writeObject(model) }
+                    byteArrayOutputStream.toByteArray()
+                })
+            }
+        }
     }
 }
 

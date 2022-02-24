@@ -8,6 +8,9 @@ package org.jetbrains.kotlin.gradle.kpm.idea
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
 import org.gradle.api.artifacts.component.ModuleComponentSelector
 import org.gradle.api.artifacts.component.ProjectComponentIdentifier
+import org.gradle.api.artifacts.result.ResolvedArtifactResult
+import org.gradle.internal.component.local.model.OpaqueComponentArtifactIdentifier
+import org.gradle.internal.component.local.model.OpaqueComponentIdentifier
 import org.gradle.internal.resolve.ModuleVersionResolveException
 import org.jetbrains.kotlin.gradle.kpm.external.ExternalVariantApi
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.FragmentAttributes
@@ -44,15 +47,22 @@ class IdeaKotlinVariantBinaryDependencyResolver(
             }.toSet()
 
         val resolvedDependencies = artifacts.artifacts.mapNotNull { artifact ->
-            val identifier = artifact.variant.owner as? ModuleComponentIdentifier ?: return@mapNotNull null
-
             IdeaKotlinFragmentResolvedBinaryDependencyImpl(
-                coordinates = BinaryCoordinatesImpl(identifier.group, identifier.module, identifier.version),
+                coordinates = coordinates(artifact),
                 binaryType = viewBinaryType,
                 binaryFile = artifact.file
             )
         }.toSet()
 
         return resolvedDependencies + unresolvedDependencies
+    }
+
+    private fun coordinates(artifact: ResolvedArtifactResult): BinaryCoordinates? {
+        val owner = artifact.variant.owner
+        if (owner is ModuleComponentIdentifier) {
+            return BinaryCoordinatesImpl(owner.group, owner.module, owner.version)
+        }
+
+        return null
     }
 }
