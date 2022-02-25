@@ -79,6 +79,16 @@ class GenerationState private constructor(
         private val bindingContext: BindingContext,
         private val configuration: CompilerConfiguration
     ) {
+        // TODO: patch IntelliJ project and remove this compatibility c-tor
+        constructor(
+            project: Project,
+            builderFactory: ClassBuilderFactory,
+            module: ModuleDescriptor,
+            bindingContext: BindingContext,
+            @Suppress("UNUSED_PARAMETER") files: List<KtFile>,
+            configuration: CompilerConfiguration
+        ) : this(project, builderFactory, module, bindingContext, configuration)
+
         private var generateDeclaredClassFilter: GenerateClassFilter = GenerateClassFilter.GENERATE_ALL
         fun generateDeclaredClassFilter(v: GenerateClassFilter) =
             apply { generateDeclaredClassFilter = v }
