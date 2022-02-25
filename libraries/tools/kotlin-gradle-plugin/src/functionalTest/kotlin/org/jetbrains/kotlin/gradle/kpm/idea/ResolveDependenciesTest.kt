@@ -4,7 +4,6 @@
  */
 
 @file:Suppress("FunctionName")
-@file:OptIn(ExternalVariantApi::class)
 
 package org.jetbrains.kotlin.gradle.kpm.idea
 

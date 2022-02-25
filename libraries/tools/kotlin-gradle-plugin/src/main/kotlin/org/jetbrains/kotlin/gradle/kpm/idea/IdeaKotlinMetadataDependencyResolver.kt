@@ -84,7 +84,7 @@ private fun resolveTransformedFragmentBinaryDependency(
 ): List<IdeaKotlinFragmentBinaryDependency> {
     return resolution.allVisibleSourceSetNames
         .flatMap { fragmentName ->
-            val binaryCoordinates = BinaryCoordinatesImpl(
+            val binaryCoordinates = IdeaKotlinBinaryCoordinatesImpl(
                 dependencyId.group, dependencyId.module, dependencyId.version, kotlinModuleIdentifier.moduleName, fragmentName
             )
 

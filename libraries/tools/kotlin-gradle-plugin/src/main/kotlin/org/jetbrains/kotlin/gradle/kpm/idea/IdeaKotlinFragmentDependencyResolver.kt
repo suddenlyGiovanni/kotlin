@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.gradle.kpm.idea
 
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.KotlinGradleFragment
 
-interface IdeaKotlinFragmentDependencyResolver {
+fun interface IdeaKotlinFragmentDependencyResolver {
     fun resolve(fragment: KotlinGradleFragment): Set<IdeaKotlinFragmentDependency>
 
     object Empty : IdeaKotlinFragmentDependencyResolver {

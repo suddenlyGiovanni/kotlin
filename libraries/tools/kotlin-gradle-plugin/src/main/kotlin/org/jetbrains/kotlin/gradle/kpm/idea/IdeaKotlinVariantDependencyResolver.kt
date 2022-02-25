@@ -5,27 +5,57 @@
 
 package org.jetbrains.kotlin.gradle.kpm.idea
 
+import org.gradle.api.artifacts.ResolvableDependencies
+import org.gradle.api.artifacts.component.ComponentIdentifier
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
 import org.gradle.api.artifacts.component.ModuleComponentSelector
 import org.gradle.api.artifacts.component.ProjectComponentIdentifier
-import org.gradle.api.artifacts.result.ResolvedArtifactResult
-import org.gradle.internal.component.local.model.OpaqueComponentArtifactIdentifier
-import org.gradle.internal.component.local.model.OpaqueComponentIdentifier
 import org.gradle.internal.resolve.ModuleVersionResolveException
-import org.jetbrains.kotlin.gradle.kpm.external.ExternalVariantApi
+import org.jetbrains.kotlin.gradle.plugin.mpp.MetadataDependencyResolution
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.FragmentAttributes
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.KotlinGradleFragment
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.KotlinGradleVariant
+import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.disambiguateName
 
 class IdeaKotlinVariantBinaryDependencyResolver(
+    private val dependenciesProvider: DependenciesProvider = CompileDependenciesProvider,
     private val viewBinaryType: String = IdeaKotlinFragmentBinaryDependency.CLASSPATH_BINARY_TYPE,
     private val viewAttributes: FragmentAttributes<KotlinGradleFragment> = FragmentAttributes { }
 ) : IdeaKotlinFragmentDependencyResolver {
 
-    override fun resolve(fragment: KotlinGradleFragment): Set<IdeaKotlinFragmentBinaryDependency> {
-        if (fragment !is KotlinGradleVariant) return emptySet()
+    interface DependenciesProvider {
+        fun resolvableDependencies(fragment: KotlinGradleFragment): ResolvableDependencies?
+    }
 
-        val artifacts = fragment.compileDependenciesConfiguration.incoming.artifactView { view ->
+    object CompileDependenciesProvider : DependenciesProvider {
+        override fun resolvableDependencies(fragment: KotlinGradleFragment): ResolvableDependencies? {
+            if (fragment !is KotlinGradleVariant) return null
+            return fragment.compileDependenciesConfiguration.incoming
+        }
+    }
+
+    object DeclaredDependenciesProvider : DependenciesProvider {
+        override fun resolvableDependencies(fragment: KotlinGradleFragment): ResolvableDependencies? {
+            val results = mutableListOf<MetadataDependencyResolution.KeepOriginalDependency>()
+
+            results.single().dependency.variants.map {
+                it.
+            }
+            fragment.project.configurations.detachedConfiguration(
+                *results.map { it }.toTypedArray()
+            )
+
+            // TODO: Dependency Consistency Scope
+            val configuration = fragment.project.configurations
+                .maybeCreate(fragment.disambiguateName("resolvableApiAndImplementationDependencies"))
+            configuration.extendsFrom(fragment.transitiveApiConfiguration, fragment.transitiveImplementationConfiguration)
+            return configuration.incoming
+        }
+    }
+
+    override fun resolve(fragment: KotlinGradleFragment): Set<IdeaKotlinFragmentBinaryDependency> {
+        val dependencies = dependenciesProvider.resolvableDependencies(fragment) ?: return emptySet()
+        val artifacts = dependencies.artifactView { view ->
             viewAttributes.setAttributes(view.attributes, fragment)
             view.lenient(true)
             view.componentFilter { component -> component !is ProjectComponentIdentifier }
@@ -41,14 +71,14 @@ class IdeaKotlinVariantBinaryDependencyResolver(
                     )
 
                 IdeaKotlinFragmentUnresolvedBinaryDependencyImpl(
-                    coordinates = BinaryCoordinatesImpl(selector.group, selector.module, selector.version),
+                    coordinates = IdeaKotlinBinaryCoordinatesImpl(selector.group, selector.module, selector.version),
                     cause = reason.message?.takeIf { it.isNotBlank() }
                 )
             }.toSet()
 
         val resolvedDependencies = artifacts.artifacts.mapNotNull { artifact ->
             IdeaKotlinFragmentResolvedBinaryDependencyImpl(
-                coordinates = coordinates(artifact),
+                coordinates = artifact.variant.owner.ideaKotlinBinaryCoordinates,
                 binaryType = viewBinaryType,
                 binaryFile = artifact.file
             )
@@ -56,13 +86,10 @@ class IdeaKotlinVariantBinaryDependencyResolver(
 
         return resolvedDependencies + unresolvedDependencies
     }
-
-    private fun coordinates(artifact: ResolvedArtifactResult): BinaryCoordinates? {
-        val owner = artifact.variant.owner
-        if (owner is ModuleComponentIdentifier) {
-            return BinaryCoordinatesImpl(owner.group, owner.module, owner.version)
-        }
-
-        return null
-    }
 }
+
+private val ComponentIdentifier.ideaKotlinBinaryCoordinates: IdeaKotlinBinaryCoordinates?
+    get() = when (this) {
+        is ModuleComponentIdentifier -> IdeaKotlinBinaryCoordinatesImpl(group, module, version)
+        else -> null
+    }

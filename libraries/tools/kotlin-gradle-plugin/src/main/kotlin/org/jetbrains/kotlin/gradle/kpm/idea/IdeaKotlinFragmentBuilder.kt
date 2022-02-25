@@ -6,9 +6,13 @@
 package org.jetbrains.kotlin.gradle.kpm.idea
 
 import org.jetbrains.kotlin.gradle.kpm.KotlinExternalModelContainer
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType.*
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.KotlinGradleFragment
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.KotlinGradleFragmentInternal
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.KotlinGradleVariant
+import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.variantsContainingFragment
+import org.jetbrains.kotlin.gradle.utils.toSetOrEmpty
 
 internal class IdeaKotlinFragmentBuildingContext(
     private val parent: IdeaKotlinProjectModelBuildingContext
@@ -28,6 +32,8 @@ private fun IdeaKotlinFragmentBuildingContext.buildIdeaKotlinFragment(fragment: 
     return IdeaKotlinFragmentImpl(
         name = fragment.name,
         moduleIdentifier = fragment.containingModule.moduleIdentifier.toIdeaKotlinModuleIdentifier(),
+        platforms = fragment.containingModule.variantsContainingFragment(fragment)
+            .map { variant -> buildIdeaKotlinPlatform(variant.platformType) }.toSet(),
         languageSettings = fragment.languageSettings.toIdeaKotlinLanguageSettings(),
         dependencies = dependencyResolver.resolve(fragment).toList(),
         directRefinesDependencies = fragment.directRefinesDependencies.map { refinesFragment -> toIdeaKotlinFragment(refinesFragment) },
@@ -40,6 +46,7 @@ private fun IdeaKotlinFragmentBuildingContext.buildIdeaKotlinFragment(fragment: 
 private fun IdeaKotlinFragmentBuildingContext.buildIdeaKotlinVariant(variant: KotlinGradleVariant): IdeaKotlinVariant {
     return IdeaKotlinVariantImpl(
         fragment = buildIdeaKotlinFragment(variant),
+        platform = buildIdeaKotlinPlatform(variant.platformType),
         variantAttributes = variant.variantAttributes.mapKeys { (key, _) -> key.uniqueName },
         compilationOutputs = variant.compilationOutputs.toIdeaKotlinCompilationOutputs()
     )

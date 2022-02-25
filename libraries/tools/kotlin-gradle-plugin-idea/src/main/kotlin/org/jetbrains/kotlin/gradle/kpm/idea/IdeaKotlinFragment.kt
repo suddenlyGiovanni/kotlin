@@ -11,6 +11,7 @@ import java.io.Serializable
 interface IdeaKotlinFragment : Serializable {
     val name: String
     val moduleIdentifier: IdeaKotlinModuleIdentifier
+    val platforms: Set<IdeaKotlinPlatform>
     val languageSettings: IdeaKotlinLanguageSettings?
     val dependencies: List<IdeaKotlinFragmentDependency>
     val directRefinesDependencies: List<IdeaKotlinFragment>
@@ -23,6 +24,7 @@ interface IdeaKotlinFragment : Serializable {
 data class IdeaKotlinFragmentImpl(
     override val name: String,
     override val moduleIdentifier: IdeaKotlinModuleIdentifier,
+    override val platforms: Set<IdeaKotlinPlatform>,
     override val languageSettings: IdeaKotlinLanguageSettings?,
     override val dependencies: List<IdeaKotlinFragmentDependency>,
     override val directRefinesDependencies: List<IdeaKotlinFragment>,

@@ -20,6 +20,9 @@ interface IdeaKotlinProjectModelBuilder {
     @ExternalVariantApi
     fun registerDependencyResolver(resolver: IdeaKotlinFragmentDependencyResolver)
 
+    @ExternalVariantApi
+    fun registerDependencyTransformer(transformer: IdeaKotlinFragmentDependencyTransformer)
+
     fun buildIdeaKotlinProjectModel(): IdeaKotlinProjectModel
 }
 
@@ -29,14 +32,24 @@ internal class IdeaKotlinProjectModelBuilderImpl(
         IdeaKotlinVariantBinaryDependencyResolver(),
         IdeaKotlinMetadataDependencyResolver(),
         IdeaKotlinSourcesAndDocumentationResolver()
+    ),
+    dependencyTransformers: List<IdeaKotlinFragmentDependencyTransformer> = listOf(
+        IdeaKotlinSinglePlatformStdlibCommonFilter,
+        IdeaKotlinUnusedSourcesAndDocumentationFilter
     )
 ) : ToolingModelBuilder, IdeaKotlinProjectModelBuilder {
 
     private val dependencyResolvers = dependencyResolvers.toMutableList()
+    private val dependencyTransformers = dependencyTransformers.toMutableList()
 
     @ExternalVariantApi
     override fun registerDependencyResolver(resolver: IdeaKotlinFragmentDependencyResolver) {
         dependencyResolvers.add(resolver)
+    }
+
+    @ExternalVariantApi
+    override fun registerDependencyTransformer(transformer: IdeaKotlinFragmentDependencyTransformer) {
+        dependencyTransformers.add(transformer)
     }
 
     override fun buildIdeaKotlinProjectModel(): IdeaKotlinProjectModel {
@@ -52,7 +65,10 @@ internal class IdeaKotlinProjectModelBuilderImpl(
     }
 
     private inner class Context : IdeaKotlinProjectModelBuildingContext {
-        override val dependencyResolver: IdeaKotlinFragmentDependencyResolver = IdeaKotlinFragmentDependencyResolver(dependencyResolvers)
+        override val dependencyResolver = IdeaKotlinFragmentDependencyResolver { fragment ->
+            val dependencies = IdeaKotlinFragmentDependencyResolver(dependencyResolvers).resolve(fragment)
+            IdeaKotlinFragmentDependencyTransformer(dependencyTransformers).transform(fragment, dependencies)
+        }
     }
 }
 

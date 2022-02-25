@@ -7,7 +7,6 @@ package org.jetbrains.kotlin.gradle.kpm.idea
 
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
-import org.gradle.api.artifacts.component.ComponentIdentifier
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
 import org.gradle.api.artifacts.result.ArtifactResolutionResult
 import org.gradle.api.artifacts.result.ResolvedArtifactResult
@@ -48,7 +47,7 @@ internal class IdeaKotlinSourcesAndDocumentationResolver : IdeaKotlinFragmentDep
                 .mapNotNull { artifact ->
                     val id = artifact.id.componentIdentifier as? ModuleComponentIdentifier ?: return@mapNotNull null
                     IdeaKotlinFragmentResolvedBinaryDependencyImpl(
-                        coordinates = BinaryCoordinatesImpl(group = id.group, module = id.module, version = id.version),
+                        coordinates = IdeaKotlinBinaryCoordinatesImpl(group = id.group, module = id.module, version = id.version),
                         binaryType = binaryType,
                         binaryFile = artifact.file
                     )

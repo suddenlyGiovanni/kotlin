@@ -8,6 +8,9 @@
 package org.jetbrains.kotlin.gradle.kpm.idea
 
 import org.jetbrains.kotlin.gradle.kpm.KotlinExternalModelContainer
+import org.jetbrains.kotlin.gradle.kpm.idea.IdeaKotlinFragmentBinaryDependency.Companion.CLASSPATH_BINARY_TYPE
+import org.jetbrains.kotlin.gradle.kpm.idea.IdeaKotlinFragmentBinaryDependency.Companion.DOCUMENTATION_BINARY_TYPE
+import org.jetbrains.kotlin.gradle.kpm.idea.IdeaKotlinFragmentBinaryDependency.Companion.SOURCES_BINARY_TYPE
 import java.io.File
 import java.io.Serializable
 
@@ -23,7 +26,7 @@ sealed interface IdeaKotlinFragmentSourceDependency : IdeaKotlinFragmentDependen
     val kotlinFragmentName: String
 }
 
-sealed interface BinaryCoordinates : Serializable {
+sealed interface IdeaKotlinBinaryCoordinates : Serializable {
     val group: String
     val module: String
     val version: String
@@ -32,7 +35,7 @@ sealed interface BinaryCoordinates : Serializable {
 }
 
 sealed interface IdeaKotlinFragmentBinaryDependency : IdeaKotlinFragmentDependency {
-    val coordinates: BinaryCoordinates?
+    val coordinates: IdeaKotlinBinaryCoordinates?
 
     companion object {
         const val CLASSPATH_BINARY_TYPE = "org.jetbrains.binary.type.classpath"
@@ -49,6 +52,10 @@ sealed interface IdeaKotlinFragmentResolvedBinaryDependency : IdeaKotlinFragment
     val binaryType: String
     val binaryFile: File
 }
+
+val IdeaKotlinFragmentResolvedBinaryDependency.isSourcesType get() = binaryType == SOURCES_BINARY_TYPE
+val IdeaKotlinFragmentResolvedBinaryDependency.isDocumentationType get() = binaryType == DOCUMENTATION_BINARY_TYPE
+val IdeaKotlinFragmentResolvedBinaryDependency.isClasspathType get() = binaryType == CLASSPATH_BINARY_TYPE
 
 @InternalKotlinGradlePluginApi
 data class IdeaKotlinFragmentSourceDependencyImpl(
@@ -67,13 +74,13 @@ data class IdeaKotlinFragmentSourceDependencyImpl(
 }
 
 @InternalKotlinGradlePluginApi
-data class BinaryCoordinatesImpl(
+data class IdeaKotlinBinaryCoordinatesImpl(
     override val group: String,
     override val module: String,
     override val version: String,
     override val kotlinModuleName: String? = null,
     override val kotlinFragmentName: String? = null
-) : BinaryCoordinates {
+) : IdeaKotlinBinaryCoordinates {
 
     override fun toString(): String {
         return "$group:$module:$version" +
@@ -88,21 +95,14 @@ data class BinaryCoordinatesImpl(
 
 @InternalKotlinGradlePluginApi
 data class IdeaKotlinFragmentResolvedBinaryDependencyImpl(
-    override val coordinates: BinaryCoordinates?,
+    override val coordinates: IdeaKotlinBinaryCoordinates?,
     override val binaryType: String,
     override val binaryFile: File,
     override val external: KotlinExternalModelContainer = KotlinExternalModelContainer.Empty
 ) : IdeaKotlinFragmentResolvedBinaryDependency {
 
     override fun toString(): String {
-        val readableBinaryType = when (binaryType) {
-            IdeaKotlinFragmentBinaryDependency.CLASSPATH_BINARY_TYPE -> "classpath"
-            IdeaKotlinFragmentBinaryDependency.DOCUMENTATION_BINARY_TYPE -> "documentation"
-            IdeaKotlinFragmentBinaryDependency.SOURCES_BINARY_TYPE -> "sources"
-            else -> binaryType
-        }
-
-        return "$readableBinaryType://$coordinates/${binaryFile.name}"
+        return "${binaryType.split(".").last()}://$coordinates/${binaryFile.name}"
     }
 
     @InternalKotlinGradlePluginApi
@@ -114,7 +114,7 @@ data class IdeaKotlinFragmentResolvedBinaryDependencyImpl(
 @InternalKotlinGradlePluginApi
 data class IdeaKotlinFragmentUnresolvedBinaryDependencyImpl(
     override val cause: String?,
-    override val coordinates: BinaryCoordinates?,
+    override val coordinates: IdeaKotlinBinaryCoordinates?,
     override val external: KotlinExternalModelContainer = KotlinExternalModelContainer.Empty
 ) : IdeaKotlinFragmentUnresolvedBinaryDependency {
 
