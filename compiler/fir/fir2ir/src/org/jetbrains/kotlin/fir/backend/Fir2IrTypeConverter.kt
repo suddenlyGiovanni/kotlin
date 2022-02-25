@@ -161,13 +161,25 @@ class Fir2IrTypeConverter(
                 // (some reflection tests rely on this)
                 lowerBound.toIrType(
                     typeContext,
+                    annotations,
                     hasFlexibleNullability = lowerBound.nullability != upperBound.nullability,
                     addRawTypeAnnotation = true
                 )
             }
-            is ConeFlexibleType -> {
-                // TODO: yet we take more general type. Not quite sure it's Ok
-                upperBound.toIrType(typeContext, hasFlexibleNullability = lowerBound.nullability != upperBound.nullability)
+            is ConeFlexibleType -> with(session.typeContext) {
+                if (upperBound is ConeClassLikeType) {
+                    val upper = upperBound as ConeClassLikeType
+                    val lower = lowerBound as? ConeClassLikeType ?: error("Expecting class-like type, got $lowerBound")
+                    val intermediate = if (lower.lookupTag == upper.lookupTag) {
+                        lower.replaceArguments(upper.getArguments())
+                    } else lower
+                    val mixed = if (upper.isNullable) intermediate.makeNullable() else intermediate.makeDefinitelyNotNullOrNotNull()
+                    (mixed as ConeKotlinType).toIrType(
+                        typeContext, annotations, hasFlexibleNullability = lower.nullability != upper.nullability
+                    )
+                } else {
+                    upperBound.toIrType(typeContext, annotations, hasFlexibleNullability = lowerBound.nullability != upperBound.nullability)
+                }
             }
             is ConeCapturedType -> {
                 val cached = capturedTypeCache[this]

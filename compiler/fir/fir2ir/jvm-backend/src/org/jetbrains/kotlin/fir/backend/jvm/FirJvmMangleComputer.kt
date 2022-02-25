@@ -250,6 +250,9 @@ open class FirJvmMangleComputer(
                     tBuilder.appendSignature(MangleConstant.ENHANCED_NULLABILITY_MARK)
                 }
             }
+            is ConeRawType -> {
+                mangleType(tBuilder, type.lowerBound)
+            }
             is ConeFlexibleType -> {
                 with(session.typeContext) {
                     // Need to reproduce type approximation done for flexible types in TypeTranslator.
@@ -257,7 +260,7 @@ open class FirJvmMangleComputer(
                     val upper = type.upperBound
                     if (upper is ConeClassLikeType) {
                         val lower = type.lowerBound as? ConeClassLikeType ?: error("Expecting class-like type, got ${type.lowerBound}")
-                        val intermediate = if (lower.lookupTag == upper.lookupTag && type !is ConeRawType) {
+                        val intermediate = if (lower.lookupTag == upper.lookupTag) {
                             lower.replaceArguments(upper.getArguments())
                         } else lower
                         val mixed = if (upper.isNullable) intermediate.makeNullable() else intermediate.makeDefinitelyNotNullOrNotNull()
