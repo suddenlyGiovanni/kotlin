@@ -47,6 +47,7 @@ class IrInterpreterDumpHandler(testServices: TestServices) : JvmBinaryArtifactHa
         val afterText = after.readText()
         val propertiesBefore = findConstProperties(beforeText)
         val propertiesAfter = findConstProperties(afterText)
+        testServices.assertions.assertTrue(propertiesBefore.isNotEmpty()) { "Test file doesn't contain const properties" }
         testServices.assertions.assertEquals(propertiesBefore.size, propertiesAfter.size) {
             "After lowering some properties are missing"
         }
