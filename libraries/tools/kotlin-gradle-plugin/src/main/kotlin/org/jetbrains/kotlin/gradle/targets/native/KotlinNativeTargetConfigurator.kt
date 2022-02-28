@@ -62,7 +62,6 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
             it.group = BasePlugin.BUILD_GROUP
             it.description = "Links ${binary.outputKind.description} '${binary.name}' for a target '${target.name}'."
             it.enabled = binary.konanTarget.enabledOnCurrentHost
-            it.destinationDirectory.set(binary.outputDirectory)
         }
 
 

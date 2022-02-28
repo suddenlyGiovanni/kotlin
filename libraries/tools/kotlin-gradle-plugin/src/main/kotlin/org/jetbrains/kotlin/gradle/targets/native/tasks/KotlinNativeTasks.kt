@@ -396,6 +396,14 @@ constructor(
     }
     // endregion.
 
+    override fun createCompilerArgs(): StubK2NativeCompilerArguments = StubK2NativeCompilerArguments()
+
+    override fun setupCompilerArgs(
+        args: StubK2NativeCompilerArguments,
+        defaultsOnly: Boolean,
+        ignoreClasspathResolutionErrors: Boolean
+    ) = Unit
+
     @TaskAction
     fun compile() {
         val output = outputFile.get()
@@ -563,6 +571,14 @@ constructor(
     val apiFilesProvider = project.provider {
         project.configurations.getByName(compilation.apiConfigurationName).files.filterKlibsPassedToCompiler()
     }
+
+    override fun createCompilerArgs(): StubK2NativeCompilerArguments = StubK2NativeCompilerArguments()
+
+    override fun setupCompilerArgs(
+        args: StubK2NativeCompilerArguments,
+        defaultsOnly: Boolean,
+        ignoreClasspathResolutionErrors: Boolean
+    ) = Unit
 
     private fun validatedExportedLibraries() {
         val exportConfiguration = exportLibraries as? Configuration ?: return
