@@ -12,6 +12,7 @@ import kotlin.math.min
  * The `String` class represents character strings. All string literals in Kotlin programs, such as `"abc"`, are
  * implemented as instances of this class.
  */
+@kotlin.wasm.internal.WasmAutoboxed
 public class String private constructor(internal val chars: CharArray) : Comparable<String>, CharSequence {
     public companion object {
         // Note: doesn't copy the array, use with care.
@@ -40,6 +41,7 @@ public class String private constructor(internal val chars: CharArray) : Compara
     }
 
     public override fun compareTo(other: String): Int {
+        if (this.chars === other.chars) return 0
         val len = min(this.length, other.length)
 
         for (i in 0 until len) {
@@ -52,22 +54,13 @@ public class String private constructor(internal val chars: CharArray) : Compara
     }
 
     public override fun equals(other: Any?): Boolean {
-        if (other is String)
-            return this.compareTo(other) == 0
-        return false
+        return other is String && (this.chars === other.chars || this.compareTo(other) == 0)
     }
+
 
     public override fun toString(): String = this
 
-    public override fun hashCode(): Int {
-        if (_hashCode != 0 || this.isEmpty())
-            return _hashCode
-        var hash = 0
-        for (c in chars)
-            hash = 31 * hash + c.toInt()
-        _hashCode = hash
-        return _hashCode
-    }
+    public override fun hashCode(): Int = chars.contentHashCode()
 }
 
 internal fun stringLiteral(startAddr: Int, length: Int) = String.unsafeFromCharArray(unsafeRawMemoryToCharArray(startAddr, length))
