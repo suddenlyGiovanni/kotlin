@@ -291,26 +291,26 @@ open class FirJvmMangleComputer(
         anonymousObject.mangleSimpleDeclaration("<anonymous>")
     }
 
-    override fun visitVariable(property: FirVariable, data: Boolean) {
-        isRealExpect = isRealExpect or property.isExpect
-        typeParameterContainer.add(property)
-        property.visitParent()
+    override fun visitVariable(variable: FirVariable, data: Boolean) {
+        isRealExpect = isRealExpect or variable.isExpect
+        typeParameterContainer.add(variable)
+        variable.visitParent()
 
-        val isStaticProperty = property.isStatic
+        val isStaticProperty = variable.isStatic
         if (isStaticProperty) {
             builder.appendSignature(MangleConstant.STATIC_MEMBER_MARK)
         }
 
-        property.receiverTypeRef?.let {
+        variable.receiverTypeRef?.let {
             builder.appendSignature(MangleConstant.EXTENSION_RECEIVER_PREFIX)
             mangleType(builder, it.coneType)
         }
 
-        property.typeParameters.withIndex().toList().collectForMangler(builder, MangleConstant.TYPE_PARAMETERS) { (index, typeParameter) ->
+        variable.typeParameters.withIndex().toList().collectForMangler(builder, MangleConstant.TYPE_PARAMETERS) { (index, typeParameter) ->
             mangleTypeParameter(this, typeParameter.symbol.fir, index)
         }
 
-        builder.append(property.name.asString())
+        builder.append(variable.name.asString())
     }
 
     override fun visitProperty(property: FirProperty, data: Boolean) {
