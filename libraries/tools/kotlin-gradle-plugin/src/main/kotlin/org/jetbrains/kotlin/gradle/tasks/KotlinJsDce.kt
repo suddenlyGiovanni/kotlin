@@ -16,12 +16,12 @@
 
 package org.jetbrains.kotlin.gradle.tasks
 
+import org.gradle.api.file.ConfigurableFileCollection
+import org.gradle.api.file.FileCollection
 import org.gradle.api.model.ObjectFactory
-import org.gradle.api.tasks.CacheableTask
-import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.Internal
-import org.gradle.api.tasks.TaskAction
+import org.gradle.api.tasks.*
 import org.gradle.work.ChangeType
+import org.gradle.work.Incremental
 import org.gradle.work.InputChanges
 import org.jetbrains.kotlin.cli.common.arguments.DevModeOverwritingStrategies
 import org.jetbrains.kotlin.cli.common.arguments.K2JSDceArguments
@@ -32,6 +32,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJsDceOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinJsDceOptionsImpl
 import org.jetbrains.kotlin.gradle.logging.GradleKotlinLogger
 import org.jetbrains.kotlin.gradle.utils.canonicalPathWithoutExtension
+import org.jetbrains.kotlin.gradle.utils.fileExtensionCasePermutations
 import java.io.File
 import javax.inject.Inject
 
@@ -43,10 +44,9 @@ abstract class KotlinJsDce @Inject constructor(
 
     init {
         cacheOnlyIfEnabledForKotlin()
-    }
 
-    @get:Internal
-    internal val objects = project.objects
+        include("js".fileExtensionCasePermutations().map { "**/*.$it" })
+    }
 
     override fun createCompilerArgs(): K2JSDceArguments = K2JSDceArguments()
 
@@ -75,9 +75,18 @@ abstract class KotlinJsDce @Inject constructor(
     @Input
     var jvmArgs = mutableListOf<String>()
 
-    private val buildDir by lazy {
-        project.buildDir
-    }
+    // Source could be empty, while classpath not
+    @get:Incremental
+    @get:InputFiles
+    @get:IgnoreEmptyDirectories
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    override val sources: FileCollection = super.sources
+
+    @get:Incremental
+    @get:InputFiles
+    abstract override val classpath: ConfigurableFileCollection
+
+    private val buildDir = project.layout.buildDirectory
 
     private val isDevMode
         get() = dceOptions.devMode || "-dev-mode" in dceOptions.freeCompilerArgs
@@ -100,7 +109,7 @@ abstract class KotlinJsDce @Inject constructor(
         } else {
             classpath.asFileTree.files
         }
-        // TODO: use PatternFilterable here!
+
         val inputFiles = sources.asFileTree.files.plus(classpathFiles)
             .filter { !kotlinFilesOnly || isDceCandidate(it) }
             .map { it.path }
@@ -125,7 +134,7 @@ abstract class KotlinJsDce @Inject constructor(
             K2JSDce::class.java.name,
             defaultCompilerClasspath,
             log,
-            buildDir,
+            buildDir.get().asFile,
             jvmArgs
         )
         throwGradleExceptionIfError(exitCode, KotlinCompilerExecutionStrategy.OUT_OF_PROCESS)
