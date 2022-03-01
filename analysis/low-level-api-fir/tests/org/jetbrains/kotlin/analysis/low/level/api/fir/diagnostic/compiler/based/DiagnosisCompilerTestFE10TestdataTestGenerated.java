@@ -754,6 +754,12 @@ public class DiagnosisCompilerTestFE10TestdataTestGenerated extends AbstractDiag
         }
 
         @Test
+        @TestMetadata("simple.kt")
+        public void testSimple() throws Exception {
+            runTest("compiler/testData/diagnostics/tests/simple.kt");
+        }
+
+        @Test
         @TestMetadata("StarsInFunctionCalls.kt")
         public void testStarsInFunctionCalls() throws Exception {
             runTest("compiler/testData/diagnostics/tests/StarsInFunctionCalls.kt");
