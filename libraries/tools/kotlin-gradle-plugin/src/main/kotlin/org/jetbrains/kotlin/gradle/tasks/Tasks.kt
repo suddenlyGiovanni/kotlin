@@ -130,10 +130,10 @@ abstract class AbstractKotlinCompileTool<T : CommonToolArguments> @Inject constr
     }
 
     @Internal
-    final override fun getIncludes(): Set<String> = patternFilterable.includes
+    final override fun getIncludes(): MutableSet<String> = patternFilterable.includes
 
     @Internal
-    final override fun getExcludes(): Set<String> = patternFilterable.excludes
+    final override fun getExcludes(): MutableSet<String> = patternFilterable.excludes
 
     final override fun setIncludes(includes: Iterable<String>): PatternFilterable = also {
         patternFilterable.setIncludes(includes)

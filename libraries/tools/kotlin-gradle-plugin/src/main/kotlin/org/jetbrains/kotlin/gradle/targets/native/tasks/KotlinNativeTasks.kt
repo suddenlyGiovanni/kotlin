@@ -210,7 +210,7 @@ abstract class AbstractKotlinNativeCompile<
 
     @get:Internal
     open val outputFile: Provider<File>
-        get() = destinationDirectory.map {
+        get() = destinationDirectory.flatMap {
             val prefix = outputKind.prefix(konanTarget)
             val suffix = outputKind.suffix(konanTarget)
             val filename = "$prefix${baseName}$suffix".let {
@@ -223,7 +223,7 @@ abstract class AbstractKotlinNativeCompile<
                 }
             }
 
-            it.file(filename).asFile
+            objectFactory.property(it.file(filename).asFile)
         }
 
     // endregion
@@ -478,7 +478,8 @@ constructor(
         // Gradle build cache transforms symlinks into regular files https://guides.gradle.org/using-build-cache/#symbolic_links
         outputs.cacheIf { outputKind != FRAMEWORK }
 
-        setSource(compilation.compileKotlinTask.outputFile)
+        this.setSource(compilation.compileKotlinTask.outputFile)
+        includes.clear() // we need to include non '.kt' or '.kts' files
         disallowSourceChanges()
     }
 
