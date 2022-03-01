@@ -24,7 +24,13 @@ using namespace kotlin;
 
 namespace {
 
+struct CollectTraits {
+    using MarkQueue = gc::VectorMarkQueueTraits;
+};
+
 struct MarkTraits {
+    using MarkQueue = gc::VectorMarkQueueTraits;
+
     static bool IsMarked(ObjHeader* object) noexcept {
         auto& objectData = mm::ObjectFactory<gc::ConcurrentMarkAndSweep>::NodeRef::From(object).GCObjectData();
         return objectData.color() == gc::ConcurrentMarkAndSweep::ObjectData::Color::kBlack;
@@ -143,7 +149,7 @@ bool gc::ConcurrentMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     state_.start(epoch);
     RuntimeLogInfo(
             {kTagGC}, "Started GC epoch %" PRId64 ". Time since last GC %" PRIu64 " microseconds", epoch, timeStartUs - lastGCTimestampUs_);
-    collectRootSet(graySet_);
+    gc::collectRootSet<CollectTraits>(graySet_);
     auto timeRootSetUs = konan::getTimeMicros();
     // Can be unsafe, because we've stopped the world.
 
