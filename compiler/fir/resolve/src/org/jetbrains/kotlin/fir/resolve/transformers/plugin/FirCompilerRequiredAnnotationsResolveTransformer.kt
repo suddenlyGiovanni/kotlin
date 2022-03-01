@@ -74,6 +74,18 @@ open class FirCompilerRequiredAnnotationsResolveTransformer(
         return file
     }
 
+    fun <T> withFile(file: FirFile, f: () -> T): T = annotationTransformer.withFile(file, f)
+
+    fun <T> withFileAndScopes(file: FirFile, f: () -> T): T {
+        annotationTransformer.withFile(file) {
+            return annotationTransformer.withFileScopes(file, f)
+        }
+    }
+
+    override fun transformRegularClass(regularClass: FirRegularClass, data: Any?): FirStatement {
+        return annotationTransformer.transformRegularClass(regularClass, LinkedHashMultimap.create())
+    }
+
     private fun FirFile.resolveAnnotations(
         annotations: Set<AnnotationFqn>,
         metaAnnotations: Set<AnnotationFqn>
@@ -185,9 +197,15 @@ private class FirAnnotationResolveTransformer(
     }
 
     override fun transformFile(file: FirFile, data: Multimap<AnnotationFqn, FirRegularClass>): FirFile {
+        withFile(file) {
+            return super.transformFile(file, data)
+        }
+    }
+
+    inline fun <T> withFile(file: FirFile, f: () -> T): T {
         typeResolverTransformer.withFile(file) {
             argumentsTransformer.context.withFile(file, argumentsTransformer.components) {
-                return super.transformFile(file, data)
+                return f()
             }
         }
     }

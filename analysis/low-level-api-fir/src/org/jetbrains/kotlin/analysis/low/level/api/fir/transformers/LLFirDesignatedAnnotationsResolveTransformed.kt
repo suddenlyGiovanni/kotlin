@@ -11,6 +11,7 @@ import org.jetbrains.kotlin.analysis.low.level.api.fir.lazy.resolve.ResolveTreeB
 import org.jetbrains.kotlin.analysis.low.level.api.fir.util.ensurePhase
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.declarations.*
+import org.jetbrains.kotlin.fir.resolve.ResolutionMode
 import org.jetbrains.kotlin.fir.resolve.ScopeSession
 import org.jetbrains.kotlin.fir.resolve.transformers.plugin.FirCompilerRequiredAnnotationsResolveTransformer
 
@@ -19,14 +20,35 @@ internal class LLFirDesignatedAnnotationsResolveTransformed(
     session: FirSession,
     scopeSession: ScopeSession,
 ) : LLFirLazyTransformer, FirCompilerRequiredAnnotationsResolveTransformer(session, scopeSession) {
+
+    private fun moveNextDeclaration(designationIterator: Iterator<FirDeclaration>) {
+        if (!designationIterator.hasNext()) {
+            designation.declaration.transform<FirDeclaration, ResolutionMode>(this, ResolutionMode.ContextIndependent)
+            return
+        }
+        when (val nextElement = designationIterator.next()) {
+            is FirFile -> {
+                withFile(nextElement) {
+                    moveNextDeclaration(designationIterator)
+                }
+            }
+            is FirRegularClass -> {
+                moveNextDeclaration(designationIterator)
+            }
+            else -> {
+                error("Unexpected declaration in designation: ${nextElement::class.qualifiedName}")
+            }
+        }
+    }
+
     override fun transformDeclaration(phaseRunner: LLFirPhaseRunner) {
         if (designation.declaration.resolvePhase >= FirResolvePhase.COMPILER_REQUIRED_ANNOTATIONS) return
 
-        //val designationIterator = designation.toSequenceWithFile(includeTarget = false).iterator()
+        val designationIterator = designation.toSequenceWithFile(includeTarget = false).iterator()
 
         ResolveTreeBuilder.resolvePhase(designation.declaration, FirResolvePhase.COMPILER_REQUIRED_ANNOTATIONS) {
             phaseRunner.runPhaseWithCustomResolve(FirResolvePhase.COMPILER_REQUIRED_ANNOTATIONS) {
-                //moveNextDeclaration(designationIterator)
+                moveNextDeclaration(designationIterator)
             }
         }
 
