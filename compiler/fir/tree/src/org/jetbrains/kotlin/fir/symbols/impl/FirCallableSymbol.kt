@@ -50,7 +50,7 @@ abstract class FirCallableSymbol<D : FirCallableDeclaration> : FirBasedSymbol<D>
 
     val deprecation: DeprecationsPerUseSite?
         get() {
-            ensureResolved(FirResolvePhase.STATUS)
+            ensureResolved(FirResolvePhase.COMPILER_REQUIRED_ANNOTATIONS)
             return fir.deprecation
         }
 
