@@ -35,6 +35,7 @@ import org.jetbrains.kotlin.test.services.moduleStructure
 import org.jetbrains.kotlin.test.utils.MultiModuleInfoDumper
 import org.jetbrains.kotlin.test.utils.withExtension
 import org.jetbrains.kotlin.test.utils.withSuffixAndExtension
+import org.jetbrains.kotlin.utils.addToStdlib.applyIf
 import java.io.File
 
 class IrTextDumpHandler(
@@ -110,11 +111,16 @@ class IrTextDumpHandler(
             printTypeAbbreviations = false,
             isHiddenDeclaration = { isHiddenDeclaration(it, irBuiltins) },
             stableOrder = true,
+            // Expect declarations exist in K1 IR just before serialization, but won't be serialized. Though, dumps should be same before and after
+            printExpectDeclarations = module.languageVersionSettings.languageVersion.usesK2,
         )
 
         val builder = baseDumper.builderForModule(module.name)
         val testFileToIrFile = info.irModuleFragment.files.groupWithTestFiles(module)
-        for ((testFile, irFile) in testFileToIrFile) {
+        val orderedTestFileToIrFile = testFileToIrFile.applyIf(dumpOptions.stableOrder) {
+            sortedBy { it.second.fileEntry.name }
+        }
+        for ((testFile, irFile) in orderedTestFileToIrFile) {
             if (testFile?.directives?.contains(EXTERNAL_FILE) == true) continue
             var actualDump = irFile.dumpTreesFromLineNumber(lineNumber = 0, dumpOptions)
             if (actualDump.isEmpty()) {

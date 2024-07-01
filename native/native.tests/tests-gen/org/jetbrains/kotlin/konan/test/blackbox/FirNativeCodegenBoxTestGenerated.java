@@ -5100,6 +5100,12 @@ public class FirNativeCodegenBoxTestGenerated extends AbstractNativeCodegenBoxTe
           public void testUnitWithSideEffect() {
             runTest("compiler/testData/codegen/box/callableReference/function/local/unitWithSideEffect.kt");
           }
+
+          @Test
+          @TestMetadata("withValueArguments.kt")
+          public void testWithValueArguments() {
+            runTest("compiler/testData/codegen/box/callableReference/function/local/withValueArguments.kt");
+          }
         }
       }
 
@@ -9876,6 +9882,12 @@ public class FirNativeCodegenBoxTestGenerated extends AbstractNativeCodegenBoxTe
       @TestMetadata("for_loops_types.kt")
       public void testFor_loops_types() {
         runTest("compiler/testData/codegen/box/controlflow/for_loops_types.kt");
+      }
+
+      @Test
+      @TestMetadata("smartcastOnThisInInitializationSection.kt")
+      public void testSmartcastOnThisInInitializationSection() {
+        runTest("compiler/testData/codegen/box/controlflow/smartcastOnThisInInitializationSection.kt");
       }
 
       @Test
@@ -45331,6 +45343,12 @@ public class FirNativeCodegenBoxTestGenerated extends AbstractNativeCodegenBoxTe
       }
 
       @Test
+      @TestMetadata("unsignedInStringInterpolation.kt")
+      public void testUnsignedInStringInterpolation() {
+        runTest("compiler/testData/codegen/box/unsignedTypes/unsignedInStringInterpolation.kt");
+      }
+
+      @Test
       @TestMetadata("unsignedIntCompare.kt")
       public void testUnsignedIntCompare() {
         runTest("compiler/testData/codegen/box/unsignedTypes/unsignedIntCompare.kt");
@@ -49230,6 +49248,12 @@ public class FirNativeCodegenBoxTestGenerated extends AbstractNativeCodegenBoxTe
       @TestMetadata("localFunInLambdaCapturesAnotherFun.kt")
       public void testLocalFunInLambdaCapturesAnotherFun() {
         runTest("compiler/testData/codegen/boxInline/localFunInLambda/localFunInLambdaCapturesAnotherFun.kt");
+      }
+
+      @Test
+      @TestMetadata("localFunInLambdaCapturesOuterVariable.kt")
+      public void testLocalFunInLambdaCapturesOuterVariable() {
+        runTest("compiler/testData/codegen/boxInline/localFunInLambda/localFunInLambdaCapturesOuterVariable.kt");
       }
     }
 

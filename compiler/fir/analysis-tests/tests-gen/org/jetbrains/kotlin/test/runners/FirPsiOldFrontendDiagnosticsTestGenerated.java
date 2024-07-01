@@ -8615,6 +8615,12 @@ public class FirPsiOldFrontendDiagnosticsTestGenerated extends AbstractFirPsiDia
       }
 
       @Test
+      @TestMetadata("smartcastOnThisInInitializationSection.kt")
+      public void testSmartcastOnThisInInitializationSection() {
+        runTest("compiler/testData/diagnostics/tests/controlFlowAnalysis/smartcastOnThisInInitializationSection.kt");
+      }
+
+      @Test
       @TestMetadata("throwInLambda.kt")
       public void testThrowInLambda() {
         runTest("compiler/testData/diagnostics/tests/controlFlowAnalysis/throwInLambda.kt");
@@ -38465,9 +38471,21 @@ public class FirPsiOldFrontendDiagnosticsTestGenerated extends AbstractFirPsiDia
       }
 
       @Test
-      @TestMetadata("newListMethodsImmutable.kt")
-      public void testNewListMethodsImmutable() {
-        runTest("compiler/testData/diagnostics/tests/testsWithJava21/newListMethodsImmutable.kt");
+      @TestMetadata("newListMethodsImmutable20.kt")
+      public void testNewListMethodsImmutable20() {
+        runTest("compiler/testData/diagnostics/tests/testsWithJava21/newListMethodsImmutable20.kt");
+      }
+
+      @Test
+      @TestMetadata("newListMethodsImmutable21.kt")
+      public void testNewListMethodsImmutable21() {
+        runTest("compiler/testData/diagnostics/tests/testsWithJava21/newListMethodsImmutable21.kt");
+      }
+
+      @Test
+      @TestMetadata("newListMethodsImmutable22.kt")
+      public void testNewListMethodsImmutable22() {
+        runTest("compiler/testData/diagnostics/tests/testsWithJava21/newListMethodsImmutable22.kt");
       }
 
       @Test
@@ -40943,6 +40961,12 @@ public class FirPsiOldFrontendDiagnosticsTestGenerated extends AbstractFirPsiDia
       }
 
       @Test
+      @TestMetadata("ExhaustiveOnTypeParameterWithSealedUpperBound.kt")
+      public void testExhaustiveOnTypeParameterWithSealedUpperBound() {
+        runTest("compiler/testData/diagnostics/tests/when/ExhaustiveOnTypeParameterWithSealedUpperBound.kt");
+      }
+
+      @Test
       @TestMetadata("ExhaustivePlatformBoolean.kt")
       public void testExhaustivePlatformBoolean() {
         runTest("compiler/testData/diagnostics/tests/when/ExhaustivePlatformBoolean.kt");
@@ -41342,6 +41366,90 @@ public class FirPsiOldFrontendDiagnosticsTestGenerated extends AbstractFirPsiDia
         }
 
         @Test
+        @TestMetadata("diverseBooleanExpression.kt")
+        public void testDiverseBooleanExpression() {
+          runTest("compiler/testData/diagnostics/tests/when/guard/diverseBooleanExpression.kt");
+        }
+
+        @Test
+        @TestMetadata("earlyJumps.kt")
+        public void testEarlyJumps() {
+          runTest("compiler/testData/diagnostics/tests/when/guard/earlyJumps.kt");
+        }
+
+        @Test
+        @TestMetadata("elvisOperator.kt")
+        public void testElvisOperator() {
+          runTest("compiler/testData/diagnostics/tests/when/guard/elvisOperator.kt");
+        }
+
+        @Test
+        @TestMetadata("exhaustiveness.kt")
+        public void testExhaustiveness() {
+          runTest("compiler/testData/diagnostics/tests/when/guard/exhaustiveness.kt");
+        }
+
+        @Test
+        @TestMetadata("expectedTypeInGuard.kt")
+        public void testExpectedTypeInGuard() {
+          runTest("compiler/testData/diagnostics/tests/when/guard/expectedTypeInGuard.kt");
+        }
+
+        @Test
+        @TestMetadata("guardWithNoSubject.kt")
+        public void testGuardWithNoSubject() {
+          runTest("compiler/testData/diagnostics/tests/when/guard/guardWithNoSubject.kt");
+        }
+
+        @Test
+        @TestMetadata("ifElseExpressions.kt")
+        public void testIfElseExpressions() {
+          runTest("compiler/testData/diagnostics/tests/when/guard/ifElseExpressions.kt");
+        }
+
+        @Test
+        @TestMetadata("initializationAnalyses.kt")
+        public void testInitializationAnalyses() {
+          runTest("compiler/testData/diagnostics/tests/when/guard/initializationAnalyses.kt");
+        }
+
+        @Test
+        @TestMetadata("lambda.kt")
+        public void testLambda() {
+          runTest("compiler/testData/diagnostics/tests/when/guard/lambda.kt");
+        }
+
+        @Test
+        @TestMetadata("multipleCondition.kt")
+        public void testMultipleCondition() {
+          runTest("compiler/testData/diagnostics/tests/when/guard/multipleCondition.kt");
+        }
+
+        @Test
+        @TestMetadata("returnAnalysis.kt")
+        public void testReturnAnalysis() {
+          runTest("compiler/testData/diagnostics/tests/when/guard/returnAnalysis.kt");
+        }
+
+        @Test
+        @TestMetadata("smartCasts.kt")
+        public void testSmartCasts() {
+          runTest("compiler/testData/diagnostics/tests/when/guard/smartCasts.kt");
+        }
+
+        @Test
+        @TestMetadata("thisInSubject.kt")
+        public void testThisInSubject() {
+          runTest("compiler/testData/diagnostics/tests/when/guard/thisInSubject.kt");
+        }
+
+        @Test
+        @TestMetadata("typeCheckerBehaves.kt")
+        public void testTypeCheckerBehaves() {
+          runTest("compiler/testData/diagnostics/tests/when/guard/typeCheckerBehaves.kt");
+        }
+
+        @Test
         @TestMetadata("whenWithGuardDisabled.kt")
         public void testWhenWithGuardDisabled() {
           runTest("compiler/testData/diagnostics/tests/when/guard/whenWithGuardDisabled.kt");
@@ -41357,6 +41465,18 @@ public class FirPsiOldFrontendDiagnosticsTestGenerated extends AbstractFirPsiDia
         @TestMetadata("whenWithGuardSyntax.kt")
         public void testWhenWithGuardSyntax() {
           runTest("compiler/testData/diagnostics/tests/when/guard/whenWithGuardSyntax.kt");
+        }
+
+        @Test
+        @TestMetadata("whenWithNamedSubject.kt")
+        public void testWhenWithNamedSubject() {
+          runTest("compiler/testData/diagnostics/tests/when/guard/whenWithNamedSubject.kt");
+        }
+
+        @Test
+        @TestMetadata("whenWithSealed.kt")
+        public void testWhenWithSealed() {
+          runTest("compiler/testData/diagnostics/tests/when/guard/whenWithSealed.kt");
         }
       }
 

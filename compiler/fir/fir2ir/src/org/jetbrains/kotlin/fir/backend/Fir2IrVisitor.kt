@@ -1530,7 +1530,7 @@ class Fir2IrVisitor(
             var endArgumentOffset = -1
             for (firArgument in stringConcatenationCall.arguments) {
                 val argument = convertToIrExpression(firArgument)
-                if (argument is IrConst<*>) {
+                if (argument is IrConst<*> && argument.kind == IrConstKind.String) {
                     if (sb.isEmpty()) {
                         startArgumentOffset = argument.startOffset
                     }
@@ -1705,13 +1705,13 @@ class Fir2IrVisitor(
                 }
             } else when (binaryLogicExpression.kind) {
                 LogicOperationKind.AND -> {
-                    IrIfThenElseImpl(startOffset, endOffset, builtins.booleanType, IrStatementOrigin.ANDAND).apply {
+                    IrWhenImpl(startOffset, endOffset, builtins.booleanType, IrStatementOrigin.ANDAND).apply {
                         branches.add(IrBranchImpl(leftOperand, rightOperand))
                         branches.add(elseBranch(constFalse(rightOperand.startOffset, rightOperand.endOffset)))
                     }
                 }
                 LogicOperationKind.OR -> {
-                    IrIfThenElseImpl(startOffset, endOffset, builtins.booleanType, IrStatementOrigin.OROR).apply {
+                    IrWhenImpl(startOffset, endOffset, builtins.booleanType, IrStatementOrigin.OROR).apply {
                         branches.add(IrBranchImpl(leftOperand, constTrue(leftOperand.startOffset, leftOperand.endOffset)))
                         branches.add(elseBranch(rightOperand))
                     }
