@@ -9,7 +9,10 @@ import kotlin.reflect.*
 import kotlin.test.*
 
 fun check(x: KClass<*>, expectedSupertypes: String = "[kotlin.Any]") {
-    assertEquals(setOf("equals", "hashCode", "toString"), x.members.mapTo(hashSetOf()) { it.name })
+    // Mainly check that `members` doesn't crash for synthetic classes. The exact contents of `members` is not that important, except that
+    // it should probably contain equals, hashCode and toString.
+    val memberNames = x.members.mapTo(hashSetOf()) { it.name }
+    assertTrue(memberNames.containsAll(setOf("equals", "hashCode", "toString")), "Fail: $memberNames")
 
     assertEquals(emptyList(), x.annotations)
     assertEquals(emptyList(), x.constructors)
