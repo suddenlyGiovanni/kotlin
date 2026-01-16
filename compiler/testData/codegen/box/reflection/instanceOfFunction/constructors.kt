@@ -74,7 +74,7 @@ fun box(): String {
     check(Anno::class.constructors.single())
     check(JAnno::class.constructors.single())
 
-    if (System.getProperty("kotlin.reflect.jvm.useK1Implementation")?.toBoolean() != true) {
+    if (Class.forName("kotlin.reflect.jvm.internal.SystemPropertiesKt").getMethod("getUseK1Implementation").invoke(null) != true) {
         check(JAnnoNonValue::class.constructors.single(), call = false)
     }
 

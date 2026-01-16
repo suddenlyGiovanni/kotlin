@@ -26,7 +26,7 @@ private fun KClass<*>.supertype(): KType =
 fun box(): String {
     assertEquals("kotlin.collections.MutableList<kotlin.collections.(Mutable)List<kotlin.String!>!>", J.J1::class.supertype().toString())
 
-    if (System.getProperty("kotlin.reflect.jvm.useK1Implementation")?.toBoolean() == true) {
+    if (Class.forName("kotlin.reflect.jvm.internal.SystemPropertiesKt").getMethod("getUseK1Implementation").invoke(null) == true) {
         // It's effectively the same type as below, because `List<out S>` is the same type as `List<S>` (because of declaration-site
         // variance in `kotlin.collections.List`.
         // But K1 implementation in `JavaTypeResolver` used the following logic: do not add a projection at use site, if the same projection

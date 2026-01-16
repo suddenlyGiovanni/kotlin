@@ -92,7 +92,7 @@ fun box(): String {
         J.PrimitiveArrays::class.parametersToString(),
     )
 
-    if (System.getProperty("kotlin.reflect.jvm.useK1Implementation")?.toBoolean() == true) {
+    if (Class.forName("kotlin.reflect.jvm.internal.SystemPropertiesKt").getMethod("getUseK1Implementation").invoke(null) == true) {
         // The flexibility difference in types doesn't matter in practice because `KClass`'s type parameter has `Any` bound.
         assertEquals(
             """
