@@ -26,15 +26,23 @@ import org.jetbrains.sir.lightclasses.SirFromKtSymbol
 import org.jetbrains.sir.lightclasses.extensions.withSessions
 
 @OptIn(KaExperimentalApi::class)
-internal inline fun <reified T : KaCallableSymbol> SirFromKtSymbol<T>.translateReturnType(): SirType {
-    return withSessions {
-        this@translateReturnType.ktSymbol.returnType.translateType(
-            SirTypeVariance.COVARIANT,
-            reportErrorType = { error("Can't translate return type in ${ktSymbol.render()}: ${it}") },
-            reportUnsupportedType = { error("Can't translate return type in ${ktSymbol.render()}: type is not supported") },
-            processTypeImports = this@translateReturnType.ktSymbol.containingModule.sirModule()::updateImports
-        )
-    }
+internal inline fun <reified T : KaCallableSymbol> SirFromKtSymbol<T>.translateReturnType(): SirType = withSessions {
+    this@translateReturnType.ktSymbol.returnType.translateType(
+        SirTypeVariance.COVARIANT,
+        reportErrorType = { error("Can't translate return type in ${ktSymbol.render()}: ${it}") },
+        reportUnsupportedType = { error("Can't translate return type in ${ktSymbol.render()}: type is not supported") },
+        processTypeImports = this@translateReturnType.ktSymbol.containingModule.sirModule()::updateImports
+    )
+}
+
+@OptIn(KaExperimentalApi::class)
+internal inline fun <reified T : KaCallableSymbol> SirFromKtSymbol<T>.translateInvariantType(): SirType = withSessions {
+    this@translateInvariantType.ktSymbol.returnType.translateType(
+        SirTypeVariance.INVARIANT,
+        reportErrorType = { error("Can't translate invariant type in ${ktSymbol.render()}: ${it}") },
+        reportUnsupportedType = { error("Can't translate invariant type in ${ktSymbol.render()}: type is not supported") },
+        processTypeImports = this@translateInvariantType.ktSymbol.containingModule.sirModule()::updateImports
+    )
 }
 
 internal inline fun <reified T : KaFunctionSymbol> SirFromKtSymbol<T>.translateParameters(): List<SirParameter> {
