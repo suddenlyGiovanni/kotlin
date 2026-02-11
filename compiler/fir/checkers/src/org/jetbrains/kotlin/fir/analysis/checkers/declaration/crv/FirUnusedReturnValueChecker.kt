@@ -10,6 +10,8 @@ import org.jetbrains.kotlin.config.AnalysisFlags
 import org.jetbrains.kotlin.config.ReturnValueCheckerMode
 import org.jetbrains.kotlin.diagnostics.DiagnosticReporter
 import org.jetbrains.kotlin.diagnostics.reportOn
+import org.jetbrains.kotlin.fir.FirElement
+import org.jetbrains.kotlin.fir.analysis.cfa.util.previousCfgNodes
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
 import org.jetbrains.kotlin.fir.analysis.checkers.declaration.FirUnusedCheckerBase
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors
@@ -18,9 +20,11 @@ import org.jetbrains.kotlin.fir.declarations.mustUseReturnValueStatusComponent
 import org.jetbrains.kotlin.fir.expressions.*
 import org.jetbrains.kotlin.fir.originalOrSelf
 import org.jetbrains.kotlin.fir.references.toResolvedCallableSymbol
+import org.jetbrains.kotlin.fir.resolve.dfa.FirControlFlowGraphReferenceImpl
 import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirEnumEntrySymbol
 import org.jetbrains.kotlin.fir.types.resolvedType
+import org.jetbrains.kotlin.fir.visitors.FirVisitorVoid
 import org.jetbrains.kotlin.resolve.ReturnValueStatus
 
 object FirUnusedReturnValueChecker : FirUnusedCheckerBase() {
@@ -56,30 +60,48 @@ object FirUnusedReturnValueChecker : FirUnusedCheckerBase() {
         return reportForSymbol(expression, resolvedSymbol, data)
     }
 
-    // TODO(KT-84196): analyze all return points inside the lambda, not just the last statement
     context(context: CheckerContext)
-    private fun FirAnonymousFunction.lastStatementIsIgnorable(): Boolean {
-        val returnExpression = body?.statements?.lastOrNull() as? FirReturnExpression ?: return false
-        if (returnExpression.target.labeledElement != this) return true // non-local return => Nothing => ignorable
+    private fun FirAnonymousFunction.allReturnPointsAreIgnorable(): Boolean {
+        if (body == null) return false
 
-        val result = returnExpression.result
-        if (result.resolvedType.isIgnorable()) return true
-        if (result.toResolvedCallableSymbol(context.session)?.isSubjectToCheck() == false) return true
-        return false
+        val cfg = (this.controlFlowGraphReference as? FirControlFlowGraphReferenceImpl)?.controlFlowGraph ?: return false
+        val returns = cfg.exitNode.previousCfgNodes.mapNotNull { node ->
+            when (val exp = node.fir) {
+                is FirReturnExpression -> exp
+                // BlockExit node contains the whole block expression:
+                is FirBlock -> (exp.statements.lastOrNull() as? FirReturnExpression)?.takeIf { it.target.labeledElement == this@allReturnPointsAreIgnorable }
+                else -> null
+            }?.result
+        }
+
+        for (result in returns) {
+            val ignorableType = result.resolvedType.isIgnorable()
+            val ignorableSymbol = result.toResolvedCallableSymbol(context.session)?.isSubjectToCheck() == false
+            // Function only is ignorable if all its return points are ignorable, so we do not need to check everything if we already found must-use return point
+            if (!ignorableType && !ignorableSymbol) return false
+        }
+
+        // NB: If we never encountered any `return`s, it means that all possible exits are `throw`s or some other Nothings (see ResolveUtils/addReturnToLastStatementIfNeeded),
+        // and our judgement that lambda result is ignorable is still correct.
+        return true
     }
 
     context(context: CheckerContext)
     private fun hasContractAndPropagatesIgnorable(functionCall: FirFunctionCall, resolvedSymbol: FirCallableSymbol<*>): Boolean {
-        val parameterIndex = resolvedSymbol.getReturnsResultOfParameterIndex() ?: return false
-        val functionalArgument = functionCall.arguments.getOrNull(parameterIndex) ?: return false
-        return when (functionalArgument) {
-            is FirAnonymousFunctionExpression -> functionalArgument.anonymousFunction.lastStatementIsIgnorable()
-            is FirCallableReferenceAccess -> functionalArgument.calleeReference.toResolvedCallableSymbol(discardErrorReference = true)
-                ?.let { refSymbol ->
-                    refSymbol.resolvedReturnType.isIgnorable() || !refSymbol.isSubjectToCheck()
-                } ?: false
-            else -> false
+        val fpIndices = resolvedSymbol.indicesOfPropagatingFunctionalParameters()
+        val functionalArguments = fpIndices.mapNotNull { functionCall.arguments.getOrNull(it) }
+        functionalArguments.forEach { functionalArgument ->
+            val isIgnorable = when (functionalArgument) {
+                is FirAnonymousFunctionExpression -> functionalArgument.anonymousFunction.allReturnPointsAreIgnorable()
+                is FirCallableReferenceAccess -> functionalArgument.calleeReference.toResolvedCallableSymbol(discardErrorReference = true)
+                    ?.let { refSymbol ->
+                        refSymbol.resolvedReturnType.isIgnorable() || !refSymbol.isSubjectToCheck()
+                    } ?: false
+                else -> false
+            }
+            if (!isIgnorable) return false // Function only is ignorable if all its propagating functional arguments return ignorable values
         }
+        return functionalArguments.isNotEmpty()
     }
 
     context(context: CheckerContext)
