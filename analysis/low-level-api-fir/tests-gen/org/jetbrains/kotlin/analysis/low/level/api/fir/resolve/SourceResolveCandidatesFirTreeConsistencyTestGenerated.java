@@ -2812,6 +2812,12 @@ public class SourceResolveCandidatesFirTreeConsistencyTestGenerated extends Abst
     }
 
     @Test
+    @TestMetadata("namedFullWithGeneric.kt")
+    public void testNamedFullWithGeneric() {
+      run("namedFullWithGeneric.kt");
+    }
+
+    @Test
     @TestMetadata("namedShort.kt")
     public void testNamedShort() {
       run("namedShort.kt");
