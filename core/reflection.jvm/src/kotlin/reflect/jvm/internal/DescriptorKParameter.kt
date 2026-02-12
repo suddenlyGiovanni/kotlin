@@ -59,7 +59,8 @@ internal class DescriptorKParameter(
                     callable.caller.parameterTypes[index]
                 }
             }
-            return callable.overriddenStorage.typeSubstitutor.substitute(type).type
+            return callable.overriddenStorage.getTypeSubstitutor(callable.typeParameters, memberNameForDebug = callable.name)
+                .substitute(type).type
                 ?: starProjectionInTopLevelTypeIsNotPossible(containerForDebug = callable)
         }
 
