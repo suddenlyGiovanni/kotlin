@@ -28,6 +28,7 @@ import java.util.regex.Pattern
  * @property recursive if false then subdirectories wouldn't be traversed
  */
 class SimpleTestClassModel(
+    val testInfraRevision: TestInfraRevision,
     val rootFile: File,
     val recursive: Boolean,
     private val excludeParentDirs: Boolean,
@@ -59,6 +60,7 @@ class SimpleTestClassModel(
             if (allExcludedDirs.contains(file.name)) return@l null
 
             SimpleTestClassModel(
+                testInfraRevision,
                 rootFile = file,
                 recursive = true,
                 excludeParentDirs,
@@ -102,7 +104,10 @@ class SimpleTestClassModel(
         }
 
         buildList {
-            add(RunTestMethodModel(targetBackend, doTestMethodName, testRunnerMethodName))
+            when (testInfraRevision) {
+                TestInfraRevision.LegacyJUnit4 -> add(RunTestMethodModel(targetBackend, doTestMethodName, testRunnerMethodName))
+                TestInfraRevision.StandardJUnit5 -> {}
+            }
             if (!skipTestAllFilesCheck) {
                 add(TestAllFilesPresentMethodModel())
             }

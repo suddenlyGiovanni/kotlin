@@ -208,8 +208,6 @@ object TestGeneratorForJUnit5 : AbstractTestGenerator() {
             var first = true
 
             for (methodModel in testMethods) {
-                if (methodModel is RunTestMethodModel) continue // should also skip its imports
-
                 if (first) {
                     first = false
                 } else {
