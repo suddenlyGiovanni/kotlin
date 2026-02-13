@@ -5,8 +5,9 @@
 package org.jetbrains.kotlin.generators.model
 
 import com.intellij.openapi.util.io.FileUtil
-import org.jetbrains.kotlin.generators.MethodGenerator
-import org.jetbrains.kotlin.generators.impl.SimpleTestClassModelTestAllFilesPresentMethodGenerator
+import org.jetbrains.kotlin.generators.model.methods.RunTestMethodModel
+import org.jetbrains.kotlin.generators.model.methods.SimpleTestMethodModel
+import org.jetbrains.kotlin.generators.model.methods.TestAllFilesPresentMethodModel
 import org.jetbrains.kotlin.generators.util.TestGeneratorUtil.fileNameToJavaIdentifier
 import org.jetbrains.kotlin.generators.util.extractTagsFromDirectory
 import org.jetbrains.kotlin.generators.util.extractTagsFromTestFile
@@ -35,7 +36,7 @@ class SimpleTestClassModel(
     val filenamePattern: Pattern,
     val excludePattern: Pattern?,
     private val doTestMethodName: String,
-    private val testClassName: String,
+    val testClassName: String,
     val targetBackend: TargetBackend?,
     excludeDirs: Collection<String>,
     excludeDirsRecursively: Collection<String>,
@@ -109,7 +110,7 @@ class SimpleTestClassModel(
                 TestInfraRevision.StandardJUnit5 -> {}
             }
             if (!skipTestAllFilesCheck) {
-                add(TestAllFilesPresentMethodModel())
+                add(TestAllFilesPresentMethodModel(this@SimpleTestClassModel))
             }
             addAll(additionalMethods)
             rootFile.listFiles().orEmpty().mapNotNullTo(this) l@{ file ->
@@ -153,27 +154,6 @@ class SimpleTestClassModel(
 
     override val dataPathRoot: String
         get() = "\$PROJECT_ROOT"
-
-    /**
-     * Test method which ensures that there is a generated test for each testdata file in the
-     *   corresponding directory. Used to validate that generated test is up-to-date.
-     */
-    inner class TestAllFilesPresentMethodModel : MethodModel<TestAllFilesPresentMethodModel>() {
-        override val generator: MethodGenerator<TestAllFilesPresentMethodModel>
-            get() = SimpleTestClassModelTestAllFilesPresentMethodGenerator
-
-        override val name: String
-            get() = "testAllFilesPresentIn$testClassName"
-
-        override val dataString: String?
-            get() = null
-
-        val classModel: SimpleTestClassModel
-            get() = this@SimpleTestClassModel
-
-        override val tags: List<String>
-            get() = emptyList()
-    }
 
     companion object {
         private val BY_NAME = Comparator.comparing(TestEntityModel::name)
