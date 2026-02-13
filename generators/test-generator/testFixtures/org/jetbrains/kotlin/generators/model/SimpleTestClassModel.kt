@@ -53,36 +53,30 @@ class SimpleTestClassModel(
         if (!rootFile.isDirectory || !recursive) {
             return@lazy emptyList()
         }
-        val children = mutableListOf<TestClassModel>()
-        val files = rootFile.listFiles() ?: return@lazy emptyList()
-        for (file in files) {
-            if (file.isDirectory && dirHasFilesInside(file) && !allExcludedDirs.contains(file.name)) {
-                val innerTestClassName = fileNameToJavaIdentifier(file)
-                children.add(
-                    SimpleTestClassModel(
-                        file,
-                        true,
-                        excludeParentDirs,
-                        filenamePattern,
-                        excludePattern,
-                        doTestMethodName,
-                        innerTestClassName,
-                        targetBackend,
-                        excludesStripOneDirectory(excludeDirs, file.name),
-                        excludeDirsRecursively,
-                        testRunnerMethodName,
-                        annotations,
-                        extractTagsFromDirectory(file),
-                        additionalMethods.filter { it.shouldBeGeneratedForInnerTestClass },
-                        skipTestAllFilesCheck,
-                    )
-                )
-            }
-        }
-        children.sortWith(BY_NAME)
-        children
-    }
+        rootFile.listFiles().orEmpty().mapNotNull l@{ file ->
+            if (!file.isDirectory) return@l null
+            if (!dirHasFilesInside(file)) return@l null
+            if (allExcludedDirs.contains(file.name)) return@l null
 
+            SimpleTestClassModel(
+                rootFile = file,
+                recursive = true,
+                excludeParentDirs,
+                filenamePattern,
+                excludePattern,
+                doTestMethodName,
+                testClassName = fileNameToJavaIdentifier(file),
+                targetBackend,
+                excludesStripOneDirectory(excludeDirs, file.name),
+                excludeDirsRecursively,
+                testRunnerMethodName,
+                annotations,
+                extractTagsFromDirectory(file),
+                additionalMethods.filter { it.shouldBeGeneratedForInnerTestClass },
+                skipTestAllFilesCheck,
+            )
+        }.sortedWith(BY_NAME)
+    }
 
     private fun excludesStripOneDirectory(excludeDirs: Collection<String>, directoryName: String): Collection<String> {
         if (excludeDirs.isEmpty()) return excludeDirs
@@ -106,45 +100,41 @@ class SimpleTestClassModel(
             )
             return@lazy listOf(methodModel)
         }
-        val result = mutableListOf<MethodModel<*>>()
-        result.add(RunTestMethodModel(targetBackend, doTestMethodName, testRunnerMethodName))
-        if (!skipTestAllFilesCheck) {
-            result.add(TestAllFilesPresentMethodModel())
-        }
-        result.addAll(additionalMethods)
-        val listFiles = rootFile.listFiles()
-        if (listFiles != null) {
-            for (file in listFiles) {
-                val excluded = let {
-                    val name = file.name
-                    val byPattern = excludePattern != null && excludePattern.matcher(name).matches()
-                    val byDirectory = file.isDirectory && (name in allExcludedDirs)
-                    return@let byPattern || byDirectory
-                }
-                if (!excluded && filenamePattern.matcher(file.name).matches()) {
-                    if (file.isDirectory && excludeParentDirs && dirHasSubDirs(file)) {
-                        continue
-                    }
-                    if (file.isDirectory && !dirHasFilesInside(file)) {
-                        throw IllegalStateException(
-                            "testData directory $file is empty. " +
-                                    "This might be due to git branch switching removed the contents but left directory intact. " +
-                                    "Consider removing empty directory or revert removing of its' contents."
-                        )
-                    }
-                    result.add(
-                        SimpleTestMethodModel(
-                            rootFile,
-                            file,
-                            filenamePattern,
-                            extractTagsFromTestFile(file)
-                        )
+
+        buildList {
+            add(RunTestMethodModel(targetBackend, doTestMethodName, testRunnerMethodName))
+            if (!skipTestAllFilesCheck) {
+                add(TestAllFilesPresentMethodModel())
+            }
+            addAll(additionalMethods)
+            rootFile.listFiles().orEmpty().mapNotNullTo(this) l@{ file ->
+                val fileName = file.name
+                // doesn't match testdata pattern
+                if (!filenamePattern.matcher(fileName).matches()) return@l null
+
+                // excluded by pattern
+                if (excludePattern != null && excludePattern.matcher(fileName).matches()) return@l null
+
+                // excluded by directory
+                if (file.isDirectory && (fileName in allExcludedDirs)) return@l null
+
+                if (file.isDirectory && excludeParentDirs && dirHasSubDirs(file)) return@l null
+
+                if (file.isDirectory && !dirHasFilesInside(file)) {
+                    error(
+                        "testData directory $file is empty. " +
+                                "This might be due to git branch switching removed the contents but left directory intact. " +
+                                "Consider removing empty directory or revert removing of its' contents."
                     )
                 }
+                SimpleTestMethodModel(
+                    rootFile,
+                    file,
+                    filenamePattern,
+                    extractTagsFromTestFile(file)
+                )
             }
-        }
-        result.sortWith(BY_NAME)
-        result
+        }.sortedWith(BY_NAME)
     }
 
     override val isEmpty: Boolean
