@@ -3057,6 +3057,24 @@ public class FirIdeNormalAnalysisLibrarySourceModuleResolveSymbolTestGenerated e
       public void testAllMembers() {
         run("allMembers.kt");
       }
+
+      @Test
+      @TestMetadata("importedFromObject.kt")
+      public void testImportedFromObject() {
+        run("importedFromObject.kt");
+      }
+
+      @Test
+      @TestMetadata("withGenericIterator.kt")
+      public void testWithGenericIterator() {
+        run("withGenericIterator.kt");
+      }
+
+      @Test
+      @TestMetadata("withGenericOperators.kt")
+      public void testWithGenericOperators() {
+        run("withGenericOperators.kt");
+      }
     }
   }
 

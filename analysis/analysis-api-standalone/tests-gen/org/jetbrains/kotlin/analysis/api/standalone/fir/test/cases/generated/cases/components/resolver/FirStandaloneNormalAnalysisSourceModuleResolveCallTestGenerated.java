@@ -3160,6 +3160,24 @@ public class FirStandaloneNormalAnalysisSourceModuleResolveCallTestGenerated ext
         run("allMembers.kt");
       }
 
+      @Test
+      @TestMetadata("importedFromObject.kt")
+      public void testImportedFromObject() {
+        run("importedFromObject.kt");
+      }
+
+      @Test
+      @TestMetadata("withGenericIterator.kt")
+      public void testWithGenericIterator() {
+        run("withGenericIterator.kt");
+      }
+
+      @Test
+      @TestMetadata("withGenericOperators.kt")
+      public void testWithGenericOperators() {
+        run("withGenericOperators.kt");
+      }
+
       @Nested
       @TestMetadata("analysis/analysis-api/testData/components/resolver/singleByPsi/forLoopIn/inSource/withErrors")
       @TestDataPath("$PROJECT_ROOT")
@@ -3174,9 +3192,45 @@ public class FirStandaloneNormalAnalysisSourceModuleResolveCallTestGenerated ext
         }
 
         @Test
+        @TestMetadata("hasNextAndNextMissing.kt")
+        public void testHasNextAndNextMissing() {
+          run("hasNextAndNextMissing.kt");
+        }
+
+        @Test
+        @TestMetadata("hasNextIncorrect.kt")
+        public void testHasNextIncorrect() {
+          run("hasNextIncorrect.kt");
+        }
+
+        @Test
+        @TestMetadata("hasNextMissing.kt")
+        public void testHasNextMissing() {
+          run("hasNextMissing.kt");
+        }
+
+        @Test
+        @TestMetadata("iteratorIncorrect.kt")
+        public void testIteratorIncorrect() {
+          run("iteratorIncorrect.kt");
+        }
+
+        @Test
+        @TestMetadata("iteratorMissing.kt")
+        public void testIteratorMissing() {
+          run("iteratorMissing.kt");
+        }
+
+        @Test
         @TestMetadata("nextMissing.kt")
         public void testNextMissing() {
           run("nextMissing.kt");
+        }
+
+        @Test
+        @TestMetadata("nextMissingIncorrect.kt")
+        public void testNextMissingIncorrect() {
+          run("nextMissingIncorrect.kt");
         }
       }
     }
