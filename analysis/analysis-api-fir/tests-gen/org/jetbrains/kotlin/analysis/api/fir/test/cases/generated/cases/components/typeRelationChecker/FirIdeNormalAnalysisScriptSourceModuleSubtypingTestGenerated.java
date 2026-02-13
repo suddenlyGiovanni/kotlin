@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleSubtypingTestGenerated extend
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/typeRelationChecker/subtypingAndEquality/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInSubtypingAndEquality() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/typeRelationChecker/subtypingAndEquality"), Pattern.compile("^(.+)\\.kts$"), null, true);

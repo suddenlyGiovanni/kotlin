@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
 @TestMetadata("analysis/low-level-api-fir/testData/contentAndResolutionScopesProviders")
 @TestDataPath("$PROJECT_ROOT")
 public class ContentAndResolutionScopesProvidersTestGenerated extends AbstractContentAndResolutionScopesProvidersTest {
+  private void run(String fileName) {
+    runTest("analysis/low-level-api-fir/testData/contentAndResolutionScopesProviders/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInContentAndResolutionScopesProviders() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/low-level-api-fir/testData/contentAndResolutionScopesProviders"), Pattern.compile("^([^.]+)\\.kt$"), null, false);
@@ -26,54 +30,54 @@ public class ContentAndResolutionScopesProvidersTestGenerated extends AbstractCo
   @Test
   @TestMetadata("empty.kt")
   public void testEmpty() {
-    runTest("analysis/low-level-api-fir/testData/contentAndResolutionScopesProviders/empty.kt");
+    run("empty.kt");
   }
 
   @Test
   @TestMetadata("libraryDependency.kt")
   public void testLibraryDependency() {
-    runTest("analysis/low-level-api-fir/testData/contentAndResolutionScopesProviders/libraryDependency.kt");
+    run("libraryDependency.kt");
   }
 
   @Test
   @TestMetadata("librarySourceWithFallbackDependencies.kt")
   public void testLibrarySourceWithFallbackDependencies() {
-    runTest("analysis/low-level-api-fir/testData/contentAndResolutionScopesProviders/librarySourceWithFallbackDependencies.kt");
+    run("librarySourceWithFallbackDependencies.kt");
   }
 
   @Test
   @TestMetadata("librarySourceWithRegularDependencies.kt")
   public void testLibrarySourceWithRegularDependencies() {
-    runTest("analysis/low-level-api-fir/testData/contentAndResolutionScopesProviders/librarySourceWithRegularDependencies.kt");
+    run("librarySourceWithRegularDependencies.kt");
   }
 
   @Test
   @TestMetadata("randomFiles.kt")
   public void testRandomFiles() {
-    runTest("analysis/low-level-api-fir/testData/contentAndResolutionScopesProviders/randomFiles.kt");
+    run("randomFiles.kt");
   }
 
   @Test
   @TestMetadata("shadowedAndAdded.kt")
   public void testShadowedAndAdded() {
-    runTest("analysis/low-level-api-fir/testData/contentAndResolutionScopesProviders/shadowedAndAdded.kt");
+    run("shadowedAndAdded.kt");
   }
 
   @Test
   @TestMetadata("shadowingInsideSingleModule.kt")
   public void testShadowingInsideSingleModule() {
-    runTest("analysis/low-level-api-fir/testData/contentAndResolutionScopesProviders/shadowingInsideSingleModule.kt");
+    run("shadowingInsideSingleModule.kt");
   }
 
   @Test
   @TestMetadata("singleFile.kt")
   public void testSingleFile() {
-    runTest("analysis/low-level-api-fir/testData/contentAndResolutionScopesProviders/singleFile.kt");
+    run("singleFile.kt");
   }
 
   @Test
   @TestMetadata("singleModule.kt")
   public void testSingleModule() {
-    runTest("analysis/low-level-api-fir/testData/contentAndResolutionScopesProviders/singleModule.kt");
+    run("singleModule.kt");
   }
 }

@@ -40,6 +40,10 @@ public class FirStandaloneNormalAnalysisSourceModuleElementDiagnosticsTestGenera
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/elementDiagnostics/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInElementDiagnostics() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/diagnosticsProvider/elementDiagnostics"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,42 +52,42 @@ public class FirStandaloneNormalAnalysisSourceModuleElementDiagnosticsTestGenera
   @Test
   @TestMetadata("classWithFunctionWithImplicitType.kt")
   public void testClassWithFunctionWithImplicitType() {
-    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/elementDiagnostics/classWithFunctionWithImplicitType.kt");
+    run("classWithFunctionWithImplicitType.kt");
   }
 
   @Test
   @TestMetadata("classWithNestedClass.kt")
   public void testClassWithNestedClass() {
-    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/elementDiagnostics/classWithNestedClass.kt");
+    run("classWithNestedClass.kt");
   }
 
   @Test
   @TestMetadata("delegatedClass.kt")
   public void testDelegatedClass() {
-    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/elementDiagnostics/delegatedClass.kt");
+    run("delegatedClass.kt");
   }
 
   @Test
   @TestMetadata("delegatedClassComplex.kt")
   public void testDelegatedClassComplex() {
-    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/elementDiagnostics/delegatedClassComplex.kt");
+    run("delegatedClassComplex.kt");
   }
 
   @Test
   @TestMetadata("fileWithFunctionWithImplicitType.kt")
   public void testFileWithFunctionWithImplicitType() {
-    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/elementDiagnostics/fileWithFunctionWithImplicitType.kt");
+    run("fileWithFunctionWithImplicitType.kt");
   }
 
   @Test
   @TestMetadata("hiddenFromObjectiveC.kt")
   public void testHiddenFromObjectiveC() {
-    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/elementDiagnostics/hiddenFromObjectiveC.kt");
+    run("hiddenFromObjectiveC.kt");
   }
 
   @Test
   @TestMetadata("javaScriptStableName.kt")
   public void testJavaScriptStableName() {
-    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/elementDiagnostics/javaScriptStableName.kt");
+    run("javaScriptStableName.kt");
   }
 }

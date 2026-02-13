@@ -40,6 +40,10 @@ public class FirStandaloneNormalAnalysisSourceModuleStaticMemberScopeTestGenerat
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/scopeProvider/staticMemberScope/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInStaticMemberScope() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/scopeProvider/staticMemberScope"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,30 +52,30 @@ public class FirStandaloneNormalAnalysisSourceModuleStaticMemberScopeTestGenerat
   @Test
   @TestMetadata("class.kt")
   public void testClass() {
-    runTest("analysis/analysis-api/testData/components/scopeProvider/staticMemberScope/class.kt");
+    run("class.kt");
   }
 
   @Test
   @TestMetadata("classWithJavaSuperclass.kt")
   public void testClassWithJavaSuperclass() {
-    runTest("analysis/analysis-api/testData/components/scopeProvider/staticMemberScope/classWithJavaSuperclass.kt");
+    run("classWithJavaSuperclass.kt");
   }
 
   @Test
   @TestMetadata("enumClass.kt")
   public void testEnumClass() {
-    runTest("analysis/analysis-api/testData/components/scopeProvider/staticMemberScope/enumClass.kt");
+    run("enumClass.kt");
   }
 
   @Test
   @TestMetadata("innerClass.kt")
   public void testInnerClass() {
-    runTest("analysis/analysis-api/testData/components/scopeProvider/staticMemberScope/innerClass.kt");
+    run("innerClass.kt");
   }
 
   @Test
   @TestMetadata("javaClass.kt")
   public void testJavaClass() {
-    runTest("analysis/analysis-api/testData/components/scopeProvider/staticMemberScope/javaClass.kt");
+    run("javaClass.kt");
   }
 }

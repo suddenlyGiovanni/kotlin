@@ -40,6 +40,10 @@ public class FirStandaloneNormalAnalysisSourceModuleResolveExtensionInfoProvider
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/resolveExtensionInfoProvider/extensionScopeWithPsi/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInExtensionScopeWithPsi() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/resolveExtensionInfoProvider/extensionScopeWithPsi"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,12 +52,12 @@ public class FirStandaloneNormalAnalysisSourceModuleResolveExtensionInfoProvider
   @Test
   @TestMetadata("multipleExtensions.kt")
   public void testMultipleExtensions() {
-    runTest("analysis/analysis-api/testData/components/resolveExtensionInfoProvider/extensionScopeWithPsi/multipleExtensions.kt");
+    run("multipleExtensions.kt");
   }
 
   @Test
   @TestMetadata("singleModule.kt")
   public void testSingleModule() {
-    runTest("analysis/analysis-api/testData/components/resolveExtensionInfoProvider/extensionScopeWithPsi/singleModule.kt");
+    run("singleModule.kt");
   }
 }

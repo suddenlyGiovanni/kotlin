@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleTypeScopeTestGenerated ext
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/scopeProvider/typeScope/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInTypeScope() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/scopeProvider/typeScope"), Pattern.compile("^(.+)\\.kts$"), null, true);

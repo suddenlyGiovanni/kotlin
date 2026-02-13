@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleAnalysisApiSignatureContracts
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/signatureSubstitution/signatureContracts/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInSignatureContracts() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/signatureSubstitution/signatureContracts"), Pattern.compile("^(.+)\\.kts$"), null, true);

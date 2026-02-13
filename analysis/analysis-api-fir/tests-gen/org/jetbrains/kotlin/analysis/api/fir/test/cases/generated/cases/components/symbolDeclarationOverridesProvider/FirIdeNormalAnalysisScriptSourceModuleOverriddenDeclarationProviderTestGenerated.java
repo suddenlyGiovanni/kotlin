@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleOverriddenDeclarationProvider
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/symbolDeclarationOverridesProvider/overriddenSymbols/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInOverriddenSymbols() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/symbolDeclarationOverridesProvider/overriddenSymbols"), Pattern.compile("^(.+)\\.kts$"), null, true);

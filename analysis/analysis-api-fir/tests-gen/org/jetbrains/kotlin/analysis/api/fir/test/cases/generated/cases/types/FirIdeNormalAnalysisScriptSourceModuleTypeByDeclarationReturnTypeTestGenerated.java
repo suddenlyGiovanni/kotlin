@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleTypeByDeclarationReturnTypeTe
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/types/byDeclarationReturnType/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInByDeclarationReturnType() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/types/byDeclarationReturnType"), Pattern.compile("^(.+)\\.kts$"), null, true);

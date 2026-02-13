@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleCanBeOperatorTestGenerated
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/symbolInfoProvider/canBeOperator/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInCanBeOperator() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/symbolInfoProvider/canBeOperator"), Pattern.compile("^(.+)\\.kts$"), null, true);

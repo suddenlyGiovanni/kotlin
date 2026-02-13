@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModulePackageSymbolTestGenerated ex
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/symbols/packages/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInPackages() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/symbols/packages"), Pattern.compile("^(.+)\\.kts$"), null, true);

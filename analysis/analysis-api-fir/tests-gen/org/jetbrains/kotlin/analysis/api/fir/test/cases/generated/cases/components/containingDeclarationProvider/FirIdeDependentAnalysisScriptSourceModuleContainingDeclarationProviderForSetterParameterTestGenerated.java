@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleContainingDeclarationProvi
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/containingDeclarationProvider/containingDeclarationForSetterParameter/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInContainingDeclarationForSetterParameter() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/containingDeclarationProvider/containingDeclarationForSetterParameter"), Pattern.compile("^(.+)\\.kts$"), null, true);

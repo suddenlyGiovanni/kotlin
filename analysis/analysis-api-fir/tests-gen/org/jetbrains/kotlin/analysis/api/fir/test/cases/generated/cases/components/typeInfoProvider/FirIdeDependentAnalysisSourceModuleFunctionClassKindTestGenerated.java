@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisSourceModuleFunctionClassKindTestGenerated e
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/typeInfoProvider/functionClassKind/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInFunctionClassKind() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/typeInfoProvider/functionClassKind"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,24 +52,24 @@ public class FirIdeDependentAnalysisSourceModuleFunctionClassKindTestGenerated e
   @Test
   @TestMetadata("function.kt")
   public void testFunction() {
-    runTest("analysis/analysis-api/testData/components/typeInfoProvider/functionClassKind/function.kt");
+    run("function.kt");
   }
 
   @Test
   @TestMetadata("kFunction.kt")
   public void testKFunction() {
-    runTest("analysis/analysis-api/testData/components/typeInfoProvider/functionClassKind/kFunction.kt");
+    run("kFunction.kt");
   }
 
   @Test
   @TestMetadata("kSuspendFunction.kt")
   public void testKSuspendFunction() {
-    runTest("analysis/analysis-api/testData/components/typeInfoProvider/functionClassKind/kSuspendFunction.kt");
+    run("kSuspendFunction.kt");
   }
 
   @Test
   @TestMetadata("suspendFunction.kt")
   public void testSuspendFunction() {
-    runTest("analysis/analysis-api/testData/components/typeInfoProvider/functionClassKind/suspendFunction.kt");
+    run("suspendFunction.kt");
   }
 }

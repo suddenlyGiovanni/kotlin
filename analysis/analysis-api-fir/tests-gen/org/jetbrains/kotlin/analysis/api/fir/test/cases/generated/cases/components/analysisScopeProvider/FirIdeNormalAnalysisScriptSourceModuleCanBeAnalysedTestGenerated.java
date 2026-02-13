@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleCanBeAnalysedTestGenerated ex
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/analysisScopeProvider/canBeAnalysed/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInCanBeAnalysed() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/analysisScopeProvider/canBeAnalysed"), Pattern.compile("^(.+)\\.kts$"), null, true);

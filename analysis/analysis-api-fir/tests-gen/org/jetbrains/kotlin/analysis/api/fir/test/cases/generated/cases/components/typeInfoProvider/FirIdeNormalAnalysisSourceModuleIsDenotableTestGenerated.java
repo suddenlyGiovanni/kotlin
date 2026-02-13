@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisSourceModuleIsDenotableTestGenerated extends Ab
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/typeInfoProvider/isDenotable/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInIsDenotable() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/typeInfoProvider/isDenotable"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile(".*\\.descriptors\\.kt$"), true);
@@ -48,24 +52,24 @@ public class FirIdeNormalAnalysisSourceModuleIsDenotableTestGenerated extends Ab
   @Test
   @TestMetadata("localTypes.kt")
   public void testLocalTypes() {
-    runTest("analysis/analysis-api/testData/components/typeInfoProvider/isDenotable/localTypes.kt");
+    run("localTypes.kt");
   }
 
   @Test
   @TestMetadata("simpleTypes.kt")
   public void testSimpleTypes() {
-    runTest("analysis/analysis-api/testData/components/typeInfoProvider/isDenotable/simpleTypes.kt");
+    run("simpleTypes.kt");
   }
 
   @Test
   @TestMetadata("smartcast.kt")
   public void testSmartcast() {
-    runTest("analysis/analysis-api/testData/components/typeInfoProvider/isDenotable/smartcast.kt");
+    run("smartcast.kt");
   }
 
   @Test
   @TestMetadata("typeParameter.kt")
   public void testTypeParameter() {
-    runTest("analysis/analysis-api/testData/components/typeInfoProvider/isDenotable/typeParameter.kt");
+    run("typeParameter.kt");
   }
 }

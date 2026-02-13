@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
 @TestMetadata("analysis/low-level-api-fir/testData/fileBasedDeclarationProvider")
 @TestDataPath("$PROJECT_ROOT")
 public class SourceFileBasedKotlinDeclarationProviderTestGenerated extends AbstractSourceFileBasedKotlinDeclarationProviderTest {
+  private void run(String fileName) {
+    runTest("analysis/low-level-api-fir/testData/fileBasedDeclarationProvider/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInFileBasedDeclarationProvider() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/low-level-api-fir/testData/fileBasedDeclarationProvider"), Pattern.compile("^(.+)\\.(kt)$"), null, true);
@@ -26,30 +30,30 @@ public class SourceFileBasedKotlinDeclarationProviderTestGenerated extends Abstr
   @Test
   @TestMetadata("defaultPackage.kt")
   public void testDefaultPackage() {
-    runTest("analysis/low-level-api-fir/testData/fileBasedDeclarationProvider/defaultPackage.kt");
+    run("defaultPackage.kt");
   }
 
   @Test
   @TestMetadata("local.kt")
   public void testLocal() {
-    runTest("analysis/low-level-api-fir/testData/fileBasedDeclarationProvider/local.kt");
+    run("local.kt");
   }
 
   @Test
   @TestMetadata("nestedTypeAlias.kt")
   public void testNestedTypeAlias() {
-    runTest("analysis/low-level-api-fir/testData/fileBasedDeclarationProvider/nestedTypeAlias.kt");
+    run("nestedTypeAlias.kt");
   }
 
   @Test
   @TestMetadata("sameNames.kt")
   public void testSameNames() {
-    runTest("analysis/low-level-api-fir/testData/fileBasedDeclarationProvider/sameNames.kt");
+    run("sameNames.kt");
   }
 
   @Test
   @TestMetadata("simple.kt")
   public void testSimple() {
-    runTest("analysis/low-level-api-fir/testData/fileBasedDeclarationProvider/simple.kt");
+    run("simple.kt");
   }
 }

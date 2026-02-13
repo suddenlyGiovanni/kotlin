@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
 @TestMetadata("analysis/symbol-light-classes/testData/structure")
 @TestDataPath("$PROJECT_ROOT")
 public class SymbolLightClassesStructureForSourceTestGenerated extends AbstractSymbolLightClassesStructureForSourceTest {
+  private void run(String fileName) {
+    runTest("analysis/symbol-light-classes/testData/structure/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInStructure() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/symbol-light-classes/testData/structure"), Pattern.compile("^(.+)\\.(kt)$"), null, true);
@@ -26,42 +30,42 @@ public class SymbolLightClassesStructureForSourceTestGenerated extends AbstractS
   @Test
   @TestMetadata("Annotations.kt")
   public void testAnnotations() {
-    runTest("analysis/symbol-light-classes/testData/structure/Annotations.kt");
+    run("Annotations.kt");
   }
 
   @Test
   @TestMetadata("Classes.kt")
   public void testClasses() {
-    runTest("analysis/symbol-light-classes/testData/structure/Classes.kt");
+    run("Classes.kt");
   }
 
   @Test
   @TestMetadata("EnumEntries.kt")
   public void testEnumEntries() {
-    runTest("analysis/symbol-light-classes/testData/structure/EnumEntries.kt");
+    run("EnumEntries.kt");
   }
 
   @Test
   @TestMetadata("InterfaceAndClasses.kt")
   public void testInterfaceAndClasses() {
-    runTest("analysis/symbol-light-classes/testData/structure/InterfaceAndClasses.kt");
+    run("InterfaceAndClasses.kt");
   }
 
   @Test
   @TestMetadata("Interfaces.kt")
   public void testInterfaces() {
-    runTest("analysis/symbol-light-classes/testData/structure/Interfaces.kt");
+    run("Interfaces.kt");
   }
 
   @Test
   @TestMetadata("NestedClasses.kt")
   public void testNestedClasses() {
-    runTest("analysis/symbol-light-classes/testData/structure/NestedClasses.kt");
+    run("NestedClasses.kt");
   }
 
   @Test
   @TestMetadata("Objects.kt")
   public void testObjects() {
-    runTest("analysis/symbol-light-classes/testData/structure/Objects.kt");
+    run("Objects.kt");
   }
 }

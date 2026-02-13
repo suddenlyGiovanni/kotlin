@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
 @TestMetadata("analysis/low-level-api-fir/testData/errorResistance")
 @TestDataPath("$PROJECT_ROOT")
 public class ErrorResistanceTestGenerated extends AbstractErrorResistanceTest {
+  private void run(String fileName) {
+    runTest("analysis/low-level-api-fir/testData/errorResistance/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInErrorResistance() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/low-level-api-fir/testData/errorResistance"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -26,18 +30,18 @@ public class ErrorResistanceTestGenerated extends AbstractErrorResistanceTest {
   @Test
   @TestMetadata("builderInference.kt")
   public void testBuilderInference() {
-    runTest("analysis/low-level-api-fir/testData/errorResistance/builderInference.kt");
+    run("builderInference.kt");
   }
 
   @Test
   @TestMetadata("propertyDelegate.kt")
   public void testPropertyDelegate() {
-    runTest("analysis/low-level-api-fir/testData/errorResistance/propertyDelegate.kt");
+    run("propertyDelegate.kt");
   }
 
   @Test
   @TestMetadata("propertyInitializer.kt")
   public void testPropertyInitializer() {
-    runTest("analysis/low-level-api-fir/testData/errorResistance/propertyInitializer.kt");
+    run("propertyInitializer.kt");
   }
 }

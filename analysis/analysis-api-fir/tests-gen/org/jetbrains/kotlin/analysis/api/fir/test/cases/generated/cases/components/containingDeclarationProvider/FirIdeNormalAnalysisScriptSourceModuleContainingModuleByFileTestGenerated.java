@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleContainingModuleByFileTestGen
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/containingDeclarationProvider/containingModuleByFile/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInContainingModuleByFile() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/containingDeclarationProvider/containingModuleByFile"), Pattern.compile("^(.+)\\.kts$"), null, true);
@@ -48,6 +52,6 @@ public class FirIdeNormalAnalysisScriptSourceModuleContainingModuleByFileTestGen
   @Test
   @TestMetadata("script.kts")
   public void testScript() {
-    runTest("analysis/analysis-api/testData/components/containingDeclarationProvider/containingModuleByFile/script.kts");
+    run("script.kts");
   }
 }

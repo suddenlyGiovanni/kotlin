@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
 @TestMetadata("analysis/low-level-api-fir/testData/inBlockModification/codeFragments")
 @TestDataPath("$PROJECT_ROOT")
 public class CodeFragmentInBlockModificationTestGenerated extends AbstractCodeFragmentInBlockModificationTest {
+  private void run(String fileName) {
+    runTest("analysis/low-level-api-fir/testData/inBlockModification/codeFragments/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInCodeFragments() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/low-level-api-fir/testData/inBlockModification/codeFragments"), Pattern.compile("^([^.]+)\\.kt$"), null, false);
@@ -26,18 +30,18 @@ public class CodeFragmentInBlockModificationTestGenerated extends AbstractCodeFr
   @Test
   @TestMetadata("localClass.kt")
   public void testLocalClass() {
-    runTest("analysis/low-level-api-fir/testData/inBlockModification/codeFragments/localClass.kt");
+    run("localClass.kt");
   }
 
   @Test
   @TestMetadata("localFunction.kt")
   public void testLocalFunction() {
-    runTest("analysis/low-level-api-fir/testData/inBlockModification/codeFragments/localFunction.kt");
+    run("localFunction.kt");
   }
 
   @Test
   @TestMetadata("simple.kt")
   public void testSimple() {
-    runTest("analysis/low-level-api-fir/testData/inBlockModification/codeFragments/simple.kt");
+    run("simple.kt");
   }
 }

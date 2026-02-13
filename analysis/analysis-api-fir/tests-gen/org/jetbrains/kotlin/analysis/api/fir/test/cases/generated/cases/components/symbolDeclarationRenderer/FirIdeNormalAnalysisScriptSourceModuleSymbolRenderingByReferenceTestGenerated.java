@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleSymbolRenderingByReferenceTes
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/symbolDeclarationRenderer/symbolRenderingByReference/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInSymbolRenderingByReference() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/symbolDeclarationRenderer/symbolRenderingByReference"), Pattern.compile("^(.+)\\.kts$"), null, true);

@@ -40,6 +40,10 @@ public class FirStandaloneNormalAnalysisSourceModuleReadWriteAccessTestGenerated
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/expressionInfoProvider/readWriteAccess/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInReadWriteAccess() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/expressionInfoProvider/readWriteAccess"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,36 +52,36 @@ public class FirStandaloneNormalAnalysisSourceModuleReadWriteAccessTestGenerated
   @Test
   @TestMetadata("assignment.kt")
   public void testAssignment() {
-    runTest("analysis/analysis-api/testData/components/expressionInfoProvider/readWriteAccess/assignment.kt");
+    run("assignment.kt");
   }
 
   @Test
   @TestMetadata("assignmentPlusEq.kt")
   public void testAssignmentPlusEq() {
-    runTest("analysis/analysis-api/testData/components/expressionInfoProvider/readWriteAccess/assignmentPlusEq.kt");
+    run("assignmentPlusEq.kt");
   }
 
   @Test
   @TestMetadata("namedArguments.kt")
   public void testNamedArguments() {
-    runTest("analysis/analysis-api/testData/components/expressionInfoProvider/readWriteAccess/namedArguments.kt");
+    run("namedArguments.kt");
   }
 
   @Test
   @TestMetadata("readReference.kt")
   public void testReadReference() {
-    runTest("analysis/analysis-api/testData/components/expressionInfoProvider/readWriteAccess/readReference.kt");
+    run("readReference.kt");
   }
 
   @Test
   @TestMetadata("readReferenceInParenthesis.kt")
   public void testReadReferenceInParenthesis() {
-    runTest("analysis/analysis-api/testData/components/expressionInfoProvider/readWriteAccess/readReferenceInParenthesis.kt");
+    run("readReferenceInParenthesis.kt");
   }
 
   @Test
   @TestMetadata("unary.kt")
   public void testUnary() {
-    runTest("analysis/analysis-api/testData/components/expressionInfoProvider/readWriteAccess/unary.kt");
+    run("unary.kt");
   }
 }

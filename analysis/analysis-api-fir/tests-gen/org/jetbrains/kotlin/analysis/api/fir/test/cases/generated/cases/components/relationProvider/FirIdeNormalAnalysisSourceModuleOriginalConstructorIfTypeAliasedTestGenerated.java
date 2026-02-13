@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisSourceModuleOriginalConstructorIfTypeAliasedTes
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/relationProvider/originalConstructorIfTypeAliased/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInOriginalConstructorIfTypeAliased() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/relationProvider/originalConstructorIfTypeAliased"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,36 +52,36 @@ public class FirIdeNormalAnalysisSourceModuleOriginalConstructorIfTypeAliasedTes
   @Test
   @TestMetadata("regularClass.kt")
   public void testRegularClass() {
-    runTest("analysis/analysis-api/testData/components/relationProvider/originalConstructorIfTypeAliased/regularClass.kt");
+    run("regularClass.kt");
   }
 
   @Test
   @TestMetadata("simpleTypeAlias.kt")
   public void testSimpleTypeAlias() {
-    runTest("analysis/analysis-api/testData/components/relationProvider/originalConstructorIfTypeAliased/simpleTypeAlias.kt");
+    run("simpleTypeAlias.kt");
   }
 
   @Test
   @TestMetadata("simpleTypeAlias_chained.kt")
   public void testSimpleTypeAlias_chained() {
-    runTest("analysis/analysis-api/testData/components/relationProvider/originalConstructorIfTypeAliased/simpleTypeAlias_chained.kt");
+    run("simpleTypeAlias_chained.kt");
   }
 
   @Test
   @TestMetadata("withTypeParameters.kt")
   public void testWithTypeParameters() {
-    runTest("analysis/analysis-api/testData/components/relationProvider/originalConstructorIfTypeAliased/withTypeParameters.kt");
+    run("withTypeParameters.kt");
   }
 
   @Test
   @TestMetadata("withTypeParametersChanged_chained.kt")
   public void testWithTypeParametersChanged_chained() {
-    runTest("analysis/analysis-api/testData/components/relationProvider/originalConstructorIfTypeAliased/withTypeParametersChanged_chained.kt");
+    run("withTypeParametersChanged_chained.kt");
   }
 
   @Test
   @TestMetadata("withTypeParametersFixed.kt")
   public void testWithTypeParametersFixed() {
-    runTest("analysis/analysis-api/testData/components/relationProvider/originalConstructorIfTypeAliased/withTypeParametersFixed.kt");
+    run("withTypeParametersFixed.kt");
   }
 }

@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisSourceModuleAnalysisApiSignatureSubstitutionTes
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/signatureSubstitution/signatureSubstitution/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInSignatureSubstitution() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/signatureSubstitution/signatureSubstitution"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,12 +52,12 @@ public class FirIdeNormalAnalysisSourceModuleAnalysisApiSignatureSubstitutionTes
   @Test
   @TestMetadata("function.kt")
   public void testFunction() {
-    runTest("analysis/analysis-api/testData/components/signatureSubstitution/signatureSubstitution/function.kt");
+    run("function.kt");
   }
 
   @Test
   @TestMetadata("property.kt")
   public void testProperty() {
-    runTest("analysis/analysis-api/testData/components/signatureSubstitution/signatureSubstitution/property.kt");
+    run("property.kt");
   }
 }

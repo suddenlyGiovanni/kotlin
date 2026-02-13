@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
 @TestMetadata("analysis/low-level-api-fir/testData/lazyResolveStdlibSources")
 @TestDataPath("$PROJECT_ROOT")
 public class StdLibSourcesLazyDeclarationResolveTestGenerated extends AbstractStdLibSourcesLazyDeclarationResolveTest {
+  private void run(String fileName) {
+    runTest("analysis/low-level-api-fir/testData/lazyResolveStdlibSources/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInLazyResolveStdlibSources() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/low-level-api-fir/testData/lazyResolveStdlibSources"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -26,12 +30,12 @@ public class StdLibSourcesLazyDeclarationResolveTestGenerated extends AbstractSt
   @Test
   @TestMetadata("linkedHashMap.kt")
   public void testLinkedHashMap() {
-    runTest("analysis/low-level-api-fir/testData/lazyResolveStdlibSources/linkedHashMap.kt");
+    run("linkedHashMap.kt");
   }
 
   @Test
   @TestMetadata("wrappedInt.kt")
   public void testWrappedInt() {
-    runTest("analysis/low-level-api-fir/testData/lazyResolveStdlibSources/wrappedInt.kt");
+    run("wrappedInt.kt");
   }
 }

@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisSourceModuleSymbolRenderingByReferenceTestGe
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/symbolDeclarationRenderer/symbolRenderingByReference/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInSymbolRenderingByReference() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/symbolDeclarationRenderer/symbolRenderingByReference"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,42 +52,42 @@ public class FirIdeDependentAnalysisSourceModuleSymbolRenderingByReferenceTestGe
   @Test
   @TestMetadata("javaEnhancedRecentlyNonNullType.kt")
   public void testJavaEnhancedRecentlyNonNullType() {
-    runTest("analysis/analysis-api/testData/components/symbolDeclarationRenderer/symbolRenderingByReference/javaEnhancedRecentlyNonNullType.kt");
+    run("javaEnhancedRecentlyNonNullType.kt");
   }
 
   @Test
   @TestMetadata("javaEnhancedRecentlyNullableType.kt")
   public void testJavaEnhancedRecentlyNullableType() {
-    runTest("analysis/analysis-api/testData/components/symbolDeclarationRenderer/symbolRenderingByReference/javaEnhancedRecentlyNullableType.kt");
+    run("javaEnhancedRecentlyNullableType.kt");
   }
 
   @Test
   @TestMetadata("javaEnhancedTypeExternalAnnotation.kt")
   public void testJavaEnhancedTypeExternalAnnotation() {
-    runTest("analysis/analysis-api/testData/components/symbolDeclarationRenderer/symbolRenderingByReference/javaEnhancedTypeExternalAnnotation.kt");
+    run("javaEnhancedTypeExternalAnnotation.kt");
   }
 
   @Test
   @TestMetadata("javaMethodWithMultipleTypeParametersBound.kt")
   public void testJavaMethodWithMultipleTypeParametersBound() {
-    runTest("analysis/analysis-api/testData/components/symbolDeclarationRenderer/symbolRenderingByReference/javaMethodWithMultipleTypeParametersBound.kt");
+    run("javaMethodWithMultipleTypeParametersBound.kt");
   }
 
   @Test
   @TestMetadata("javaMethodWithTypeParametersBound.kt")
   public void testJavaMethodWithTypeParametersBound() {
-    runTest("analysis/analysis-api/testData/components/symbolDeclarationRenderer/symbolRenderingByReference/javaMethodWithTypeParametersBound.kt");
+    run("javaMethodWithTypeParametersBound.kt");
   }
 
   @Test
   @TestMetadata("jsrAnnotation.kt")
   public void testJsrAnnotation() {
-    runTest("analysis/analysis-api/testData/components/symbolDeclarationRenderer/symbolRenderingByReference/jsrAnnotation.kt");
+    run("jsrAnnotation.kt");
   }
 
   @Test
   @TestMetadata("jsrAnnotationInsideLibrary.kt")
   public void testJsrAnnotationInsideLibrary() {
-    runTest("analysis/analysis-api/testData/components/symbolDeclarationRenderer/symbolRenderingByReference/jsrAnnotationInsideLibrary.kt");
+    run("jsrAnnotationInsideLibrary.kt");
   }
 }

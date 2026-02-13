@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisSourceModuleRestrictedAnalysisRejectionTestGene
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/restrictedAnalysis/restriction/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInRestriction() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/restrictedAnalysis/restriction"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,24 +52,24 @@ public class FirIdeNormalAnalysisSourceModuleRestrictedAnalysisRejectionTestGene
   @Test
   @TestMetadata("notRestrictedAllowed.kt")
   public void testNotRestrictedAllowed() {
-    runTest("analysis/analysis-api/testData/restrictedAnalysis/restriction/notRestrictedAllowed.kt");
+    run("notRestrictedAllowed.kt");
   }
 
   @Test
   @TestMetadata("notRestrictedNotAllowed.kt")
   public void testNotRestrictedNotAllowed() {
-    runTest("analysis/analysis-api/testData/restrictedAnalysis/restriction/notRestrictedNotAllowed.kt");
+    run("notRestrictedNotAllowed.kt");
   }
 
   @Test
   @TestMetadata("restrictedAllowed.kt")
   public void testRestrictedAllowed() {
-    runTest("analysis/analysis-api/testData/restrictedAnalysis/restriction/restrictedAllowed.kt");
+    run("restrictedAllowed.kt");
   }
 
   @Test
   @TestMetadata("restrictedNotAllowed.kt")
   public void testRestrictedNotAllowed() {
-    runTest("analysis/analysis-api/testData/restrictedAnalysis/restriction/restrictedNotAllowed.kt");
+    run("restrictedNotAllowed.kt");
   }
 }

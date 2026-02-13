@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
 @TestMetadata("analysis/symbol-light-classes/testData/structureByFqName")
 @TestDataPath("$PROJECT_ROOT")
 public class SymbolLightClassesStructureByFqNameForSourceTestGenerated extends AbstractSymbolLightClassesStructureByFqNameForSourceTest {
+  private void run(String fileName) {
+    runTest("analysis/symbol-light-classes/testData/structureByFqName/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInStructureByFqName() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/symbol-light-classes/testData/structureByFqName"), Pattern.compile("^(.+)\\.(kt)$"), null, true);
@@ -26,6 +30,6 @@ public class SymbolLightClassesStructureByFqNameForSourceTestGenerated extends A
   @Test
   @TestMetadata("DefaultImpls.kt")
   public void testDefaultImpls() {
-    runTest("analysis/symbol-light-classes/testData/structureByFqName/DefaultImpls.kt");
+    run("DefaultImpls.kt");
   }
 }

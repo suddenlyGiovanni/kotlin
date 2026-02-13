@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisSourceModuleContainingDeclarationProviderByM
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/containingDeclarationProvider/containingDeclarationFromMemberScope/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInContainingDeclarationFromMemberScope() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/containingDeclarationProvider/containingDeclarationFromMemberScope"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,12 +52,12 @@ public class FirIdeDependentAnalysisSourceModuleContainingDeclarationProviderByM
   @Test
   @TestMetadata("intersectionOverride.kt")
   public void testIntersectionOverride() {
-    runTest("analysis/analysis-api/testData/components/containingDeclarationProvider/containingDeclarationFromMemberScope/intersectionOverride.kt");
+    run("intersectionOverride.kt");
   }
 
   @Test
   @TestMetadata("subsitutionOverride.kt")
   public void testSubsitutionOverride() {
-    runTest("analysis/analysis-api/testData/components/containingDeclarationProvider/containingDeclarationFromMemberScope/subsitutionOverride.kt");
+    run("subsitutionOverride.kt");
   }
 }

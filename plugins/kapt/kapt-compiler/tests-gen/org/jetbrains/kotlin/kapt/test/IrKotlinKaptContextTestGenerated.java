@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
 @TestMetadata("plugins/kapt/kapt-compiler/testData/kotlinRunner")
 @TestDataPath("$PROJECT_ROOT")
 public class IrKotlinKaptContextTestGenerated extends AbstractIrKotlinKaptContextTest {
+  private void run(String fileName) {
+    runTest("plugins/kapt/kapt-compiler/testData/kotlinRunner/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInKotlinRunner() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("plugins/kapt/kapt-compiler/testData/kotlinRunner"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -26,36 +30,36 @@ public class IrKotlinKaptContextTestGenerated extends AbstractIrKotlinKaptContex
   @Test
   @TestMetadata("DefaultParameterValues.kt")
   public void testDefaultParameterValues() {
-    runTest("plugins/kapt/kapt-compiler/testData/kotlinRunner/DefaultParameterValues.kt");
+    run("DefaultParameterValues.kt");
   }
 
   @Test
   @TestMetadata("ErrorLocationMapping.kt")
   public void testErrorLocationMapping() {
-    runTest("plugins/kapt/kapt-compiler/testData/kotlinRunner/ErrorLocationMapping.kt");
+    run("ErrorLocationMapping.kt");
   }
 
   @Test
   @TestMetadata("Log.kt")
   public void testLog() {
-    runTest("plugins/kapt/kapt-compiler/testData/kotlinRunner/Log.kt");
+    run("Log.kt");
   }
 
   @Test
   @TestMetadata("NestedClasses.kt")
   public void testNestedClasses() {
-    runTest("plugins/kapt/kapt-compiler/testData/kotlinRunner/NestedClasses.kt");
+    run("NestedClasses.kt");
   }
 
   @Test
   @TestMetadata("Overloads.kt")
   public void testOverloads() {
-    runTest("plugins/kapt/kapt-compiler/testData/kotlinRunner/Overloads.kt");
+    run("Overloads.kt");
   }
 
   @Test
   @TestMetadata("Simple.kt")
   public void testSimple() {
-    runTest("plugins/kapt/kapt-compiler/testData/kotlinRunner/Simple.kt");
+    run("Simple.kt");
   }
 }

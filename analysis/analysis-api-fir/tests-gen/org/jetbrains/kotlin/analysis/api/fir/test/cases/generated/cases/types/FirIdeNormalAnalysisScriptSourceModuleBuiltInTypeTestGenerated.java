@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleBuiltInTypeTestGenerated exte
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/types/builtins/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInBuiltins() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/types/builtins"), Pattern.compile("^(.+)\\.kts$"), null, true);

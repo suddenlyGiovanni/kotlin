@@ -40,6 +40,10 @@ public class FirStandaloneNormalAnalysisSourceModuleGetKlibSourceFileNameTestGen
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/klibSourceFileNameProvider/getKlibSourceFileName/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInGetKlibSourceFileName() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/klibSourceFileNameProvider/getKlibSourceFileName"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,18 +52,18 @@ public class FirStandaloneNormalAnalysisSourceModuleGetKlibSourceFileNameTestGen
   @Test
   @TestMetadata("class.kt")
   public void testClass() {
-    runTest("analysis/analysis-api/testData/components/klibSourceFileNameProvider/getKlibSourceFileName/class.kt");
+    run("class.kt");
   }
 
   @Test
   @TestMetadata("topLevelFunction.kt")
   public void testTopLevelFunction() {
-    runTest("analysis/analysis-api/testData/components/klibSourceFileNameProvider/getKlibSourceFileName/topLevelFunction.kt");
+    run("topLevelFunction.kt");
   }
 
   @Test
   @TestMetadata("topLevelProperty.kt")
   public void testTopLevelProperty() {
-    runTest("analysis/analysis-api/testData/components/klibSourceFileNameProvider/getKlibSourceFileName/topLevelProperty.kt");
+    run("topLevelProperty.kt");
   }
 }

@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleVarargArrayTypeTestGenerated 
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/typeProvider/varargArrayType/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInVarargArrayType() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/typeProvider/varargArrayType"), Pattern.compile("^(.+)\\.kts$"), null, true);

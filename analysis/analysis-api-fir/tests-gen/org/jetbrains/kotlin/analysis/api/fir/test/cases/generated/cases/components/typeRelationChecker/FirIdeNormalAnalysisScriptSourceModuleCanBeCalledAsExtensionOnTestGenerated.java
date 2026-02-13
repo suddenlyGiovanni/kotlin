@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleCanBeCalledAsExtensionOnTestG
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/typeRelationChecker/canBeCalledAsExtensionOn/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInCanBeCalledAsExtensionOn() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/typeRelationChecker/canBeCalledAsExtensionOn"), Pattern.compile("^(.+)\\.kts$"), null, true);

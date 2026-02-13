@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleFunctionClassKindTestGener
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/typeInfoProvider/functionClassKind/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInFunctionClassKind() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/typeInfoProvider/functionClassKind"), Pattern.compile("^(.+)\\.kts$"), null, true);

@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisSourceModuleIsSubclassOfTestGenerated extend
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/symbolDeclarationOverridesProvider/isSubclassOf/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInIsSubclassOf() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/symbolDeclarationOverridesProvider/isSubclassOf"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,36 +52,36 @@ public class FirIdeDependentAnalysisSourceModuleIsSubclassOfTestGenerated extend
   @Test
   @TestMetadata("childClass.kt")
   public void testChildClass() {
-    runTest("analysis/analysis-api/testData/components/symbolDeclarationOverridesProvider/isSubclassOf/childClass.kt");
+    run("childClass.kt");
   }
 
   @Test
   @TestMetadata("grandParentClass.kt")
   public void testGrandParentClass() {
-    runTest("analysis/analysis-api/testData/components/symbolDeclarationOverridesProvider/isSubclassOf/grandParentClass.kt");
+    run("grandParentClass.kt");
   }
 
   @Test
   @TestMetadata("localClasses.kt")
   public void testLocalClasses() {
-    runTest("analysis/analysis-api/testData/components/symbolDeclarationOverridesProvider/isSubclassOf/localClasses.kt");
+    run("localClasses.kt");
   }
 
   @Test
   @TestMetadata("parentClass.kt")
   public void testParentClass() {
-    runTest("analysis/analysis-api/testData/components/symbolDeclarationOverridesProvider/isSubclassOf/parentClass.kt");
+    run("parentClass.kt");
   }
 
   @Test
   @TestMetadata("sameClass.kt")
   public void testSameClass() {
-    runTest("analysis/analysis-api/testData/components/symbolDeclarationOverridesProvider/isSubclassOf/sameClass.kt");
+    run("sameClass.kt");
   }
 
   @Test
   @TestMetadata("unrelatedClass.kt")
   public void testUnrelatedClass() {
-    runTest("analysis/analysis-api/testData/components/symbolDeclarationOverridesProvider/isSubclassOf/unrelatedClass.kt");
+    run("unrelatedClass.kt");
   }
 }

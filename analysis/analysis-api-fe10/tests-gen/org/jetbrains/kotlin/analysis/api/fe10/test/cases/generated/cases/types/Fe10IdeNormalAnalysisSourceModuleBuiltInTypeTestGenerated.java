@@ -40,6 +40,10 @@ public class Fe10IdeNormalAnalysisSourceModuleBuiltInTypeTestGenerated extends A
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/types/builtins/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInBuiltins() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/types/builtins"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,12 +52,12 @@ public class Fe10IdeNormalAnalysisSourceModuleBuiltInTypeTestGenerated extends A
   @Test
   @TestMetadata("any.kt")
   public void testAny() {
-    runTest("analysis/analysis-api/testData/types/builtins/any.kt");
+    run("any.kt");
   }
 
   @Test
   @TestMetadata("anyWithoutBuiltins.kt")
   public void testAnyWithoutBuiltins() {
-    runTest("analysis/analysis-api/testData/types/builtins/anyWithoutBuiltins.kt");
+    run("anyWithoutBuiltins.kt");
   }
 }

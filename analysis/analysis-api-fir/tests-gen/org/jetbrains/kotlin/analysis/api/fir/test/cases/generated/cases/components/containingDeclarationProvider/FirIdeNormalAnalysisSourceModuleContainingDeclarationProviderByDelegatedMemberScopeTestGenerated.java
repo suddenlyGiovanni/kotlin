@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisSourceModuleContainingDeclarationProviderByDele
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/containingDeclarationProvider/containingDeclarationByDelegatedMemberScope/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInContainingDeclarationByDelegatedMemberScope() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/containingDeclarationProvider/containingDeclarationByDelegatedMemberScope"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,6 +52,6 @@ public class FirIdeNormalAnalysisSourceModuleContainingDeclarationProviderByDele
   @Test
   @TestMetadata("delegation.kt")
   public void testDelegation() {
-    runTest("analysis/analysis-api/testData/components/containingDeclarationProvider/containingDeclarationByDelegatedMemberScope/delegation.kt");
+    run("delegation.kt");
   }
 }

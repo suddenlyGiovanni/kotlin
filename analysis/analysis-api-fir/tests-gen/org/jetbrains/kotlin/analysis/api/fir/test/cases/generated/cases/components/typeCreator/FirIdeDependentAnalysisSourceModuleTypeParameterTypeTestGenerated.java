@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisSourceModuleTypeParameterTypeTestGenerated e
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/typeCreator/typeParameter/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInTypeParameter() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/typeCreator/typeParameter"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,30 +52,30 @@ public class FirIdeDependentAnalysisSourceModuleTypeParameterTypeTestGenerated e
   @Test
   @TestMetadata("javaByName.kt")
   public void testJavaByName() {
-    runTest("analysis/analysis-api/testData/components/typeCreator/typeParameter/javaByName.kt");
+    run("javaByName.kt");
   }
 
   @Test
   @TestMetadata("kotlinByName.kt")
   public void testKotlinByName() {
-    runTest("analysis/analysis-api/testData/components/typeCreator/typeParameter/kotlinByName.kt");
+    run("kotlinByName.kt");
   }
 
   @Test
   @TestMetadata("multipleBounds.kt")
   public void testMultipleBounds() {
-    runTest("analysis/analysis-api/testData/components/typeCreator/typeParameter/multipleBounds.kt");
+    run("multipleBounds.kt");
   }
 
   @Test
   @TestMetadata("regular.kt")
   public void testRegular() {
-    runTest("analysis/analysis-api/testData/components/typeCreator/typeParameter/regular.kt");
+    run("regular.kt");
   }
 
   @Test
   @TestMetadata("reified.kt")
   public void testReified() {
-    runTest("analysis/analysis-api/testData/components/typeCreator/typeParameter/reified.kt");
+    run("reified.kt");
   }
 }

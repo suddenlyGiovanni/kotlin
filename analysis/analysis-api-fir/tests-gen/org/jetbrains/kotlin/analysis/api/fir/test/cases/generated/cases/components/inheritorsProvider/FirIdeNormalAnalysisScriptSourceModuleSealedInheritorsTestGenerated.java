@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleSealedInheritorsTestGenerated
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/inheritorsProvider/sealedInheritors/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInSealedInheritors() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/inheritorsProvider/sealedInheritors"), Pattern.compile("^(.+)\\.kts$"), null, true);

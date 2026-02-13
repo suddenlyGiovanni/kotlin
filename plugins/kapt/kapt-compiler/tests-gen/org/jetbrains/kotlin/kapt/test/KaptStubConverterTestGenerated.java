@@ -19,22 +19,26 @@ import java.util.regex.Pattern;
 @TestMetadata("plugins/kapt/kapt-compiler/testData/converter")
 @TestDataPath("$PROJECT_ROOT")
 public class KaptStubConverterTestGenerated extends AbstractKaptStubConverterTest {
+  private void run(String fileName) {
+    runTest("plugins/kapt/kapt-compiler/testData/converter/" + fileName);
+  }
+
   @Test
   @TestMetadata("abstractEnum.kt")
   public void testAbstractEnum() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/abstractEnum.kt");
+    run("abstractEnum.kt");
   }
 
   @Test
   @TestMetadata("abstractMethods.kt")
   public void testAbstractMethods() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/abstractMethods.kt");
+    run("abstractMethods.kt");
   }
 
   @Test
   @TestMetadata("aliasedImports.kt")
   public void testAliasedImports() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/aliasedImports.kt");
+    run("aliasedImports.kt");
   }
 
   @Test
@@ -45,841 +49,845 @@ public class KaptStubConverterTestGenerated extends AbstractKaptStubConverterTes
   @Test
   @TestMetadata("annotationInAnnotationParameters.kt")
   public void testAnnotationInAnnotationParameters() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/annotationInAnnotationParameters.kt");
+    run("annotationInAnnotationParameters.kt");
   }
 
   @Test
   @TestMetadata("annotationWithArrayArgument.kt")
   public void testAnnotationWithArrayArgument() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/annotationWithArrayArgument.kt");
+    run("annotationWithArrayArgument.kt");
   }
 
   @Test
   @TestMetadata("annotationWithCompanion.kt")
   public void testAnnotationWithCompanion() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/annotationWithCompanion.kt");
+    run("annotationWithCompanion.kt");
   }
 
   @Test
   @TestMetadata("annotationWithEmptyTarget.kt")
   public void testAnnotationWithEmptyTarget() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/annotationWithEmptyTarget.kt");
+    run("annotationWithEmptyTarget.kt");
   }
 
   @Test
   @TestMetadata("annotationWithFqNames.kt")
   public void testAnnotationWithFqNames() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/annotationWithFqNames.kt");
+    run("annotationWithFqNames.kt");
   }
 
   @Test
   @TestMetadata("annotationWithVaragArguments.kt")
   public void testAnnotationWithVaragArguments() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/annotationWithVaragArguments.kt");
+    run("annotationWithVaragArguments.kt");
   }
 
   @Test
   @TestMetadata("annotations.kt")
   public void testAnnotations() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/annotations.kt");
+    run("annotations.kt");
   }
 
   @Test
   @TestMetadata("annotations2.kt")
   public void testAnnotations2() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/annotations2.kt");
+    run("annotations2.kt");
   }
 
   @Test
   @TestMetadata("annotations3.kt")
   public void testAnnotations3() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/annotations3.kt");
+    run("annotations3.kt");
   }
 
   @Test
   @TestMetadata("annotationsWithClassLiterals.kt")
   public void testAnnotationsWithClassLiterals() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/annotationsWithClassLiterals.kt");
+    run("annotationsWithClassLiterals.kt");
   }
 
   @Test
   @TestMetadata("annotationsWithConstants.kt")
   public void testAnnotationsWithConstants() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/annotationsWithConstants.kt");
+    run("annotationsWithConstants.kt");
   }
 
   @Test
   @TestMetadata("annotationsWithTargets.kt")
   public void testAnnotationsWithTargets() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/annotationsWithTargets.kt");
+    run("annotationsWithTargets.kt");
   }
 
   @Test
   @TestMetadata("anonymousDelegate.kt")
   public void testAnonymousDelegate() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/anonymousDelegate.kt");
+    run("anonymousDelegate.kt");
   }
 
   @Test
   @TestMetadata("anonymousInitializer.kt")
   public void testAnonymousInitializer() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/anonymousInitializer.kt");
+    run("anonymousInitializer.kt");
   }
 
   @Test
   @TestMetadata("anonymousObjectInEnumSuperConstructor.kt")
   public void testAnonymousObjectInEnumSuperConstructor() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/anonymousObjectInEnumSuperConstructor.kt");
+    run("anonymousObjectInEnumSuperConstructor.kt");
   }
 
   @Test
   @TestMetadata("comments.kt")
   public void testComments() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/comments.kt");
+    run("comments.kt");
   }
 
   @Test
   @TestMetadata("cyrillicClassName.kt")
   public void testCyrillicClassName() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/cyrillicClassName.kt");
+    run("cyrillicClassName.kt");
   }
 
   @Test
   @TestMetadata("dataClass.kt")
   public void testDataClass() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/dataClass.kt");
+    run("dataClass.kt");
   }
 
   @Test
   @TestMetadata("dataClassWithCustomProperty.kt")
   public void testDataClassWithCustomProperty() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/dataClassWithCustomProperty.kt");
+    run("dataClassWithCustomProperty.kt");
   }
 
   @Test
   @TestMetadata("dataClassWithUnresolvedComponentType.kt")
   public void testDataClassWithUnresolvedComponentType() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/dataClassWithUnresolvedComponentType.kt");
+    run("dataClassWithUnresolvedComponentType.kt");
   }
 
   @Test
   @TestMetadata("defaultImpls.kt")
   public void testDefaultImpls() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/defaultImpls.kt");
+    run("defaultImpls.kt");
   }
 
   @Test
   @TestMetadata("defaultImplsWithTypeParameters.kt")
   public void testDefaultImplsWithTypeParameters() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/defaultImplsWithTypeParameters.kt");
+    run("defaultImplsWithTypeParameters.kt");
   }
 
   @Test
   @TestMetadata("defaultPackage.kt")
   public void testDefaultPackage() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/defaultPackage.kt");
+    run("defaultPackage.kt");
   }
 
   @Test
   @TestMetadata("defaultPackageCorrectErrorTypes.kt")
   public void testDefaultPackageCorrectErrorTypes() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/defaultPackageCorrectErrorTypes.kt");
+    run("defaultPackageCorrectErrorTypes.kt");
   }
 
   @Test
   @TestMetadata("defaultParameterValueOff.kt")
   public void testDefaultParameterValueOff() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/defaultParameterValueOff.kt");
+    run("defaultParameterValueOff.kt");
   }
 
   @Test
   @TestMetadata("defaultParameterValueOn.kt")
   public void testDefaultParameterValueOn() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/defaultParameterValueOn.kt");
+    run("defaultParameterValueOn.kt");
   }
 
   @Test
   @TestMetadata("delegateCorrectErrorTypes.kt")
   public void testDelegateCorrectErrorTypes() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/delegateCorrectErrorTypes.kt");
+    run("delegateCorrectErrorTypes.kt");
   }
 
   @Test
   @TestMetadata("delegateToList.kt")
   public void testDelegateToList() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/delegateToList.kt");
+    run("delegateToList.kt");
   }
 
   @Test
   @TestMetadata("delegatedProperties.kt")
   public void testDelegatedProperties() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/delegatedProperties.kt");
+    run("delegatedProperties.kt");
   }
 
   @Test
   @TestMetadata("delegationAndCompanionObject.kt")
   public void testDelegationAndCompanionObject() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/delegationAndCompanionObject.kt");
+    run("delegationAndCompanionObject.kt");
   }
 
   @Test
   @TestMetadata("delegationToAnonymousObject.kt")
   public void testDelegationToAnonymousObject() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/delegationToAnonymousObject.kt");
+    run("delegationToAnonymousObject.kt");
   }
 
   @Test
   @TestMetadata("deprecated.kt")
   public void testDeprecated() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/deprecated.kt");
+    run("deprecated.kt");
   }
 
   @Test
   @TestMetadata("enumConstructorCallWithErrorType.kt")
   public void testEnumConstructorCallWithErrorType() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/enumConstructorCallWithErrorType.kt");
+    run("enumConstructorCallWithErrorType.kt");
   }
 
   @Test
   @TestMetadata("enumImports.kt")
   public void testEnumImports() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/enumImports.kt");
+    run("enumImports.kt");
   }
 
   @Test
   @TestMetadata("enumInCompanion.kt")
   public void testEnumInCompanion() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/enumInCompanion.kt");
+    run("enumInCompanion.kt");
   }
 
   @Test
   @TestMetadata("enumSecondaryConstructor.kt")
   public void testEnumSecondaryConstructor() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/enumSecondaryConstructor.kt");
+    run("enumSecondaryConstructor.kt");
   }
 
   @Test
   @TestMetadata("enums.kt")
   public void testEnums() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/enums.kt");
+    run("enums.kt");
   }
 
   @Test
   @TestMetadata("errorExtensionReceiver.kt")
   public void testErrorExtensionReceiver() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/errorExtensionReceiver.kt");
+    run("errorExtensionReceiver.kt");
   }
 
   @Test
   @TestMetadata("errorLocationMapping.kt")
   public void testErrorLocationMapping() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/errorLocationMapping.kt");
+    run("errorLocationMapping.kt");
   }
 
   @Test
   @TestMetadata("errorSuperclass.kt")
   public void testErrorSuperclass() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/errorSuperclass.kt");
+    run("errorSuperclass.kt");
   }
 
   @Test
   @TestMetadata("errorSuperclassCorrectErrorTypes.kt")
   public void testErrorSuperclassCorrectErrorTypes() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/errorSuperclassCorrectErrorTypes.kt");
+    run("errorSuperclassCorrectErrorTypes.kt");
   }
 
   @Test
   @TestMetadata("errorSuperclassJava.kt")
   public void testErrorSuperclassJava() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/errorSuperclassJava.kt");
+    run("errorSuperclassJava.kt");
   }
 
   @Test
   @TestMetadata("fileFacadeJvmName.kt")
   public void testFileFacadeJvmName() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/fileFacadeJvmName.kt");
+    run("fileFacadeJvmName.kt");
   }
 
   @Test
   @TestMetadata("functions.kt")
   public void testFunctions() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/functions.kt");
+    run("functions.kt");
   }
 
   @Test
   @TestMetadata("genericParameters.kt")
   public void testGenericParameters() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/genericParameters.kt");
+    run("genericParameters.kt");
   }
 
   @Test
   @TestMetadata("genericRawSignatures.kt")
   public void testGenericRawSignatures() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/genericRawSignatures.kt");
+    run("genericRawSignatures.kt");
   }
 
   @Test
   @TestMetadata("genericSimple.kt")
   public void testGenericSimple() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/genericSimple.kt");
+    run("genericSimple.kt");
   }
 
   @Test
   @TestMetadata("ignoredMembers.kt")
   public void testIgnoredMembers() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/ignoredMembers.kt");
+    run("ignoredMembers.kt");
   }
 
   @Test
   @TestMetadata("implicitReturnTypes.kt")
   public void testImplicitReturnTypes() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/implicitReturnTypes.kt");
+    run("implicitReturnTypes.kt");
   }
 
   @Test
   @TestMetadata("importNestedClass.kt")
   public void testImportNestedClass() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/importNestedClass.kt");
+    run("importNestedClass.kt");
   }
 
   @Test
   @TestMetadata("importsForErrorTypes.kt")
   public void testImportsForErrorTypes() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/importsForErrorTypes.kt");
+    run("importsForErrorTypes.kt");
   }
 
   @Test
   @TestMetadata("importsKt22083.kt")
   public void testImportsKt22083() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/importsKt22083.kt");
+    run("importsKt22083.kt");
   }
 
   @Test
   @TestMetadata("importsWithUnresolvedAnnotations.kt")
   public void testImportsWithUnresolvedAnnotations() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/importsWithUnresolvedAnnotations.kt");
+    run("importsWithUnresolvedAnnotations.kt");
   }
 
   @Test
   @TestMetadata("incorrectDelegate.kt")
   public void testIncorrectDelegate() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/incorrectDelegate.kt");
+    run("incorrectDelegate.kt");
   }
 
   @Test
   @TestMetadata("inheritanceSimple.kt")
   public void testInheritanceSimple() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/inheritanceSimple.kt");
+    run("inheritanceSimple.kt");
   }
 
   @Test
   @TestMetadata("inlineClasses.kt")
   public void testInlineClasses() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/inlineClasses.kt");
+    run("inlineClasses.kt");
   }
 
   @Test
   @TestMetadata("inlineReified.kt")
   public void testInlineReified() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/inlineReified.kt");
+    run("inlineReified.kt");
   }
 
   @Test
   @TestMetadata("innerClassesWithTypeParameters.kt")
   public void testInnerClassesWithTypeParameters() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/innerClassesWithTypeParameters.kt");
+    run("innerClassesWithTypeParameters.kt");
   }
 
   @Test
   @TestMetadata("interfaceImplementation.kt")
   public void testInterfaceImplementation() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/interfaceImplementation.kt");
+    run("interfaceImplementation.kt");
   }
 
   @Test
   @TestMetadata("invalidFieldName.kt")
   public void testInvalidFieldName() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/invalidFieldName.kt");
+    run("invalidFieldName.kt");
   }
 
   @Test
   @TestMetadata("javaKeywords.kt")
   public void testJavaKeywords() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/javaKeywords.kt");
+    run("javaKeywords.kt");
   }
 
   @Test
   @TestMetadata("javaKeywordsInPackageNames.kt")
   public void testJavaKeywordsInPackageNames() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/javaKeywordsInPackageNames.kt");
+    run("javaKeywordsInPackageNames.kt");
   }
 
   @Test
   @TestMetadata("javadoc.kt")
   public void testJavadoc() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/javadoc.kt");
+    run("javadoc.kt");
   }
 
   @Test
   @TestMetadata("jvmOverloads.kt")
   public void testJvmOverloads() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/jvmOverloads.kt");
+    run("jvmOverloads.kt");
   }
 
   @Test
   @TestMetadata("jvmRecord.kt")
   public void testJvmRecord() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/jvmRecord.kt");
+    run("jvmRecord.kt");
   }
 
   @Test
   @TestMetadata("jvmRepeatableAnnotation.kt")
   public void testJvmRepeatableAnnotation() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/jvmRepeatableAnnotation.kt");
+    run("jvmRepeatableAnnotation.kt");
   }
 
   @Test
   @TestMetadata("jvmStatic.kt")
   public void testJvmStatic() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/jvmStatic.kt");
+    run("jvmStatic.kt");
   }
 
   @Test
   @TestMetadata("jvmStaticFieldInParent.kt")
   public void testJvmStaticFieldInParent() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/jvmStaticFieldInParent.kt");
+    run("jvmStaticFieldInParent.kt");
   }
 
   @Test
   @TestMetadata("kt14996.kt")
   public void testKt14996() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt14996.kt");
+    run("kt14996.kt");
   }
 
   @Test
   @TestMetadata("kt14997.kt")
   public void testKt14997() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt14997.kt");
+    run("kt14997.kt");
   }
 
   @Test
   @TestMetadata("kt14998.kt")
   public void testKt14998() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt14998.kt");
+    run("kt14998.kt");
   }
 
   @Test
   @TestMetadata("kt15145.kt")
   public void testKt15145() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt15145.kt");
+    run("kt15145.kt");
   }
 
   @Test
   @TestMetadata("kt17567.kt")
   public void testKt17567() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt17567.kt");
+    run("kt17567.kt");
   }
 
   @Test
   @TestMetadata("kt18377.kt")
   public void testKt18377() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt18377.kt");
+    run("kt18377.kt");
   }
 
   @Test
   @TestMetadata("kt18682.kt")
   public void testKt18682() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt18682.kt");
+    run("kt18682.kt");
   }
 
   @Test
   @TestMetadata("kt19700.kt")
   public void testKt19700() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt19700.kt");
+    run("kt19700.kt");
   }
 
   @Test
   @TestMetadata("kt19750.kt")
   public void testKt19750() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt19750.kt");
+    run("kt19750.kt");
   }
 
   @Test
   @TestMetadata("kt24272.kt")
   public void testKt24272() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt24272.kt");
+    run("kt24272.kt");
   }
 
   @Test
   @TestMetadata("kt25071.kt")
   public void testKt25071() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt25071.kt");
+    run("kt25071.kt");
   }
 
   @Test
   @TestMetadata("kt27126.kt")
   public void testKt27126() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt27126.kt");
+    run("kt27126.kt");
   }
 
   @Test
   @TestMetadata("kt28306.kt")
   public void testKt28306() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt28306.kt");
+    run("kt28306.kt");
   }
 
   @Test
   @TestMetadata("kt32596.kt")
   public void testKt32596() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt32596.kt");
+    run("kt32596.kt");
   }
 
   @Test
   @TestMetadata("kt34569.kt")
   public void testKt34569() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt34569.kt");
+    run("kt34569.kt");
   }
 
   @Test
   @TestMetadata("kt43786.kt")
   public void testKt43786() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt43786.kt");
+    run("kt43786.kt");
   }
 
   @Test
   @TestMetadata("kt47779.kt")
   public void testKt47779() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt47779.kt");
+    run("kt47779.kt");
   }
 
   @Test
   @TestMetadata("kt61729.kt")
   public void testKt61729() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt61729.kt");
+    run("kt61729.kt");
   }
 
   @Test
   @TestMetadata("kt65399.kt")
   public void testKt65399() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt65399.kt");
+    run("kt65399.kt");
   }
 
   @Test
   @TestMetadata("kt65453.kt")
   public void testKt65453() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt65453.kt");
+    run("kt65453.kt");
   }
 
   @Test
   @TestMetadata("kt66541.kt")
   public void testKt66541() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt66541.kt");
+    run("kt66541.kt");
   }
 
   @Test
   @TestMetadata("kt66687.kt")
   public void testKt66687() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt66687.kt");
+    run("kt66687.kt");
   }
 
   @Test
   @TestMetadata("kt67903.kt")
   public void testKt67903() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt67903.kt");
+    run("kt67903.kt");
   }
 
   @Test
   @TestMetadata("kt68145.kt")
   public void testKt68145() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt68145.kt");
+    run("kt68145.kt");
   }
 
   @Test
   @TestMetadata("kt79133_typeAliasClassLiteral.kt")
   public void testKt79133_typeAliasClassLiteral() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt79133_typeAliasClassLiteral.kt");
+    run("kt79133_typeAliasClassLiteral.kt");
   }
 
   @Test
   @TestMetadata("kt79138_javaClassAnnotatedWithMetadata.kt")
   public void testKt79138_javaClassAnnotatedWithMetadata() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt79138_javaClassAnnotatedWithMetadata.kt");
+    run("kt79138_javaClassAnnotatedWithMetadata.kt");
   }
 
   @Test
   @TestMetadata("kt79305_typeAliasUnresolvedClassLiteral.kt")
   public void testKt79305_typeAliasUnresolvedClassLiteral() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt79305_typeAliasUnresolvedClassLiteral.kt");
+    run("kt79305_typeAliasUnresolvedClassLiteral.kt");
   }
 
   @Test
   @TestMetadata("kt81691.kt")
   public void testKt81691() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt81691.kt");
+    run("kt81691.kt");
   }
 
   @Test
   @TestMetadata("kt82338.kt")
   public void testKt82338() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt82338.kt");
+    run("kt82338.kt");
   }
 
   @Test
   @TestMetadata("kt82338_correct_error_types.kt")
   public void testKt82338_correct_error_types() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/kt82338_correct_error_types.kt");
+    run("kt82338_correct_error_types.kt");
   }
 
   @Test
   @TestMetadata("lazyProperty.kt")
   public void testLazyProperty() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/lazyProperty.kt");
+    run("lazyProperty.kt");
   }
 
   @Test
   @TestMetadata("leadingDollars.kt")
   public void testLeadingDollars() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/leadingDollars.kt");
+    run("leadingDollars.kt");
   }
 
   @Test
   @TestMetadata("leadingDollars2.kt")
   public void testLeadingDollars2() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/leadingDollars2.kt");
+    run("leadingDollars2.kt");
   }
 
   @Test
   @TestMetadata("mapEntry.kt")
   public void testMapEntry() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/mapEntry.kt");
+    run("mapEntry.kt");
   }
 
   @Test
   @TestMetadata("maxErrorCount.kt")
   public void testMaxErrorCount() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/maxErrorCount.kt");
+    run("maxErrorCount.kt");
   }
 
   @Test
   @TestMetadata("maxValues.kt")
   public void testMaxValues() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/maxValues.kt");
+    run("maxValues.kt");
   }
 
   @Test
   @TestMetadata("methodParameterNames.kt")
   public void testMethodParameterNames() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/methodParameterNames.kt");
+    run("methodParameterNames.kt");
   }
 
   @Test
   @TestMetadata("methodPropertySignatureClash.kt")
   public void testMethodPropertySignatureClash() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/methodPropertySignatureClash.kt");
+    run("methodPropertySignatureClash.kt");
   }
 
   @Test
   @TestMetadata("modifiers.kt")
   public void testModifiers() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/modifiers.kt");
+    run("modifiers.kt");
   }
 
   @Test
   @TestMetadata("multifileClass.kt")
   public void testMultifileClass() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/multifileClass.kt");
+    run("multifileClass.kt");
   }
 
   @Test
   @TestMetadata("multifileClassDefaultPackage.kt")
   public void testMultifileClassDefaultPackage() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/multifileClassDefaultPackage.kt");
+    run("multifileClassDefaultPackage.kt");
   }
 
   @Test
   @TestMetadata("multipleTypeConstraints.kt")
   public void testMultipleTypeConstraints() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/multipleTypeConstraints.kt");
+    run("multipleTypeConstraints.kt");
   }
 
   @Test
   @TestMetadata("nestedClassInAnnotation.kt")
   public void testNestedClassInAnnotation() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/nestedClassInAnnotation.kt");
+    run("nestedClassInAnnotation.kt");
   }
 
   @Test
   @TestMetadata("nestedClasses.kt")
   public void testNestedClasses() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/nestedClasses.kt");
+    run("nestedClasses.kt");
   }
 
   @Test
   @TestMetadata("nestedClasses2.kt")
   public void testNestedClasses2() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/nestedClasses2.kt");
+    run("nestedClasses2.kt");
   }
 
   @Test
   @TestMetadata("nestedClassesNonRootPackage.kt")
   public void testNestedClassesNonRootPackage() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/nestedClassesNonRootPackage.kt");
+    run("nestedClassesNonRootPackage.kt");
   }
 
   @Test
   @TestMetadata("nonConstProperties.kt")
   public void testNonConstProperties() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/nonConstProperties.kt");
+    run("nonConstProperties.kt");
   }
 
   @Test
   @TestMetadata("nonExistentClass.kt")
   public void testNonExistentClass() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/nonExistentClass.kt");
+    run("nonExistentClass.kt");
   }
 
   @Test
   @TestMetadata("nonExistentClassTypesConversion.kt")
   public void testNonExistentClassTypesConversion() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/nonExistentClassTypesConversion.kt");
+    run("nonExistentClassTypesConversion.kt");
   }
 
   @Test
   @TestMetadata("nonExistentClassWIthoutCorrection.kt")
   public void testNonExistentClassWIthoutCorrection() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/nonExistentClassWIthoutCorrection.kt");
+    run("nonExistentClassWIthoutCorrection.kt");
   }
 
   @Test
   @TestMetadata("overriddenReturnTypeNullability.kt")
   public void testOverriddenReturnTypeNullability() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/overriddenReturnTypeNullability.kt");
+    run("overriddenReturnTypeNullability.kt");
   }
 
   @Test
   @TestMetadata("primitiveTypes.kt")
   public void testPrimitiveTypes() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/primitiveTypes.kt");
+    run("primitiveTypes.kt");
   }
 
   @Test
   @TestMetadata("properties.kt")
   public void testProperties() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/properties.kt");
+    run("properties.kt");
   }
 
   @Test
   @TestMetadata("propertyAnnotations.kt")
   public void testPropertyAnnotations() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/propertyAnnotations.kt");
+    run("propertyAnnotations.kt");
   }
 
   @Test
   @TestMetadata("recentlyNullable.kt")
   public void testRecentlyNullable() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/recentlyNullable.kt");
+    run("recentlyNullable.kt");
   }
 
   @Test
   @TestMetadata("repeatableAnnotations.kt")
   public void testRepeatableAnnotations() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/repeatableAnnotations.kt");
+    run("repeatableAnnotations.kt");
   }
 
   @Test
   @TestMetadata("secondaryConstructor.kt")
   public void testSecondaryConstructor() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/secondaryConstructor.kt");
+    run("secondaryConstructor.kt");
   }
 
   @Test
   @TestMetadata("severalPackageParts.kt")
   public void testSeveralPackageParts() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/severalPackageParts.kt");
+    run("severalPackageParts.kt");
   }
 
   @Test
   @TestMetadata("starImports.kt")
   public void testStarImports() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/starImports.kt");
+    run("starImports.kt");
   }
 
   @Test
   @TestMetadata("strangeIdentifiers.kt")
   public void testStrangeIdentifiers() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/strangeIdentifiers.kt");
+    run("strangeIdentifiers.kt");
   }
 
   @Test
   @TestMetadata("strangeNames.kt")
   public void testStrangeNames() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/strangeNames.kt");
+    run("strangeNames.kt");
   }
 
   @Test
   @TestMetadata("stripMetadata.kt")
   public void testStripMetadata() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/stripMetadata.kt");
+    run("stripMetadata.kt");
   }
 
   @Test
   @TestMetadata("superConstructorCall.kt")
   public void testSuperConstructorCall() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/superConstructorCall.kt");
+    run("superConstructorCall.kt");
   }
 
   @Test
   @TestMetadata("suspendArgName.kt")
   public void testSuspendArgName() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/suspendArgName.kt");
+    run("suspendArgName.kt");
   }
 
   @Test
   @TestMetadata("suspendErrorTypes.kt")
   public void testSuspendErrorTypes() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/suspendErrorTypes.kt");
+    run("suspendErrorTypes.kt");
   }
 
   @Test
   @TestMetadata("suspendFunctionSupertype.kt")
   public void testSuspendFunctionSupertype() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/suspendFunctionSupertype.kt");
+    run("suspendFunctionSupertype.kt");
   }
 
   @Test
   @TestMetadata("suspendFunctionWithBigArity.kt")
   public void testSuspendFunctionWithBigArity() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/suspendFunctionWithBigArity.kt");
+    run("suspendFunctionWithBigArity.kt");
   }
 
   @Test
   @TestMetadata("topLevel.kt")
   public void testTopLevel() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/topLevel.kt");
+    run("topLevel.kt");
   }
 
   @Test
   @TestMetadata("typeAnnotations.kt")
   public void testTypeAnnotations() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/typeAnnotations.kt");
+    run("typeAnnotations.kt");
   }
 
   @Test
   @TestMetadata("unresolvedDelegateExpression.kt")
   public void testUnresolvedDelegateExpression() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/unresolvedDelegateExpression.kt");
+    run("unresolvedDelegateExpression.kt");
   }
 
   @Test
   @TestMetadata("unsafePropertyInitializers.kt")
   public void testUnsafePropertyInitializers() {
-    runTest("plugins/kapt/kapt-compiler/testData/converter/unsafePropertyInitializers.kt");
+    run("unsafePropertyInitializers.kt");
   }
 
   @Nested
   @TestMetadata("plugins/kapt/kapt-compiler/testData/converter/jvmDefault")
   @TestDataPath("$PROJECT_ROOT")
   public class JvmDefault {
+    private void run(String fileName) {
+      runTest("plugins/kapt/kapt-compiler/testData/converter/jvmDefault/" + fileName);
+    }
+
     @Test
     public void testAllFilesPresentInJvmDefault() {
       KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("plugins/kapt/kapt-compiler/testData/converter/jvmDefault"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -888,37 +896,37 @@ public class KaptStubConverterTestGenerated extends AbstractKaptStubConverterTes
     @Test
     @TestMetadata("disable.kt")
     public void testDisable() {
-      runTest("plugins/kapt/kapt-compiler/testData/converter/jvmDefault/disable.kt");
+      run("disable.kt");
     }
 
     @Test
     @TestMetadata("disable1.8.kt")
     public void testDisable1_8() {
-      runTest("plugins/kapt/kapt-compiler/testData/converter/jvmDefault/disable1.8.kt");
+      run("disable1.8.kt");
     }
 
     @Test
     @TestMetadata("enable.kt")
     public void testEnable() {
-      runTest("plugins/kapt/kapt-compiler/testData/converter/jvmDefault/enable.kt");
+      run("enable.kt");
     }
 
     @Test
     @TestMetadata("enable1.8.kt")
     public void testEnable1_8() {
-      runTest("plugins/kapt/kapt-compiler/testData/converter/jvmDefault/enable1.8.kt");
+      run("enable1.8.kt");
     }
 
     @Test
     @TestMetadata("noCompatibility.kt")
     public void testNoCompatibility() {
-      runTest("plugins/kapt/kapt-compiler/testData/converter/jvmDefault/noCompatibility.kt");
+      run("noCompatibility.kt");
     }
 
     @Test
     @TestMetadata("noCompatibility1.8.kt")
     public void testNoCompatibility1_8() {
-      runTest("plugins/kapt/kapt-compiler/testData/converter/jvmDefault/noCompatibility1.8.kt");
+      run("noCompatibility1.8.kt");
     }
   }
 }

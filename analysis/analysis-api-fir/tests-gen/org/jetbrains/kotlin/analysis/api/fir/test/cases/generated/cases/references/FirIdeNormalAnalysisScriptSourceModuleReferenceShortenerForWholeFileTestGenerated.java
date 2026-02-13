@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleReferenceShortenerForWholeFil
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/referenceShortener/shortenWholeFile/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInShortenWholeFile() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/referenceShortener/shortenWholeFile"), Pattern.compile("^(.+)\\.kts$"), null, true);
@@ -48,18 +52,18 @@ public class FirIdeNormalAnalysisScriptSourceModuleReferenceShortenerForWholeFil
   @Test
   @TestMetadata("callInsideScriptExpression.kts")
   public void testCallInsideScriptExpression() {
-    runTest("analysis/analysis-api/testData/components/referenceShortener/shortenWholeFile/callInsideScriptExpression.kts");
+    run("callInsideScriptExpression.kts");
   }
 
   @Test
   @TestMetadata("scriptFileWithImportStatement.kts")
   public void testScriptFileWithImportStatement() {
-    runTest("analysis/analysis-api/testData/components/referenceShortener/shortenWholeFile/scriptFileWithImportStatement.kts");
+    run("scriptFileWithImportStatement.kts");
   }
 
   @Test
   @TestMetadata("scriptFileWithoutImportStatements.kts")
   public void testScriptFileWithoutImportStatements() {
-    runTest("analysis/analysis-api/testData/components/referenceShortener/shortenWholeFile/scriptFileWithoutImportStatements.kts");
+    run("scriptFileWithoutImportStatements.kts");
   }
 }

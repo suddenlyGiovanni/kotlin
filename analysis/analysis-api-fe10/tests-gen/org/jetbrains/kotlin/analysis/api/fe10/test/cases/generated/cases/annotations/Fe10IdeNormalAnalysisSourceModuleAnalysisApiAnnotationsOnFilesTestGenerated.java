@@ -40,6 +40,10 @@ public class Fe10IdeNormalAnalysisSourceModuleAnalysisApiAnnotationsOnFilesTestG
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/annotations/annotationsOnFiles/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInAnnotationsOnFiles() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/annotations/annotationsOnFiles"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,6 +52,6 @@ public class Fe10IdeNormalAnalysisSourceModuleAnalysisApiAnnotationsOnFilesTestG
   @Test
   @TestMetadata("onFile.kt")
   public void testOnFile() {
-    runTest("analysis/analysis-api/testData/annotations/annotationsOnFiles/onFile.kt");
+    run("onFile.kt");
   }
 }

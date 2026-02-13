@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleWhenMissingCasesTestGenera
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/expressionInfoProvider/whenMissingCases/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInWhenMissingCases() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/expressionInfoProvider/whenMissingCases"), Pattern.compile("^(.+)\\.kts$"), null, true);

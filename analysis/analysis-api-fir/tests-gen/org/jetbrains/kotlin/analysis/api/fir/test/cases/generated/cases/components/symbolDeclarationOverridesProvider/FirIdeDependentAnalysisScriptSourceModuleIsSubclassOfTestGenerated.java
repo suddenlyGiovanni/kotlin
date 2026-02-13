@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleIsSubclassOfTestGenerated 
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/symbolDeclarationOverridesProvider/isSubclassOf/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInIsSubclassOf() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/symbolDeclarationOverridesProvider/isSubclassOf"), Pattern.compile("^(.+)\\.kts$"), null, true);

@@ -40,6 +40,10 @@ public class FirStandaloneNormalAnalysisSourceModuleBuildArrayTypeTestGenerated 
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/typeCreator/arrayType/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInArrayType() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/typeCreator/arrayType"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,54 +52,54 @@ public class FirStandaloneNormalAnalysisSourceModuleBuildArrayTypeTestGenerated 
   @Test
   @TestMetadata("boolean.kt")
   public void testBoolean() {
-    runTest("analysis/analysis-api/testData/components/typeCreator/arrayType/boolean.kt");
+    run("boolean.kt");
   }
 
   @Test
   @TestMetadata("boxedArrayIntAsElementType.kt")
   public void testBoxedArrayIntAsElementType() {
-    runTest("analysis/analysis-api/testData/components/typeCreator/arrayType/boxedArrayIntAsElementType.kt");
+    run("boxedArrayIntAsElementType.kt");
   }
 
   @Test
   @TestMetadata("errorType.kt")
   public void testErrorType() {
-    runTest("analysis/analysis-api/testData/components/typeCreator/arrayType/errorType.kt");
+    run("errorType.kt");
   }
 
   @Test
   @TestMetadata("flexibleIntFromJava.kt")
   public void testFlexibleIntFromJava() {
-    runTest("analysis/analysis-api/testData/components/typeCreator/arrayType/flexibleIntFromJava.kt");
+    run("flexibleIntFromJava.kt");
   }
 
   @Test
   @TestMetadata("nullableInt.kt")
   public void testNullableInt() {
-    runTest("analysis/analysis-api/testData/components/typeCreator/arrayType/nullableInt.kt");
+    run("nullableInt.kt");
   }
 
   @Test
   @TestMetadata("primitiveArrayAsElementType.kt")
   public void testPrimitiveArrayAsElementType() {
-    runTest("analysis/analysis-api/testData/components/typeCreator/arrayType/primitiveArrayAsElementType.kt");
+    run("primitiveArrayAsElementType.kt");
   }
 
   @Test
   @TestMetadata("simpleNullableUserType.kt")
   public void testSimpleNullableUserType() {
-    runTest("analysis/analysis-api/testData/components/typeCreator/arrayType/simpleNullableUserType.kt");
+    run("simpleNullableUserType.kt");
   }
 
   @Test
   @TestMetadata("simpleUserType.kt")
   public void testSimpleUserType() {
-    runTest("analysis/analysis-api/testData/components/typeCreator/arrayType/simpleUserType.kt");
+    run("simpleUserType.kt");
   }
 
   @Test
   @TestMetadata("typeParameter.kt")
   public void testTypeParameter() {
-    runTest("analysis/analysis-api/testData/components/typeCreator/arrayType/typeParameter.kt");
+    run("typeParameter.kt");
   }
 }

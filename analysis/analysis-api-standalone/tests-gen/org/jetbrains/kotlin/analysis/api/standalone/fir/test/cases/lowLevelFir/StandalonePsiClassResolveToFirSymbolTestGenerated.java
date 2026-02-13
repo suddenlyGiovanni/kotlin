@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
 @TestMetadata("analysis/low-level-api-fir/testData/resolveToFirSymbolPsiClass")
 @TestDataPath("$PROJECT_ROOT")
 public class StandalonePsiClassResolveToFirSymbolTestGenerated extends AbstractStandalonePsiClassResolveToFirSymbolTest {
+  private void run(String fileName) {
+    runTest("analysis/low-level-api-fir/testData/resolveToFirSymbolPsiClass/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInResolveToFirSymbolPsiClass() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/low-level-api-fir/testData/resolveToFirSymbolPsiClass"), Pattern.compile("^([^.]+)\\.kt$"), null, true);
@@ -26,36 +30,36 @@ public class StandalonePsiClassResolveToFirSymbolTestGenerated extends AbstractS
   @Test
   @TestMetadata("classWithDollarInName.kt")
   public void testClassWithDollarInName() {
-    runTest("analysis/low-level-api-fir/testData/resolveToFirSymbolPsiClass/classWithDollarInName.kt");
+    run("classWithDollarInName.kt");
   }
 
   @Test
   @TestMetadata("nestedAndTopLevelClassesConflict.kt")
   public void testNestedAndTopLevelClassesConflict() {
-    runTest("analysis/low-level-api-fir/testData/resolveToFirSymbolPsiClass/nestedAndTopLevelClassesConflict.kt");
+    run("nestedAndTopLevelClassesConflict.kt");
   }
 
   @Test
   @TestMetadata("nestedClassWithDollarInName.kt")
   public void testNestedClassWithDollarInName() {
-    runTest("analysis/low-level-api-fir/testData/resolveToFirSymbolPsiClass/nestedClassWithDollarInName.kt");
+    run("nestedClassWithDollarInName.kt");
   }
 
   @Test
   @TestMetadata("nestedConflictInLibraryDifferentRoots.kt")
   public void testNestedConflictInLibraryDifferentRoots() {
-    runTest("analysis/low-level-api-fir/testData/resolveToFirSymbolPsiClass/nestedConflictInLibraryDifferentRoots.kt");
+    run("nestedConflictInLibraryDifferentRoots.kt");
   }
 
   @Test
   @TestMetadata("topLevelClassesConflict.kt")
   public void testTopLevelClassesConflict() {
-    runTest("analysis/low-level-api-fir/testData/resolveToFirSymbolPsiClass/topLevelClassesConflict.kt");
+    run("topLevelClassesConflict.kt");
   }
 
   @Test
   @TestMetadata("topLevelConflictInLibraryDifferentRoots.kt")
   public void testTopLevelConflictInLibraryDifferentRoots() {
-    runTest("analysis/low-level-api-fir/testData/resolveToFirSymbolPsiClass/topLevelConflictInLibraryDifferentRoots.kt");
+    run("topLevelConflictInLibraryDifferentRoots.kt");
   }
 }

@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleIsDenotableTestGenerated e
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/typeInfoProvider/isDenotable/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInIsDenotable() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/typeInfoProvider/isDenotable"), Pattern.compile("^(.+)\\.kts$"), Pattern.compile(".*\\.descriptors\\.kt$"), true);

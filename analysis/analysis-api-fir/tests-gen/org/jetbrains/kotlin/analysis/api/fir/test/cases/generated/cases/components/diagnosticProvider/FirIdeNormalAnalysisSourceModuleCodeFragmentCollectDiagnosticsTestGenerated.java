@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisSourceModuleCodeFragmentCollectDiagnosticsTestG
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/codeFragmentDiagnostics/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInCodeFragmentDiagnostics() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/diagnosticsProvider/codeFragmentDiagnostics"), Pattern.compile("^([^.]+)\\.kt$"), null, true);
@@ -48,54 +52,54 @@ public class FirIdeNormalAnalysisSourceModuleCodeFragmentCollectDiagnosticsTestG
   @Test
   @TestMetadata("evalJvm.kt")
   public void testEvalJvm() {
-    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/codeFragmentDiagnostics/evalJvm.kt");
+    run("evalJvm.kt");
   }
 
   @Test
   @TestMetadata("evalJvmJs.kt")
   public void testEvalJvmJs() {
-    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/codeFragmentDiagnostics/evalJvmJs.kt");
+    run("evalJvmJs.kt");
   }
 
   @Test
   @TestMetadata("kmpTypeCodeFragment.kt")
   public void testKmpTypeCodeFragment() {
-    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/codeFragmentDiagnostics/kmpTypeCodeFragment.kt");
+    run("kmpTypeCodeFragment.kt");
   }
 
   @Test
   @TestMetadata("kmpUnresolvedTypeCodeFragment.kt")
   public void testKmpUnresolvedTypeCodeFragment() {
-    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/codeFragmentDiagnostics/kmpUnresolvedTypeCodeFragment.kt");
+    run("kmpUnresolvedTypeCodeFragment.kt");
   }
 
   @Test
   @TestMetadata("libraryOverloads.kt")
   public void testLibraryOverloads() {
-    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/codeFragmentDiagnostics/libraryOverloads.kt");
+    run("libraryOverloads.kt");
   }
 
   @Test
   @TestMetadata("localClass.kt")
   public void testLocalClass() {
-    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/codeFragmentDiagnostics/localClass.kt");
+    run("localClass.kt");
   }
 
   @Test
   @TestMetadata("localFunction.kt")
   public void testLocalFunction() {
-    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/codeFragmentDiagnostics/localFunction.kt");
+    run("localFunction.kt");
   }
 
   @Test
   @TestMetadata("suspend.kt")
   public void testSuspend() {
-    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/codeFragmentDiagnostics/suspend.kt");
+    run("suspend.kt");
   }
 
   @Test
   @TestMetadata("typeMismatch.kt")
   public void testTypeMismatch() {
-    runTest("analysis/analysis-api/testData/components/diagnosticsProvider/codeFragmentDiagnostics/typeMismatch.kt");
+    run("typeMismatch.kt");
   }
 }

@@ -40,6 +40,10 @@ public class FirStandaloneNormalAnalysisLibraryBinaryModuleUseSiteLibraryModuleA
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/sessions/allowUseSiteLibraryModuleAnalysis/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInAllowUseSiteLibraryModuleAnalysis() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/sessions/allowUseSiteLibraryModuleAnalysis"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,12 +52,12 @@ public class FirStandaloneNormalAnalysisLibraryBinaryModuleUseSiteLibraryModuleA
   @Test
   @TestMetadata("allowLibraryModuleAnalysis.kt")
   public void testAllowLibraryModuleAnalysis() {
-    runTest("analysis/analysis-api/testData/sessions/allowUseSiteLibraryModuleAnalysis/allowLibraryModuleAnalysis.kt");
+    run("allowLibraryModuleAnalysis.kt");
   }
 
   @Test
   @TestMetadata("disallowLibraryModuleAnalysis.kt")
   public void testDisallowLibraryModuleAnalysis() {
-    runTest("analysis/analysis-api/testData/sessions/allowUseSiteLibraryModuleAnalysis/disallowLibraryModuleAnalysis.kt");
+    run("disallowLibraryModuleAnalysis.kt");
   }
 }

@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisSourceModuleAnalysisApiSymbolSubstitutionTestGe
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/signatureSubstitution/symbolSubstitution/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInSymbolSubstitution() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/signatureSubstitution/symbolSubstitution"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,12 +52,12 @@ public class FirIdeNormalAnalysisSourceModuleAnalysisApiSymbolSubstitutionTestGe
   @Test
   @TestMetadata("function.kt")
   public void testFunction() {
-    runTest("analysis/analysis-api/testData/components/signatureSubstitution/symbolSubstitution/function.kt");
+    run("function.kt");
   }
 
   @Test
   @TestMetadata("property.kt")
   public void testProperty() {
-    runTest("analysis/analysis-api/testData/components/signatureSubstitution/symbolSubstitution/property.kt");
+    run("property.kt");
   }
 }

@@ -40,6 +40,10 @@ public class Fe10IdeNormalAnalysisSourceModuleFileScopeTestGenerated extends Abs
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/scopeProvider/fileScopeTest/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInFileScopeTest() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/scopeProvider/fileScopeTest"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,12 +52,12 @@ public class Fe10IdeNormalAnalysisSourceModuleFileScopeTestGenerated extends Abs
   @Test
   @TestMetadata("fileScope.kt")
   public void testFileScope() {
-    runTest("analysis/analysis-api/testData/components/scopeProvider/fileScopeTest/fileScope.kt");
+    run("fileScope.kt");
   }
 
   @Test
   @TestMetadata("simpleFileScope.kt")
   public void testSimpleFileScope() {
-    runTest("analysis/analysis-api/testData/components/scopeProvider/fileScopeTest/simpleFileScope.kt");
+    run("simpleFileScope.kt");
   }
 }

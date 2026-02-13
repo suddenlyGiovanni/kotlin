@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleBuildArrayTypeTestGenerated e
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/typeCreator/arrayType/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInArrayType() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/typeCreator/arrayType"), Pattern.compile("^(.+)\\.kts$"), null, true);

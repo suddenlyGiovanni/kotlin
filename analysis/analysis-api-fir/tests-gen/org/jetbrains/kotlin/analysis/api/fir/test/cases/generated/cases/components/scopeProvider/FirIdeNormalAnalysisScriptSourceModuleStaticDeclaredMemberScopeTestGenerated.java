@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleStaticDeclaredMemberScopeTest
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/scopeProvider/staticDeclaredMemberScope/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInStaticDeclaredMemberScope() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/scopeProvider/staticDeclaredMemberScope"), Pattern.compile("^(.+)\\.kts$"), null, true);
@@ -48,6 +52,6 @@ public class FirIdeNormalAnalysisScriptSourceModuleStaticDeclaredMemberScopeTest
   @Test
   @TestMetadata("scriptWithClassDeclaration.kts")
   public void testScriptWithClassDeclaration() {
-    runTest("analysis/analysis-api/testData/components/scopeProvider/staticDeclaredMemberScope/scriptWithClassDeclaration.kts");
+    run("scriptWithClassDeclaration.kts");
   }
 }

@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleVisibilityCheckerTestGener
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/visibilityChecker/visibility/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInVisibility() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/visibilityChecker/visibility"), Pattern.compile("^(.+)\\.kts$"), null, true);

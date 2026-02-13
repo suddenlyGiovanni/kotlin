@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleAnalysisApiSymbolAsSignatureT
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/signatureSubstitution/symbolAsSignature/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInSymbolAsSignature() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/signatureSubstitution/symbolAsSignature"), Pattern.compile("^(.+)\\.kts$"), null, true);

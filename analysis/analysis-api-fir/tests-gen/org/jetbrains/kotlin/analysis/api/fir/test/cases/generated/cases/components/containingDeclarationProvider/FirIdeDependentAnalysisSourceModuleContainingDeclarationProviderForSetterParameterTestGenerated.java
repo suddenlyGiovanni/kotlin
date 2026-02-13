@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisSourceModuleContainingDeclarationProviderFor
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/containingDeclarationProvider/containingDeclarationForSetterParameter/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInContainingDeclarationForSetterParameter() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/containingDeclarationProvider/containingDeclarationForSetterParameter"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,6 +52,6 @@ public class FirIdeDependentAnalysisSourceModuleContainingDeclarationProviderFor
   @Test
   @TestMetadata("defaultSetter.kt")
   public void testDefaultSetter() {
-    runTest("analysis/analysis-api/testData/components/containingDeclarationProvider/containingDeclarationForSetterParameter/defaultSetter.kt");
+    run("defaultSetter.kt");
   }
 }

@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleResolveExtensionInfoProvid
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/resolveExtensionInfoProvider/extensionScopeWithPsi/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInExtensionScopeWithPsi() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/resolveExtensionInfoProvider/extensionScopeWithPsi"), Pattern.compile("^(.+)\\.kts$"), null, true);

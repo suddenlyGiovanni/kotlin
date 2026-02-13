@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisSourceModuleSubstitutorBuilderTestGenerated ext
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/substitutorFactory/substitutorBuilder/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInSubstitutorBuilder() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/substitutorFactory/substitutorBuilder"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,6 +52,6 @@ public class FirIdeNormalAnalysisSourceModuleSubstitutorBuilderTestGenerated ext
   @Test
   @TestMetadata("function.kt")
   public void testFunction() {
-    runTest("analysis/analysis-api/testData/components/substitutorFactory/substitutorBuilder/function.kt");
+    run("function.kt");
   }
 }

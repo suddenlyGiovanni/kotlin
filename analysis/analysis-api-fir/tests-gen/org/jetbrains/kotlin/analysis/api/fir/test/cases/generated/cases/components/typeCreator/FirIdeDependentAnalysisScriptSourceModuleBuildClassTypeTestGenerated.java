@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleBuildClassTypeTestGenerate
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/typeCreator/classType/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInClassType() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/typeCreator/classType"), Pattern.compile("^(.+)\\.kts$"), null, true);

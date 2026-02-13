@@ -19,6 +19,10 @@ import java.util.regex.Pattern;
 @TestMetadata("analysis/low-level-api-fir/testData/getOrBuildFirWithInterruption")
 @TestDataPath("$PROJECT_ROOT")
 public class InterruptingSourceGetOrBuildFirTestGenerated extends AbstractInterruptingSourceGetOrBuildFirTest {
+  private void run(String fileName) {
+    runTest("analysis/low-level-api-fir/testData/getOrBuildFirWithInterruption/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInGetOrBuildFirWithInterruption() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/low-level-api-fir/testData/getOrBuildFirWithInterruption"), Pattern.compile("^(.+)\\.(kt)$"), null, true);
@@ -27,37 +31,41 @@ public class InterruptingSourceGetOrBuildFirTestGenerated extends AbstractInterr
   @Test
   @TestMetadata("propertyWithBrokenGetter.kt")
   public void testPropertyWithBrokenGetter() {
-    runTest("analysis/low-level-api-fir/testData/getOrBuildFirWithInterruption/propertyWithBrokenGetter.kt");
+    run("propertyWithBrokenGetter.kt");
   }
 
   @Test
   @TestMetadata("propertyWithBrokenSetter.kt")
   public void testPropertyWithBrokenSetter() {
-    runTest("analysis/low-level-api-fir/testData/getOrBuildFirWithInterruption/propertyWithBrokenSetter.kt");
+    run("propertyWithBrokenSetter.kt");
   }
 
   @Test
   @TestMetadata("reverseOrder.kt")
   public void testReverseOrder() {
-    runTest("analysis/low-level-api-fir/testData/getOrBuildFirWithInterruption/reverseOrder.kt");
+    run("reverseOrder.kt");
   }
 
   @Test
   @TestMetadata("reverseOrder2.kt")
   public void testReverseOrder2() {
-    runTest("analysis/low-level-api-fir/testData/getOrBuildFirWithInterruption/reverseOrder2.kt");
+    run("reverseOrder2.kt");
   }
 
   @Test
   @TestMetadata("simple.kt")
   public void testSimple() {
-    runTest("analysis/low-level-api-fir/testData/getOrBuildFirWithInterruption/simple.kt");
+    run("simple.kt");
   }
 
   @Nested
   @TestMetadata("analysis/low-level-api-fir/testData/getOrBuildFirWithInterruption/scripts")
   @TestDataPath("$PROJECT_ROOT")
   public class Scripts {
+    private void run(String fileName) {
+      runTest("analysis/low-level-api-fir/testData/getOrBuildFirWithInterruption/scripts/" + fileName);
+    }
+
     @Test
     public void testAllFilesPresentInScripts() {
       KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/low-level-api-fir/testData/getOrBuildFirWithInterruption/scripts"), Pattern.compile("^(.+)\\.(kt)$"), null, true);

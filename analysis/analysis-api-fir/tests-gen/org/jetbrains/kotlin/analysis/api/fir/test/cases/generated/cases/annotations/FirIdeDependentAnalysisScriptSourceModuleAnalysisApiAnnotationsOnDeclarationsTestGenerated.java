@@ -41,6 +41,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleAnalysisApiAnnotationsOnDe
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/annotations/annotationsOnDeclaration/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInAnnotationsOnDeclaration() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/annotations/annotationsOnDeclaration"), Pattern.compile("^(.+)\\.kts$"), null, true);
@@ -50,6 +54,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleAnalysisApiAnnotationsOnDe
   @TestMetadata("analysis/analysis-api/testData/annotations/annotationsOnDeclaration/direct")
   @TestDataPath("$PROJECT_ROOT")
   public class Direct {
+    private void run(String fileName) {
+      runTest("analysis/analysis-api/testData/annotations/annotationsOnDeclaration/direct/" + fileName);
+    }
+
     @Test
     public void testAllFilesPresentInDirect() {
       KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/annotations/annotationsOnDeclaration/direct"), Pattern.compile("^(.+)\\.kts$"), null, true);
@@ -60,6 +68,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleAnalysisApiAnnotationsOnDe
   @TestMetadata("analysis/analysis-api/testData/annotations/annotationsOnDeclaration/useSite")
   @TestDataPath("$PROJECT_ROOT")
   public class UseSite {
+    private void run(String fileName) {
+      runTest("analysis/analysis-api/testData/annotations/annotationsOnDeclaration/useSite/" + fileName);
+    }
+
     @Test
     public void testAllFilesPresentInUseSite() {
       KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/annotations/annotationsOnDeclaration/useSite"), Pattern.compile("^(.+)\\.kts$"), null, true);

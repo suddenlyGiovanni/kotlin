@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleRestrictedAnalysisRejectionTe
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/restrictedAnalysis/restriction/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInRestriction() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/restrictedAnalysis/restriction"), Pattern.compile("^(.+)\\.kts$"), null, true);

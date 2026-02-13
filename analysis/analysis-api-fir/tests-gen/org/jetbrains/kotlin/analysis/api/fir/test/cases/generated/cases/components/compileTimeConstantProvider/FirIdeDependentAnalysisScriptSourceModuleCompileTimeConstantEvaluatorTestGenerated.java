@@ -41,6 +41,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleCompileTimeConstantEvaluat
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/compileTimeConstantProvider/evaluate/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInEvaluate() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/compileTimeConstantProvider/evaluate"), Pattern.compile("^(.+)\\.kts$"), null, true);
@@ -50,6 +54,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleCompileTimeConstantEvaluat
   @TestMetadata("analysis/analysis-api/testData/components/compileTimeConstantProvider/evaluate/withErrors")
   @TestDataPath("$PROJECT_ROOT")
   public class WithErrors {
+    private void run(String fileName) {
+      runTest("analysis/analysis-api/testData/components/compileTimeConstantProvider/evaluate/withErrors/" + fileName);
+    }
+
     @Test
     public void testAllFilesPresentInWithErrors() {
       KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/compileTimeConstantProvider/evaluate/withErrors"), Pattern.compile("^(.+)\\.kts$"), null, true);

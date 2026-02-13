@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleReturnTargetSymbolTestGenerat
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/expressionInfoProvider/returnExpressionTargetSymbol/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInReturnExpressionTargetSymbol() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/expressionInfoProvider/returnExpressionTargetSymbol"), Pattern.compile("^(.+)\\.kts$"), null, true);

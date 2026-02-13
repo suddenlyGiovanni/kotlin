@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleAnalysisApiAnnotationsOnFiles
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/annotations/annotationsOnFiles/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInAnnotationsOnFiles() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/annotations/annotationsOnFiles"), Pattern.compile("^(.+)\\.kts$"), null, true);

@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisSourceModuleSamClassBySamConstructorTestGenerat
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/symbolInfoProvider/samClassBySamConstructor/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInSamClassBySamConstructor() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/symbolInfoProvider/samClassBySamConstructor"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,12 +52,12 @@ public class FirIdeNormalAnalysisSourceModuleSamClassBySamConstructorTestGenerat
   @Test
   @TestMetadata("samClass.kt")
   public void testSamClass() {
-    runTest("analysis/analysis-api/testData/components/symbolInfoProvider/samClassBySamConstructor/samClass.kt");
+    run("samClass.kt");
   }
 
   @Test
   @TestMetadata("samClassWithTypeArguments.kt")
   public void testSamClassWithTypeArguments() {
-    runTest("analysis/analysis-api/testData/components/symbolInfoProvider/samClassBySamConstructor/samClassWithTypeArguments.kt");
+    run("samClassWithTypeArguments.kt");
   }
 }

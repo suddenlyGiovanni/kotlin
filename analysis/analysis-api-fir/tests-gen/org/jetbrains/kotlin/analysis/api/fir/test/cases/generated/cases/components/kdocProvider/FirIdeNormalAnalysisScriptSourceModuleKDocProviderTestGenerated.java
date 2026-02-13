@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleKDocProviderTestGenerated ext
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/kdocProvider/kdoc/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInKdoc() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/kdocProvider/kdoc"), Pattern.compile("^(.+)\\.kts$"), null, true);

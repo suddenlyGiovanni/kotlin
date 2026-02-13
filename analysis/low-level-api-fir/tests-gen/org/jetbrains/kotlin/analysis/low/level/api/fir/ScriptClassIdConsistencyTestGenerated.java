@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
 @TestMetadata("analysis/low-level-api-fir/testData/classId")
 @TestDataPath("$PROJECT_ROOT")
 public class ScriptClassIdConsistencyTestGenerated extends AbstractScriptClassIdConsistencyTest {
+  private void run(String fileName) {
+    runTest("analysis/low-level-api-fir/testData/classId/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInClassId() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/low-level-api-fir/testData/classId"), Pattern.compile("^(.+)\\.(kts)$"), null, true);
@@ -26,36 +30,36 @@ public class ScriptClassIdConsistencyTestGenerated extends AbstractScriptClassId
   @Test
   @TestMetadata("classWithMembers.kts")
   public void testClassWithMembers() {
-    runTest("analysis/low-level-api-fir/testData/classId/classWithMembers.kts");
+    run("classWithMembers.kts");
   }
 
   @Test
   @TestMetadata("classWithMembersWithPackage.kts")
   public void testClassWithMembersWithPackage() {
-    runTest("analysis/low-level-api-fir/testData/classId/classWithMembersWithPackage.kts");
+    run("classWithMembersWithPackage.kts");
   }
 
   @Test
   @TestMetadata("enum.kts")
   public void testEnum() {
-    runTest("analysis/low-level-api-fir/testData/classId/enum.kts");
+    run("enum.kts");
   }
 
   @Test
   @TestMetadata("enumEntry.kts")
   public void testEnumEntry() {
-    runTest("analysis/low-level-api-fir/testData/classId/enumEntry.kts");
+    run("enumEntry.kts");
   }
 
   @Test
   @TestMetadata("namelessClasses.kts")
   public void testNamelessClasses() {
-    runTest("analysis/low-level-api-fir/testData/classId/namelessClasses.kts");
+    run("namelessClasses.kts");
   }
 
   @Test
   @TestMetadata("namelessInsideNamelessClasses.kts")
   public void testNamelessInsideNamelessClasses() {
-    runTest("analysis/low-level-api-fir/testData/classId/namelessInsideNamelessClasses.kts");
+    run("namelessInsideNamelessClasses.kts");
   }
 }

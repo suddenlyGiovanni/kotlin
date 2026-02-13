@@ -40,6 +40,10 @@ public class Fe10IdeNormalAnalysisSourceModuleReturnTargetSymbolTestGenerated ex
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/expressionInfoProvider/returnExpressionTargetSymbol/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInReturnExpressionTargetSymbol() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/expressionInfoProvider/returnExpressionTargetSymbol"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,18 +52,18 @@ public class Fe10IdeNormalAnalysisSourceModuleReturnTargetSymbolTestGenerated ex
   @Test
   @TestMetadata("labeledReturn.kt")
   public void testLabeledReturn() {
-    runTest("analysis/analysis-api/testData/components/expressionInfoProvider/returnExpressionTargetSymbol/labeledReturn.kt");
+    run("labeledReturn.kt");
   }
 
   @Test
   @TestMetadata("normalReturn.kt")
   public void testNormalReturn() {
-    runTest("analysis/analysis-api/testData/components/expressionInfoProvider/returnExpressionTargetSymbol/normalReturn.kt");
+    run("normalReturn.kt");
   }
 
   @Test
   @TestMetadata("unresolvedReturn.kt")
   public void testUnresolvedReturn() {
-    runTest("analysis/analysis-api/testData/components/expressionInfoProvider/returnExpressionTargetSymbol/unresolvedReturn.kt");
+    run("unresolvedReturn.kt");
   }
 }

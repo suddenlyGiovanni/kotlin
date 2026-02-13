@@ -41,6 +41,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleRendererTestGenerated exte
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/symbolDeclarationRenderer/renderDeclaration/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInRenderDeclaration() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/symbolDeclarationRenderer/renderDeclaration"), Pattern.compile("^(.+)\\.kts$"), null, true);
@@ -50,6 +54,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleRendererTestGenerated exte
   @TestMetadata("analysis/analysis-api/testData/components/symbolDeclarationRenderer/renderDeclaration/types")
   @TestDataPath("$PROJECT_ROOT")
   public class Types {
+    private void run(String fileName) {
+      runTest("analysis/analysis-api/testData/components/symbolDeclarationRenderer/renderDeclaration/types/" + fileName);
+    }
+
     @Test
     public void testAllFilesPresentInTypes() {
       KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/symbolDeclarationRenderer/renderDeclaration/types"), Pattern.compile("^(.+)\\.kts$"), null, true);

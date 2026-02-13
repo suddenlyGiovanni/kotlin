@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
 @TestMetadata("analysis/low-level-api-fir/testData/lazyResolveBuiltinsBinary")
 @TestDataPath("$PROJECT_ROOT")
 public class BuiltinsBinaryLazyDeclarationResolveTestGenerated extends AbstractBuiltinsBinaryLazyDeclarationResolveTest {
+  private void run(String fileName) {
+    runTest("analysis/low-level-api-fir/testData/lazyResolveBuiltinsBinary/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInLazyResolveBuiltinsBinary() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/low-level-api-fir/testData/lazyResolveBuiltinsBinary"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -26,6 +30,6 @@ public class BuiltinsBinaryLazyDeclarationResolveTestGenerated extends AbstractB
   @Test
   @TestMetadata("Int.kt")
   public void testInt() {
-    runTest("analysis/low-level-api-fir/testData/lazyResolveBuiltinsBinary/Int.kt");
+    run("Int.kt");
   }
 }

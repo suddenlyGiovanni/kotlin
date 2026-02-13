@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleSubstitutorBuilderTestGenerat
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/substitutorFactory/substitutorBuilder/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInSubstitutorBuilder() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/substitutorFactory/substitutorBuilder"), Pattern.compile("^(.+)\\.kts$"), null, true);

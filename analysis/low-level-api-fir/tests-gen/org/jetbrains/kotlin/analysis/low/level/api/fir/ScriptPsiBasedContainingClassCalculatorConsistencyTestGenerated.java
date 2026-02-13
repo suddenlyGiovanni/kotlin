@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
 @TestMetadata("analysis/low-level-api-fir/testData/psiBasedContainingClass")
 @TestDataPath("$PROJECT_ROOT")
 public class ScriptPsiBasedContainingClassCalculatorConsistencyTestGenerated extends AbstractScriptPsiBasedContainingClassCalculatorConsistencyTest {
+  private void run(String fileName) {
+    runTest("analysis/low-level-api-fir/testData/psiBasedContainingClass/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInPsiBasedContainingClass() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/low-level-api-fir/testData/psiBasedContainingClass"), Pattern.compile("^(.+)\\.(kts)$"), null, true);
@@ -26,6 +30,6 @@ public class ScriptPsiBasedContainingClassCalculatorConsistencyTestGenerated ext
   @Test
   @TestMetadata("script.kts")
   public void testScript() {
-    runTest("analysis/low-level-api-fir/testData/psiBasedContainingClass/script.kts");
+    run("script.kts");
   }
 }

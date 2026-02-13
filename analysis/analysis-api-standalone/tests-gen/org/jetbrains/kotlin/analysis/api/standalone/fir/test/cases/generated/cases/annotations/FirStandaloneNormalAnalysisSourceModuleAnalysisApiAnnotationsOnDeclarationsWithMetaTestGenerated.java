@@ -40,6 +40,10 @@ public class FirStandaloneNormalAnalysisSourceModuleAnalysisApiAnnotationsOnDecl
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/annotations/metaAnnotations/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInMetaAnnotations() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/annotations/metaAnnotations"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,6 +52,6 @@ public class FirStandaloneNormalAnalysisSourceModuleAnalysisApiAnnotationsOnDecl
   @Test
   @TestMetadata("onProperty_javaAnnotation_varargParameter.kt")
   public void testOnProperty_javaAnnotation_varargParameter() {
-    runTest("analysis/analysis-api/testData/annotations/metaAnnotations/onProperty_javaAnnotation_varargParameter.kt");
+    run("onProperty_javaAnnotation_varargParameter.kt");
   }
 }

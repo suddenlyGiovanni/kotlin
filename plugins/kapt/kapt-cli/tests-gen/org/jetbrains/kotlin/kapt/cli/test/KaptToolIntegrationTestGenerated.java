@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
 @TestMetadata("plugins/kapt/kapt-cli/testData/integration")
 @TestDataPath("$PROJECT_ROOT")
 public class KaptToolIntegrationTestGenerated extends AbstractKaptToolIntegrationTest {
+  private void run(String fileName) {
+    runTest("plugins/kapt/kapt-cli/testData/integration/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInIntegration() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("plugins/kapt/kapt-cli/testData/integration"), Pattern.compile("^([^.]+)$"), null, false);

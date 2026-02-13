@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleHLSmartCastInfoTestGenerat
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/dataFlowInfoProvider/smartCastInfo/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInSmartCastInfo() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/dataFlowInfoProvider/smartCastInfo"), Pattern.compile("^(.+)\\.kts$"), null, true);

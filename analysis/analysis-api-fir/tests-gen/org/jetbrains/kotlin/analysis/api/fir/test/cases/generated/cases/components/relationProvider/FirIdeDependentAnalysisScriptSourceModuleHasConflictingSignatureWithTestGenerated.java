@@ -41,6 +41,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleHasConflictingSignatureWit
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/relationProvider/hasConflictingSignatureWith/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInHasConflictingSignatureWith() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/relationProvider/hasConflictingSignatureWith"), Pattern.compile("^(.+)\\.kts$"), null, true);
@@ -50,6 +54,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleHasConflictingSignatureWit
   @TestMetadata("analysis/analysis-api/testData/components/relationProvider/hasConflictingSignatureWith/withErrors")
   @TestDataPath("$PROJECT_ROOT")
   public class WithErrors {
+    private void run(String fileName) {
+      runTest("analysis/analysis-api/testData/components/relationProvider/hasConflictingSignatureWith/withErrors/" + fileName);
+    }
+
     @Test
     public void testAllFilesPresentInWithErrors() {
       KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/relationProvider/hasConflictingSignatureWith/withErrors"), Pattern.compile("^(.+)\\.kts$"), null, true);

@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleExpectedExpressionTypeTestGen
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/expressionTypeProvider/expectedExpressionType/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInExpectedExpressionType() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/expressionTypeProvider/expectedExpressionType"), Pattern.compile("^(.+)\\.kts$"), null, true);

@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleReferenceImportAliasTestGener
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/imports/importAliases/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInImportAliases() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/imports/importAliases"), Pattern.compile("^(.+)\\.kts$"), null, true);

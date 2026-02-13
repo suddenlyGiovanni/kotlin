@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
 @TestMetadata("analysis/low-level-api-fir/testData/symbolProviders/combinedPackageDelegationSymbolProvider")
 @TestDataPath("$PROJECT_ROOT")
 public class CombinedPackageDelegationSymbolProviderTestGenerated extends AbstractCombinedPackageDelegationSymbolProviderTest {
+  private void run(String fileName) {
+    runTest("analysis/low-level-api-fir/testData/symbolProviders/combinedPackageDelegationSymbolProvider/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInCombinedPackageDelegationSymbolProvider() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/low-level-api-fir/testData/symbolProviders/combinedPackageDelegationSymbolProvider"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -26,6 +30,6 @@ public class CombinedPackageDelegationSymbolProviderTestGenerated extends Abstra
   @Test
   @TestMetadata("libraryPackages.kt")
   public void testLibraryPackages() {
-    runTest("analysis/low-level-api-fir/testData/symbolProviders/combinedPackageDelegationSymbolProvider/libraryPackages.kt");
+    run("libraryPackages.kt");
   }
 }

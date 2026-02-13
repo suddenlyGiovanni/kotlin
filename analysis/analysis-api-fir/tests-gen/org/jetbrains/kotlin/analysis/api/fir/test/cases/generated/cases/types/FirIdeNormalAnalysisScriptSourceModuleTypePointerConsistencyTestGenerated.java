@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleTypePointerConsistencyTestGen
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/types/typePointers/consistency/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInConsistency() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/types/typePointers/consistency"), Pattern.compile("^(.+)\\.kts$"), null, true);

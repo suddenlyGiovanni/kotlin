@@ -40,6 +40,10 @@ public class Fe10IdeNormalAnalysisSourceModuleCanBeOperatorTestGenerated extends
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/symbolInfoProvider/canBeOperator/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInCanBeOperator() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/symbolInfoProvider/canBeOperator"), Pattern.compile("^(.+)\\.kt$"), null, true);
@@ -48,30 +52,30 @@ public class Fe10IdeNormalAnalysisSourceModuleCanBeOperatorTestGenerated extends
   @Test
   @TestMetadata("alreadyOperator.kt")
   public void testAlreadyOperator() {
-    runTest("analysis/analysis-api/testData/components/symbolInfoProvider/canBeOperator/alreadyOperator.kt");
+    run("alreadyOperator.kt");
   }
 
   @Test
   @TestMetadata("canBeOperator.kt")
   public void testCanBeOperator() {
-    runTest("analysis/analysis-api/testData/components/symbolInfoProvider/canBeOperator/canBeOperator.kt");
+    run("canBeOperator.kt");
   }
 
   @Test
   @TestMetadata("doesntMeetRequirements.kt")
   public void testDoesntMeetRequirements() {
-    runTest("analysis/analysis-api/testData/components/symbolInfoProvider/canBeOperator/doesntMeetRequirements.kt");
+    run("doesntMeetRequirements.kt");
   }
 
   @Test
   @TestMetadata("notOperatorName.kt")
   public void testNotOperatorName() {
-    runTest("analysis/analysis-api/testData/components/symbolInfoProvider/canBeOperator/notOperatorName.kt");
+    run("notOperatorName.kt");
   }
 
   @Test
   @TestMetadata("overrideOperator.kt")
   public void testOverrideOperator() {
-    runTest("analysis/analysis-api/testData/components/symbolInfoProvider/canBeOperator/overrideOperator.kt");
+    run("overrideOperator.kt");
   }
 }

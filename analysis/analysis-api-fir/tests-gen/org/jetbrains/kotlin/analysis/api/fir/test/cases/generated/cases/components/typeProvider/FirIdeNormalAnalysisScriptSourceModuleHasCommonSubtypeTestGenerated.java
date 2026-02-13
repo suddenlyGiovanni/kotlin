@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleHasCommonSubtypeTestGenerated
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/typeProvider/haveCommonSubtype/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInHaveCommonSubtype() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/typeProvider/haveCommonSubtype"), Pattern.compile("^(.+)\\.kts$"), null, true);

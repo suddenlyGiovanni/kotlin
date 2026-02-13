@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleGetExpectsForActualTestGenera
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/relationProvider/getExpectsForActual/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInGetExpectsForActual() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/relationProvider/getExpectsForActual"), Pattern.compile("^(.+)\\.kts$"), null, true);

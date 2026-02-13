@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleDoubleColonReceiverTypeTes
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/typeInfoProvider/doubleColonReceiverType/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInDoubleColonReceiverType() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/typeInfoProvider/doubleColonReceiverType"), Pattern.compile("^(.+)\\.kts$"), null, true);

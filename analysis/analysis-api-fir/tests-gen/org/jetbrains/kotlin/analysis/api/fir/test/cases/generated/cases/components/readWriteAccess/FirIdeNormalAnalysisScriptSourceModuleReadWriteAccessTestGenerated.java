@@ -40,6 +40,10 @@ public class FirIdeNormalAnalysisScriptSourceModuleReadWriteAccessTestGenerated 
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/expressionInfoProvider/readWriteAccess/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInReadWriteAccess() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/expressionInfoProvider/readWriteAccess"), Pattern.compile("^(.+)\\.kts$"), null, true);

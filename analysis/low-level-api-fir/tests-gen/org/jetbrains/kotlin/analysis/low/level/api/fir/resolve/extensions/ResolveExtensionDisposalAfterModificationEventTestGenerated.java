@@ -18,34 +18,38 @@ import java.util.regex.Pattern;
 @TestMetadata("analysis/low-level-api-fir/testData/resolveExtensionDisposal")
 @TestDataPath("$PROJECT_ROOT")
 public class ResolveExtensionDisposalAfterModificationEventTestGenerated extends AbstractResolveExtensionDisposalAfterModificationEventTest {
+  private void run(String fileName) {
+    runTest("analysis/low-level-api-fir/testData/resolveExtensionDisposal/" + fileName);
+  }
+
   @Test
   @TestMetadata("afterGlobalModuleStateModification.kt")
   public void testAfterGlobalModuleStateModification() {
-    runTest("analysis/low-level-api-fir/testData/resolveExtensionDisposal/afterGlobalModuleStateModification.kt");
+    run("afterGlobalModuleStateModification.kt");
   }
 
   @Test
   @TestMetadata("afterGlobalSourceModuleStateModification.kt")
   public void testAfterGlobalSourceModuleStateModification() {
-    runTest("analysis/low-level-api-fir/testData/resolveExtensionDisposal/afterGlobalSourceModuleStateModification.kt");
+    run("afterGlobalSourceModuleStateModification.kt");
   }
 
   @Test
   @TestMetadata("afterGlobalSourceOutOfBlockModification.kt")
   public void testAfterGlobalSourceOutOfBlockModification() {
-    runTest("analysis/low-level-api-fir/testData/resolveExtensionDisposal/afterGlobalSourceOutOfBlockModification.kt");
+    run("afterGlobalSourceOutOfBlockModification.kt");
   }
 
   @Test
   @TestMetadata("afterModuleOutOfBlockModification.kt")
   public void testAfterModuleOutOfBlockModification() {
-    runTest("analysis/low-level-api-fir/testData/resolveExtensionDisposal/afterModuleOutOfBlockModification.kt");
+    run("afterModuleOutOfBlockModification.kt");
   }
 
   @Test
   @TestMetadata("afterModuleStateModification.kt")
   public void testAfterModuleStateModification() {
-    runTest("analysis/low-level-api-fir/testData/resolveExtensionDisposal/afterModuleStateModification.kt");
+    run("afterModuleStateModification.kt");
   }
 
   @Test

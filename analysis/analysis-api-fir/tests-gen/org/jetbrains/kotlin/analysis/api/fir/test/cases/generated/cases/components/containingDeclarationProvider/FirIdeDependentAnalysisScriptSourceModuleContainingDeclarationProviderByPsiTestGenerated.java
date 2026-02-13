@@ -40,6 +40,10 @@ public class FirIdeDependentAnalysisScriptSourceModuleContainingDeclarationProvi
     );
   }
 
+  private void run(String fileName) {
+    runTest("analysis/analysis-api/testData/components/containingDeclarationProvider/containingDeclarationByPsi/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInContainingDeclarationByPsi() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/containingDeclarationProvider/containingDeclarationByPsi"), Pattern.compile("^(.+)\\.kts$"), null, true);
@@ -48,6 +52,6 @@ public class FirIdeDependentAnalysisScriptSourceModuleContainingDeclarationProvi
   @Test
   @TestMetadata("scriptWithResultProperty.kts")
   public void testScriptWithResultProperty() {
-    runTest("analysis/analysis-api/testData/components/containingDeclarationProvider/containingDeclarationByPsi/scriptWithResultProperty.kts");
+    run("scriptWithResultProperty.kts");
   }
 }
