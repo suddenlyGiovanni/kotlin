@@ -2691,6 +2691,24 @@ public class SourceResolveCandidatesFirTreeConsistencyTestGenerated extends Abst
       }
 
       @Test
+      @TestMetadata("genericDelegate.kt")
+      public void testGenericDelegate() {
+        run("genericDelegate.kt");
+      }
+
+      @Test
+      @TestMetadata("genericDelegateReadOnly.kt")
+      public void testGenericDelegateReadOnly() {
+        run("genericDelegateReadOnly.kt");
+      }
+
+      @Test
+      @TestMetadata("genericDelegateViaProvider.kt")
+      public void testGenericDelegateViaProvider() {
+        run("genericDelegateViaProvider.kt");
+      }
+
+      @Test
       @TestMetadata("getExtension.kt")
       public void testGetExtension() {
         run("getExtension.kt");
@@ -2712,6 +2730,18 @@ public class SourceResolveCandidatesFirTreeConsistencyTestGenerated extends Abst
       @TestMetadata("getOneFakeOverride.kt")
       public void testGetOneFakeOverride() {
         run("getOneFakeOverride.kt");
+      }
+
+      @Test
+      @TestMetadata("importedFromObject.kt")
+      public void testImportedFromObject() {
+        run("importedFromObject.kt");
+      }
+
+      @Test
+      @TestMetadata("nonGenericDelegate.kt")
+      public void testNonGenericDelegate() {
+        run("nonGenericDelegate.kt");
       }
 
       @Test
@@ -2764,6 +2794,48 @@ public class SourceResolveCandidatesFirTreeConsistencyTestGenerated extends Abst
       @Test
       public void testAllFilesPresentInWithErrors() {
         KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/resolver/singleByPsi/delegatedPropertyAccessors/withErrors"), Pattern.compile("^(.+)\\.(kt)$"), null, true);
+      }
+
+      @Test
+      @TestMetadata("genericDelegateIncorrentGet.kt")
+      public void testGenericDelegateIncorrentGet() {
+        run("genericDelegateIncorrentGet.kt");
+      }
+
+      @Test
+      @TestMetadata("genericDelegateViaProviderWithoutAccessors.kt")
+      public void testGenericDelegateViaProviderWithoutAccessors() {
+        run("genericDelegateViaProviderWithoutAccessors.kt");
+      }
+
+      @Test
+      @TestMetadata("genericDelegateViaProviderWithoutGet.kt")
+      public void testGenericDelegateViaProviderWithoutGet() {
+        run("genericDelegateViaProviderWithoutGet.kt");
+      }
+
+      @Test
+      @TestMetadata("genericDelegateViaProviderWithoutSet.kt")
+      public void testGenericDelegateViaProviderWithoutSet() {
+        run("genericDelegateViaProviderWithoutSet.kt");
+      }
+
+      @Test
+      @TestMetadata("genericDelegateViaUnrelatedProvider.kt")
+      public void testGenericDelegateViaUnrelatedProvider() {
+        run("genericDelegateViaUnrelatedProvider.kt");
+      }
+
+      @Test
+      @TestMetadata("genericDelegateWithoutGetter.kt")
+      public void testGenericDelegateWithoutGetter() {
+        run("genericDelegateWithoutGetter.kt");
+      }
+
+      @Test
+      @TestMetadata("genericDelegateWithoutSetter.kt")
+      public void testGenericDelegateWithoutSetter() {
+        run("genericDelegateWithoutSetter.kt");
       }
 
       @Test

@@ -2637,6 +2637,24 @@ public class FirIdeNormalAnalysisLibrarySourceModuleResolveCandidatesTestGenerat
       }
 
       @Test
+      @TestMetadata("genericDelegate.kt")
+      public void testGenericDelegate() {
+        run("genericDelegate.kt");
+      }
+
+      @Test
+      @TestMetadata("genericDelegateReadOnly.kt")
+      public void testGenericDelegateReadOnly() {
+        run("genericDelegateReadOnly.kt");
+      }
+
+      @Test
+      @TestMetadata("genericDelegateViaProvider.kt")
+      public void testGenericDelegateViaProvider() {
+        run("genericDelegateViaProvider.kt");
+      }
+
+      @Test
       @TestMetadata("getExtension.kt")
       public void testGetExtension() {
         run("getExtension.kt");
@@ -2658,6 +2676,18 @@ public class FirIdeNormalAnalysisLibrarySourceModuleResolveCandidatesTestGenerat
       @TestMetadata("getOneFakeOverride.kt")
       public void testGetOneFakeOverride() {
         run("getOneFakeOverride.kt");
+      }
+
+      @Test
+      @TestMetadata("importedFromObject.kt")
+      public void testImportedFromObject() {
+        run("importedFromObject.kt");
+      }
+
+      @Test
+      @TestMetadata("nonGenericDelegate.kt")
+      public void testNonGenericDelegate() {
+        run("nonGenericDelegate.kt");
       }
 
       @Test
