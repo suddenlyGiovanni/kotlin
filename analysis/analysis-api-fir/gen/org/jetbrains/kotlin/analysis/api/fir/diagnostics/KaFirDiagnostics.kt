@@ -3203,6 +3203,11 @@ sealed interface KaFirDiagnostic<PSI : PsiElement> : KaDiagnosticWithPsi<PSI> {
         val kind: String
     }
 
+    interface ExplicitTypeArgumentsInPropertyAccessWarning : KaFirDiagnostic<KtExpression> {
+        override val diagnosticClass get() = ExplicitTypeArgumentsInPropertyAccessWarning::class
+        val kind: String
+    }
+
     interface SafeCallableReferenceCall : KaFirDiagnostic<KtExpression> {
         override val diagnosticClass get() = SafeCallableReferenceCall::class
     }

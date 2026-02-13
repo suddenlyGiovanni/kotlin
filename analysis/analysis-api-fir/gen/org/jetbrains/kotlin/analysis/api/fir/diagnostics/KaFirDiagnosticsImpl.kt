@@ -3845,6 +3845,12 @@ internal class ExplicitTypeArgumentsInPropertyAccessImpl(
     token: KaLifetimeToken,
 ) : KaAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KaFirDiagnostic.ExplicitTypeArgumentsInPropertyAccess
 
+internal class ExplicitTypeArgumentsInPropertyAccessWarningImpl(
+    override val kind: String,
+    firDiagnostic: KtPsiDiagnostic,
+    token: KaLifetimeToken,
+) : KaAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KaFirDiagnostic.ExplicitTypeArgumentsInPropertyAccessWarning
+
 internal class SafeCallableReferenceCallImpl(
     firDiagnostic: KtPsiDiagnostic,
     token: KaLifetimeToken,
