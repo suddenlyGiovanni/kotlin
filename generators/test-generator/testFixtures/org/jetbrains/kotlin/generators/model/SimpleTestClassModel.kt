@@ -6,6 +6,7 @@ package org.jetbrains.kotlin.generators.model
 
 import com.intellij.openapi.util.io.FileUtil
 import org.jetbrains.kotlin.generators.model.methods.RunTestMethodModel
+import org.jetbrains.kotlin.generators.model.methods.RunTestWithDirectoryPrefixMethodModel
 import org.jetbrains.kotlin.generators.model.methods.SimpleTestMethodModel
 import org.jetbrains.kotlin.generators.model.methods.TestAllFilesPresentMethodModel
 import org.jetbrains.kotlin.generators.util.TestGeneratorUtil.fileNameToJavaIdentifier
@@ -96,6 +97,7 @@ class SimpleTestClassModel(
     override val methods: Collection<MethodModel<*>> by lazy {
         if (!rootFile.isDirectory) {
             val methodModel = SimpleTestMethodModel(
+                testInfraRevision,
                 rootDir = rootFile,
                 file = rootFile,
                 filenamePattern,
@@ -107,7 +109,7 @@ class SimpleTestClassModel(
         buildList {
             when (testInfraRevision) {
                 TestInfraRevision.LegacyJUnit4 -> add(RunTestMethodModel(targetBackend, doTestMethodName, testRunnerMethodName))
-                TestInfraRevision.StandardJUnit5 -> {}
+                TestInfraRevision.StandardJUnit5 -> add(RunTestWithDirectoryPrefixMethodModel(rootFile.getFilePath()))
             }
             if (!skipTestAllFilesCheck) {
                 add(TestAllFilesPresentMethodModel(this@SimpleTestClassModel))
@@ -134,6 +136,7 @@ class SimpleTestClassModel(
                     )
                 }
                 SimpleTestMethodModel(
+                    testInfraRevision,
                     rootFile,
                     file,
                     filenamePattern,
