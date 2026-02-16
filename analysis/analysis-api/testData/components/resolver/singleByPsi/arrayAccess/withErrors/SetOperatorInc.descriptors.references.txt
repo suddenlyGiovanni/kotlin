@@ -2,6 +2,7 @@ KtArrayAccessExpression(119,123): 'a[2]'
   KtArrayAccessReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
-    attempt: null
+    attempt: KaSymbolResolutionError
+    diagnostic: ERROR<UNRESOLVED_REFERENCE: Unresolved reference: a[2]>
     symbols:
       Nothing (Unresolved reference)

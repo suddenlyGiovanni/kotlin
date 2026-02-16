@@ -3,6 +3,6 @@ KtArrayAccessExpression(59,63): '1[2]'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     attempt: KaSymbolResolutionError
-    diagnostic: ERROR<OPERATOR_MODIFIER_REQUIRED: 'operator' modifier is required on 'fun Int.set(index: Int, value: Int): Int'.>
+    diagnostic: ERROR<UNRESOLVED_REFERENCE: OTHER_ERROR with set>
     symbols:
       (in ROOT) fun kotlin.Int.set(index: kotlin.Int, value: kotlin.Int): kotlin.Int

@@ -42,6 +42,7 @@ KtArrayAccessExpression(74,81): 'list[0]'
   KtArrayAccessReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in kotlin.collections.MutableList) operator fun get(index: kotlin.Int): E
 
@@ -123,7 +124,10 @@ KtArrayAccessExpression(159,166): 'list[1]'
   KtArrayAccessReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
+      (in kotlin.collections.MutableList) operator fun get(index: kotlin.Int): E
+    resolveToSymbols:
       0: (in kotlin.collections.MutableList) operator fun get(index: kotlin.Int): E
       1: (in kotlin.collections.MutableList) operator fun set(index: kotlin.Int, element: E): E
 
@@ -151,7 +155,10 @@ KtArrayAccessExpression(178,185): 'list[2]'
   KtArrayAccessReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
+      (in kotlin.collections.MutableList) operator fun get(index: kotlin.Int): E
+    resolveToSymbols:
       0: (in kotlin.collections.MutableList) operator fun get(index: kotlin.Int): E
       1: (in kotlin.collections.MutableList) operator fun set(index: kotlin.Int, element: E): E
 
@@ -228,7 +235,10 @@ KtArrayAccessExpression(247,254): 'list[i]'
   KtArrayAccessReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
+      (in kotlin.collections.MutableList) operator fun get(index: kotlin.Int): E
+    resolveToSymbols:
       0: (in kotlin.collections.MutableList) operator fun get(index: kotlin.Int): E
       1: (in kotlin.collections.MutableList) operator fun set(index: kotlin.Int, element: E): E
 
@@ -282,7 +292,10 @@ KtArrayAccessExpression(269,276): 'list[2]'
   KtArrayAccessReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
+      (in kotlin.collections.MutableList) operator fun get(index: kotlin.Int): E
+    resolveToSymbols:
       0: (in kotlin.collections.MutableList) operator fun get(index: kotlin.Int): E
       1: (in kotlin.collections.MutableList) operator fun set(index: kotlin.Int, element: E): E
 

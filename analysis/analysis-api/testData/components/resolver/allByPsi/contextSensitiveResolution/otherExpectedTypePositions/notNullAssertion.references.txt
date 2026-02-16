@@ -367,6 +367,7 @@ KtArrayAccessExpression(803,819): 'map[myClassProp]'
   KtArrayAccessReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in kotlin.collections.Map) operator fun get(key: K): V?
 
@@ -388,6 +389,8 @@ KtArrayAccessExpression(831,846): 'map[stringProp]'
   KtArrayAccessReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionError
+    diagnostic: ERROR<ARGUMENT_TYPE_MISMATCH: Argument type mismatch: actual type is 'String', but 'MyClass' was expected.>
     symbols:
       (in kotlin.collections.Map) operator fun get(key: K): V?
 
@@ -409,6 +412,7 @@ KtArrayAccessExpression(858,878): 'map[NestedInheritor]'
   KtArrayAccessReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in kotlin.collections.Map) operator fun get(key: K): V?
 
@@ -430,6 +434,7 @@ KtArrayAccessExpression(890,915): 'map[getNestedInheritor()]'
   KtArrayAccessReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in kotlin.collections.Map) operator fun get(key: K): V?
 

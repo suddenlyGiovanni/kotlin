@@ -36,6 +36,7 @@ KtArrayAccessExpression(74,81): 'list[0]'
   KtArrayAccessReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in kotlin.collections.MutableList) override operator fun get(index: kotlin.Int): E
 
@@ -93,6 +94,7 @@ KtArrayAccessExpression(159,166): 'list[1]'
   KtArrayAccessReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
@@ -114,6 +116,7 @@ KtArrayAccessExpression(178,185): 'list[2]'
   KtArrayAccessReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
@@ -184,6 +187,7 @@ KtArrayAccessExpression(247,254): 'list[i]'
   KtArrayAccessReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in kotlin.collections.MutableList) override operator fun get(index: kotlin.Int): E
 
@@ -225,6 +229,7 @@ KtArrayAccessExpression(269,276): 'list[2]'
   KtArrayAccessReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 

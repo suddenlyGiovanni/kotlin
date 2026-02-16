@@ -522,6 +522,45 @@ public interface KaResolver : KaSessionComponent {
     public fun KtCollectionLiteralReference.resolveSymbol(): KaNamedFunctionSymbol?
 
     /**
+     * Resolves the operator function symbol targeted by the given [KtArrayAccessReference].
+     *
+     * #### Example
+     *
+     * ```kotlin
+     * class A {
+     *     operator fun get(i: Int): Int = i
+     *     operator fun set(i: Int, value: Int) {}
+     * }
+     *
+     * fun test(a: A) {
+     *     a[0]
+     * //  ^^^^  resolves to `get`
+     *     a[0] = 1
+     * //  ^^^^ resolves to `set`
+     * }
+     * ```
+     *
+     * Calling `resolveSymbol()` on a [KtArrayAccessReference] (`a[0]`) returns the [KaNamedFunctionSymbol] of the corresponding
+     * `get`/`set` operator if resolution succeeds; otherwise, it returns `null` (e.g., when unresolved or ambiguous).
+     *
+     * This is a specialized counterpart of [KtResolvable.resolveSymbol] focused specifically on array access references.
+     *
+     * **Note**: the `get` call is prefered in the case of a compound assignent
+     *
+     * ```kotlin
+     * fun test(m: MyMap<String, Int>) {
+     *     m["a"] += 1
+     * //  ^^^^^^
+     * }
+     * ```
+     *
+     * @see tryResolveSymbols
+     * @see KtResolvable.resolveSymbol
+     */
+    @KaExperimentalApi
+    public fun KtArrayAccessReference.resolveSymbol(): KaNamedFunctionSymbol?
+
+    /**
      * Attempts to resolve the call for the given [KtResolvableCall].
      *
      * ### Usage Example:
@@ -1640,6 +1679,52 @@ public fun KtConstructorDelegationReference.resolveSymbol(): KaConstructorSymbol
 @KaContextParameterApi
 context(session: KaSession)
 public fun KtCollectionLiteralReference.resolveSymbol(): KaNamedFunctionSymbol? {
+    return with(session) {
+        resolveSymbol()
+    }
+}
+
+/**
+ * Resolves the operator function symbol targeted by the given [KtArrayAccessReference].
+ *
+ * #### Example
+ *
+ * ```kotlin
+ * class A {
+ *     operator fun get(i: Int): Int = i
+ *     operator fun set(i: Int, value: Int) {}
+ * }
+ *
+ * fun test(a: A) {
+ *     a[0]
+ * //  ^^^^  resolves to `get`
+ *     a[0] = 1
+ * //  ^^^^ resolves to `set`
+ * }
+ * ```
+ *
+ * Calling `resolveSymbol()` on a [KtArrayAccessReference] (`a[0]`) returns the [KaNamedFunctionSymbol] of the corresponding
+ * `get`/`set` operator if resolution succeeds; otherwise, it returns `null` (e.g., when unresolved or ambiguous).
+ *
+ * This is a specialized counterpart of [KtResolvable.resolveSymbol] focused specifically on array access references.
+ *
+ * **Note**: the `get` call is prefered in the case of a compound assignent
+ *
+ * ```kotlin
+ * fun test(m: MyMap<String, Int>) {
+ *     m["a"] += 1
+ * //  ^^^^^^
+ * }
+ * ```
+ *
+ * @see tryResolveSymbols
+ * @see KtResolvable.resolveSymbol
+ */
+// Auto-generated bridge. DO NOT EDIT MANUALLY!
+@KaExperimentalApi
+@KaContextParameterApi
+context(session: KaSession)
+public fun KtArrayAccessReference.resolveSymbol(): KaNamedFunctionSymbol? {
     return with(session) {
         resolveSymbol()
     }
