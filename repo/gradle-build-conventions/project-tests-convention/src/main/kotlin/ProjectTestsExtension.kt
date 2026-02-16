@@ -345,6 +345,7 @@ abstract class ProjectTestsExtension(val project: Project) {
                 add(generationPath.asFile.absolutePath)
                 if (generateTestsInBuildDirectory) {
                     add("allowGenerationOnTeamCity")
+                    add("skipTestAllFilesCheck")
                 }
             }
             if (generateTestsInBuildDirectory) {

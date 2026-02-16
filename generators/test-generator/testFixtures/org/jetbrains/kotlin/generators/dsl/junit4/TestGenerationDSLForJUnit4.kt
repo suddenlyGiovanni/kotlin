@@ -32,7 +32,7 @@ fun generateTestGroupSuiteWithJUnit4(
     mainClassName: String? = TestGeneratorUtil.getMainClassName(),
     init: TestGroupSuite.() -> Unit,
 ) {
-    val suite = TestGroupSuite(TestInfraRevision.LegacyJUnit4).apply(init)
+    val suite = TestGroupSuite(TestInfraRevision.LegacyJUnit4, defaultSkipTestAllFilesCheck = false).apply(init)
     suite.forEachTestClassParallel { testClass ->
         val (changed, testSourceFilePath) = TestGeneratorForJUnit4
             .generateAndSave(testClass, dryRun, allowGenerationOnTeamCity, mainClassName)

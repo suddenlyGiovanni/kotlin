@@ -21,7 +21,7 @@ fun TestGroupSuite.forEachTestClassParallel(f: (TestGroup.TestClass) -> Unit) {
         .forEach(f)
 }
 
-class TestGroupSuite(val testInfraRevision: TestInfraRevision) {
+class TestGroupSuite(val testInfraRevision: TestInfraRevision, val defaultSkipTestAllFilesCheck: Boolean) {
     private val _testGroups = mutableListOf<TestGroup>()
     val testGroups: List<TestGroup>
         get() = _testGroups
@@ -37,6 +37,7 @@ class TestGroupSuite(val testInfraRevision: TestInfraRevision) {
             testDataRoot,
             testRunnerMethodName,
             testInfraRevision,
+            defaultSkipTestAllFilesCheck,
         ).apply(init)
     }
 }
@@ -46,7 +47,7 @@ class TestGroup(
     val testDataRoot: String,
     val testRunnerMethodName: String,
     val testInfraRevision: TestInfraRevision,
-    val annotations: List<AnnotationModel> = emptyList(),
+    val defaultSkipTestAllFilesCheck: Boolean,
 ) {
     private val _testClasses: MutableList<TestClass> = mutableListOf()
     val testClasses: List<TestClass>
@@ -130,7 +131,7 @@ class TestGroup(
             targetBackend: TargetBackend? = null,
             excludeDirs: List<String> = listOf(),
             excludeDirsRecursively: List<String> = listOf(),
-            skipTestAllFilesCheck: Boolean = false,
+            skipTestAllFilesCheck: Boolean = defaultSkipTestAllFilesCheck,
         ) {
             val rootFile = File("$testDataRoot/$relativeRootPath")
             val compiledPattern = Pattern.compile(pattern)
