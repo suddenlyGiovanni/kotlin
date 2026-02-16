@@ -1,0 +1,12 @@
+KtNameReferenceExpression(70,75): 'block'
+  KtSimpleNameReference:
+    isImplicitReferenceToCompanion: false
+    usesContextSensitiveResolution: false
+    symbols:
+      block: context(kotlin.String) () -> kotlin.Unit
+
+  SyntheticPropertyAccessorReference:
+    isImplicitReferenceToCompanion: false
+    usesContextSensitiveResolution: false
+    symbols:
+      Nothing (Unresolved reference)

@@ -3236,6 +3236,54 @@ public class FirIdeNormalAnalysisSourceModuleResolveCandidatesTestGenerated exte
     }
 
     @Test
+    @TestMetadata("contextArgumentToContextualType.kt")
+    public void testContextArgumentToContextualType() {
+      run("contextArgumentToContextualType.kt");
+    }
+
+    @Test
+    @TestMetadata("contextArgumentToContextualTypeWithAllAsParameters.kt")
+    public void testContextArgumentToContextualTypeWithAllAsParameters() {
+      run("contextArgumentToContextualTypeWithAllAsParameters.kt");
+    }
+
+    @Test
+    @TestMetadata("contextArgumentToContextualTypeWithArgument.kt")
+    public void testContextArgumentToContextualTypeWithArgument() {
+      run("contextArgumentToContextualTypeWithArgument.kt");
+    }
+
+    @Test
+    @TestMetadata("contextArgumentToContextualTypeWithImplicitReceiver.kt")
+    public void testContextArgumentToContextualTypeWithImplicitReceiver() {
+      run("contextArgumentToContextualTypeWithImplicitReceiver.kt");
+    }
+
+    @Test
+    @TestMetadata("contextArgumentToContextualTypeWithImplicitReceiverAndParameter.kt")
+    public void testContextArgumentToContextualTypeWithImplicitReceiverAndParameter() {
+      run("contextArgumentToContextualTypeWithImplicitReceiverAndParameter.kt");
+    }
+
+    @Test
+    @TestMetadata("contextArgumentToContextualTypeWithReceiver.kt")
+    public void testContextArgumentToContextualTypeWithReceiver() {
+      run("contextArgumentToContextualTypeWithReceiver.kt");
+    }
+
+    @Test
+    @TestMetadata("contextArgumentToContextualTypeWithReceiverAsParameter.kt")
+    public void testContextArgumentToContextualTypeWithReceiverAsParameter() {
+      run("contextArgumentToContextualTypeWithReceiverAsParameter.kt");
+    }
+
+    @Test
+    @TestMetadata("contextArgumentToContextualTypeWithReceiverAsParameterAndParameter.kt")
+    public void testContextArgumentToContextualTypeWithReceiverAsParameterAndParameter() {
+      run("contextArgumentToContextualTypeWithReceiverAsParameterAndParameter.kt");
+    }
+
+    @Test
     @TestMetadata("functionClash.kt")
     public void testFunctionClash() {
       run("functionClash.kt");
