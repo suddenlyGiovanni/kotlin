@@ -497,6 +497,31 @@ public interface KaResolver : KaSessionComponent {
     public fun KtConstructorDelegationReference.resolveSymbol(): KaConstructorSymbol?
 
     /**
+     * Resolves the function symbol targeted by the given [KtCollectionLiteralReference].
+     *
+     * #### Example
+     *
+     * ```kotlin
+     * annotation class Anno(val arr: IntArray)
+     *
+     * @Anno([1, 2, 3])
+     * //    ^^^^^^^^^ resolves to the `intArrayOf` function
+     * fun use() {}
+     * ```
+     *
+     * Calling `resolveSymbol()` on a [KtCollectionLiteralReference] (`[1, 2, 3]`) returns the [KaNamedFunctionSymbol]
+     * of the corresponding array factory (e.g., `arrayOf`, `intArrayOf`) if resolution succeeds; otherwise, it returns `null`
+     * (e.g., when unresolved or ambiguous).
+     *
+     * This is a specialized counterpart of [KtResolvable.resolveSymbol] focused specifically on collection literal references
+     *
+     * @see tryResolveSymbols
+     * @see KtResolvable.resolveSymbol
+     */
+    @KaExperimentalApi
+    public fun KtCollectionLiteralReference.resolveSymbol(): KaNamedFunctionSymbol?
+
+    /**
      * Attempts to resolve the call for the given [KtResolvableCall].
      *
      * ### Usage Example:
@@ -1583,6 +1608,38 @@ public fun KtDestructuringDeclarationReference.resolveSymbol(): KaCallableSymbol
 @KaContextParameterApi
 context(session: KaSession)
 public fun KtConstructorDelegationReference.resolveSymbol(): KaConstructorSymbol? {
+    return with(session) {
+        resolveSymbol()
+    }
+}
+
+/**
+ * Resolves the function symbol targeted by the given [KtCollectionLiteralReference].
+ *
+ * #### Example
+ *
+ * ```kotlin
+ * annotation class Anno(val arr: IntArray)
+ *
+ * @Anno([1, 2, 3])
+ * //    ^^^^^^^^^ resolves to the `intArrayOf` function
+ * fun use() {}
+ * ```
+ *
+ * Calling `resolveSymbol()` on a [KtCollectionLiteralReference] (`[1, 2, 3]`) returns the [KaNamedFunctionSymbol]
+ * of the corresponding array factory (e.g., `arrayOf`, `intArrayOf`) if resolution succeeds; otherwise, it returns `null`
+ * (e.g., when unresolved or ambiguous).
+ *
+ * This is a specialized counterpart of [KtResolvable.resolveSymbol] focused specifically on collection literal references
+ *
+ * @see tryResolveSymbols
+ * @see KtResolvable.resolveSymbol
+ */
+// Auto-generated bridge. DO NOT EDIT MANUALLY!
+@KaExperimentalApi
+@KaContextParameterApi
+context(session: KaSession)
+public fun KtCollectionLiteralReference.resolveSymbol(): KaNamedFunctionSymbol? {
     return with(session) {
         resolveSymbol()
     }

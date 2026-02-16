@@ -2,6 +2,7 @@ KtCollectionLiteralExpression(211,226): '["1", "2", "3"]'
   KtCollectionLiteralReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in MyList.Companion) operator fun <T1> of(vararg vals: T1): MyList<T1>
 

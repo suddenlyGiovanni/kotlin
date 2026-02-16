@@ -2,6 +2,7 @@ KtCollectionLiteralExpression(55,58): '[1]'
   KtCollectionLiteralReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in kotlin.collections) fun <T> setOf(element: T): kotlin.collections.Set<T>
 
