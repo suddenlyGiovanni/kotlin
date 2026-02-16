@@ -60,7 +60,7 @@ interface NativeKlibCompilationConfig {
         get() = configuration.konanWriteDependenciesOfProducedKlibTo
 
     val nativeTargetsForManifest: Collection<KonanTarget>?
-        get() = configuration.get(NativeConfigurationKeys.KONAN_MANIFEST_NATIVE_TARGETS)
+        get() = configuration[NativeConfigurationKeys.KONAN_MANIFEST_NATIVE_TARGETS]
 
     val manifestProperties: Properties?
 

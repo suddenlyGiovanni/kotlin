@@ -33,20 +33,11 @@ import org.jetbrains.kotlin.konan.config.fullExportedNamePrefix
 import org.jetbrains.kotlin.konan.config.generateDebugTrampoline
 import org.jetbrains.kotlin.konan.config.incrementalCacheDir
 import org.jetbrains.kotlin.konan.config.konanDataDir
-import org.jetbrains.kotlin.konan.config.konanFriendLibraries
-import org.jetbrains.kotlin.konan.config.konanGeneratedHeaderKlibPath
 import org.jetbrains.kotlin.konan.config.konanHome
-import org.jetbrains.kotlin.konan.config.konanIncludedBinaries
 import org.jetbrains.kotlin.konan.config.konanIncludedLibraries
 import org.jetbrains.kotlin.konan.config.konanManifestAddend
-import org.jetbrains.kotlin.konan.config.konanNativeLibraries
-import org.jetbrains.kotlin.konan.config.konanOutputPath
-import org.jetbrains.kotlin.konan.config.konanProducedArtifactKind
 import org.jetbrains.kotlin.konan.config.konanPurgeUserLibs
-import org.jetbrains.kotlin.konan.config.konanRefinesModules
-import org.jetbrains.kotlin.konan.config.konanShortModuleName
 import org.jetbrains.kotlin.konan.config.konanTarget
-import org.jetbrains.kotlin.konan.config.konanWriteDependenciesOfProducedKlibTo
 import org.jetbrains.kotlin.konan.config.llvmLtoPasses
 import org.jetbrains.kotlin.konan.config.llvmModulePasses
 import org.jetbrains.kotlin.konan.config.llvmVariant
@@ -63,11 +54,9 @@ import org.jetbrains.kotlin.konan.config.testDumpOutputPath
 import org.jetbrains.kotlin.konan.file.File
 import org.jetbrains.kotlin.konan.properties.loadProperties
 import org.jetbrains.kotlin.konan.target.*
-import org.jetbrains.kotlin.konan.util.visibleName
 import org.jetbrains.kotlin.library.KotlinLibrary
 import org.jetbrains.kotlin.library.metadata.resolver.TopologicalLibraryOrder
 import org.jetbrains.kotlin.native.resolve.KonanLibrariesResolveSupport
-import org.jetbrains.kotlin.util.removeSuffixIfPresent
 import org.jetbrains.kotlin.utils.KotlinNativePaths
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -710,39 +699,6 @@ class KonanConfig(
 
     val isInteropStubs: Boolean
         get() = manifestProperties?.getProperty("interop") == "true"
-
-    override val produce: CompilerOutputKind
-        get() = configuration.konanProducedArtifactKind!!
-
-    override val metadataKlib: Boolean
-        get() = configuration.getBoolean(CommonConfigurationKeys.METADATA_KLIB)
-
-    override val headerKlibPath: String?
-        get() = configuration.konanGeneratedHeaderKlibPath?.removeSuffixIfPresent(".klib")
-
-    override val friendModuleFiles: Set<File>
-        get() = configuration.konanFriendLibraries.map { File(it) }.toSet()
-
-    override val refinesModuleFiles: Set<File>
-        get() = configuration.konanRefinesModules.map { File(it) }.toSet()
-
-    override val nativeLibraries: List<String>
-        get() = configuration.konanNativeLibraries
-
-    override val includeBinaries: List<String>
-        get() = configuration.konanIncludedBinaries
-
-    override val writeDependenciesOfProducedKlibTo: String?
-        get() = configuration.konanWriteDependenciesOfProducedKlibTo
-
-    override val nativeTargetsForManifest: Collection<KonanTarget>?
-        get() = configuration.get(NativeConfigurationKeys.KONAN_MANIFEST_NATIVE_TARGETS)
-
-    override val shortModuleName: String?
-        get() = configuration.konanShortModuleName
-
-    override val outputPath: String
-        get() = configuration.konanOutputPath?.removeSuffixIfPresent(produce.suffix(target)) ?: produce.visibleName
 }
 
 private fun String.isRelease(): Boolean {
