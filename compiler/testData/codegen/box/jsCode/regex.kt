@@ -1,4 +1,8 @@
 // TARGET_BACKEND: JS_IR, JS_IR_ES6
+
+// IGNORE_KLIB_BACKEND_ERRORS_WITH_CUSTOM_SECOND_STAGE: JS:2.3.0
+// KT-78742: Supported in 2.3.20-Beta1
+
 // FILE: lib.kt
 package foo
 
