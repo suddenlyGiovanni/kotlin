@@ -7,15 +7,12 @@ package org.jetbrains.kotlin.idea.references
 
 import com.intellij.openapi.util.TextRange
 import org.jetbrains.kotlin.name.Name
-import org.jetbrains.kotlin.psi.KtExperimentalApi
 import org.jetbrains.kotlin.psi.KtForExpression
 import org.jetbrains.kotlin.psi.KtImplementationDetail
-import org.jetbrains.kotlin.resolution.KtResolvable
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
-@OptIn(KtExperimentalApi::class)
 @SubclassOptInRequired(KtImplementationDetail::class)
-abstract class KtForLoopInReference(element: KtForExpression) : KtMultiReference<KtForExpression>(element), KtResolvable {
+abstract class KtForLoopInReference(element: KtForExpression) : KtMultiReference<KtForExpression>(element) {
     override fun getRangeInElement(): TextRange {
         val inKeyword = expression.inKeyword ?: return TextRange.EMPTY_RANGE
 

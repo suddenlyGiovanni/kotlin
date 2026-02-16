@@ -11,14 +11,11 @@ import org.jetbrains.kotlin.kdoc.psi.impl.KDocName
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.load.java.JvmAbi
 import org.jetbrains.kotlin.name.Name
-import org.jetbrains.kotlin.psi.KtExperimentalApi
 import org.jetbrains.kotlin.psi.KtImplementationDetail
 import org.jetbrains.kotlin.references.utils.KotlinKDocResolutionStrategyProviderService
-import org.jetbrains.kotlin.resolution.KtResolvable
 
-@OptIn(KtExperimentalApi::class)
 @SubclassOptInRequired(KtImplementationDetail::class)
-abstract class KDocReference(element: KDocName) : KtMultiReference<KDocName>(element), KtResolvable {
+abstract class KDocReference(element: KDocName) : KtMultiReference<KDocName>(element) {
     override fun getRangeInElement(): TextRange = element.getNameTextRange()
 
     override fun canRename(): Boolean = true

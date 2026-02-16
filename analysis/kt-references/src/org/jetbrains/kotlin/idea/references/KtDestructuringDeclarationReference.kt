@@ -10,15 +10,12 @@ import com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.psi.KtDestructuringDeclaration
 import org.jetbrains.kotlin.psi.KtDestructuringDeclarationEntry
-import org.jetbrains.kotlin.psi.KtExperimentalApi
 import org.jetbrains.kotlin.psi.KtImplementationDetail
-import org.jetbrains.kotlin.resolution.KtResolvable
 
-@OptIn(KtExperimentalApi::class)
 @SubclassOptInRequired(KtImplementationDetail::class)
 abstract class KtDestructuringDeclarationReference(
     element: KtDestructuringDeclarationEntry
-) : KtMultiReference<KtDestructuringDeclarationEntry>(element), KtResolvable {
+) : KtMultiReference<KtDestructuringDeclarationEntry>(element) {
 
     override fun getRangeInElement() = TextRange(0, element.textLength)
 
