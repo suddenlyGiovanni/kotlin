@@ -62,7 +62,7 @@ internal fun KotlinLibrary.getAllTransitiveDependencies(allLibraries: Map<String
 
 // TODO: deleteRecursively might throw an exception!
 class CacheBuilder(
-        val config: KonanConfig,
+        val config: NativeSecondStageCompilationConfig,
         val compilationSpawner: CompilationSpawner
 ) {
     private val configuration = config.configuration

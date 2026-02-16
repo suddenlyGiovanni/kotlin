@@ -17,10 +17,10 @@ import org.jetbrains.kotlin.library.metadata.*
 import org.jetbrains.kotlin.library.metadata.resolver.KotlinLibraryResolveResult
 import org.jetbrains.kotlin.library.toUnresolvedLibraries
 
-internal fun ModuleDescriptor.getExportedDependencies(config: KonanConfig): List<ModuleDescriptor> =
+internal fun ModuleDescriptor.getExportedDependencies(config: NativeSecondStageCompilationConfig): List<ModuleDescriptor> =
         getDescriptorsFromLibraries((config.exportedLibraries + config.includedLibraries).toSet())
 
-internal fun ModuleDescriptor.getIncludedLibraryDescriptors(config: KonanConfig): List<ModuleDescriptor> =
+internal fun ModuleDescriptor.getIncludedLibraryDescriptors(config: NativeSecondStageCompilationConfig): List<ModuleDescriptor> =
         getDescriptorsFromLibraries(config.includedLibraries.toSet())
 
 private fun ModuleDescriptor.getDescriptorsFromLibraries(libraries: Set<KotlinLibrary>) =

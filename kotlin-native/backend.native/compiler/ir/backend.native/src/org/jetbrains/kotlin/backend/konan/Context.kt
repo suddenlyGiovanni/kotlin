@@ -37,7 +37,7 @@ private var IrClass.layoutBuilder: ClassLayoutBuilder? by irAttribute(copyByDefa
 
 // TODO: Can be renamed or merged with KonanBackendContext
 internal class Context(
-        config: KonanConfig,
+        config: NativeSecondStageCompilationConfig,
         val sourcesModules: Set<ModuleDescriptor>,
         override val builtIns: KonanBuiltIns,
         override val irBuiltIns: IrBuiltIns,

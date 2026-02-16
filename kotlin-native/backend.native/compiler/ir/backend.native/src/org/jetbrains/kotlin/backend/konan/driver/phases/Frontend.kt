@@ -36,7 +36,7 @@ internal interface FrontendContext : NativeBackendPhaseContext {
 }
 
 internal class FrontendContextImpl(
-        config: KonanConfig
+        config: NativeSecondStageCompilationConfig
 ) : BasicNativeBackendPhaseContext(config), FrontendContext {
     override lateinit var frontendServices: FrontendServices
 }

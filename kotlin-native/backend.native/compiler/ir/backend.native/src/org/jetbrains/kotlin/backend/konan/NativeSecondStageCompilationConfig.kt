@@ -61,7 +61,7 @@ import org.jetbrains.kotlin.utils.KotlinNativePaths
 import java.nio.file.Files
 import java.nio.file.Paths
 
-class KonanConfig(
+class NativeSecondStageCompilationConfig(
         val project: Project,
         override val configuration: CompilerConfiguration
 ) : NativeCompilationConfig {

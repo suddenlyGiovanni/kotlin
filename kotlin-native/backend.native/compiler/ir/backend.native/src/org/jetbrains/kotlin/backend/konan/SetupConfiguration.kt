@@ -382,7 +382,7 @@ fun CompilerConfiguration.setupFromArguments(arguments: K2NativeCompilerArgument
 
 private fun String.absoluteNormalizedFile() = java.io.File(this).absoluteFile.normalize()
 
-internal fun CompilerConfiguration.setupCommonOptionsForCaches(config: KonanConfig) = with(NativeConfigurationKeys) {
+internal fun CompilerConfiguration.setupCommonOptionsForCaches(config: NativeSecondStageCompilationConfig) = with(NativeConfigurationKeys) {
     konanTarget = config.target.toString()
     put(DEBUG, config.debug)
     setupPartialLinkageConfig(config.partialLinkageConfig)

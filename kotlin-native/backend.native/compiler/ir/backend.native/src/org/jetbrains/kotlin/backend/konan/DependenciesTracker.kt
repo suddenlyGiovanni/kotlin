@@ -75,7 +75,7 @@ private sealed class FileOrigin {
 
 internal class DependenciesTrackerImpl(
         private val llvmModuleSpecification: LlvmModuleSpecification,
-        private val config: KonanConfig,
+        private val config: NativeSecondStageCompilationConfig,
         private val context: Context,
 ) : DependenciesTracker {
     private data class LibraryFile(val library: KotlinLibrary, val fqName: String, val filePath: String)
@@ -433,7 +433,7 @@ data class DependenciesTrackingResult(
                     listOf(ALL_CACHED_BITCODE_DEPENDENCIES) + allCachedBitcodeDeps
         }
 
-        fun deserialize(path: String, dependencies: List<String>, config: KonanConfig): DependenciesTrackingResult {
+        fun deserialize(path: String, dependencies: List<String>, config: NativeSecondStageCompilationConfig): DependenciesTrackingResult {
 
             val nativeDepsToLinkIndex = dependencies.indexOf(NATIVE_DEPENDENCIES_TO_LINK)
             require(nativeDepsToLinkIndex >= 0) { "Invalid dependency file at $path" }

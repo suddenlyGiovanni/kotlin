@@ -102,7 +102,7 @@ class KonanDriver(
             configuration.filesToCache = fileNames
         }
 
-        var config = KonanConfig(project, configuration)
+        var config = NativeSecondStageCompilationConfig(project, configuration)
 
         if (configuration.listTargets) {
             config.targetManager.list()
@@ -146,7 +146,7 @@ class KonanDriver(
         val cacheBuilder = CacheBuilder(config, compilationSpawner)
         if (cacheBuilder.needToBuild()) {
             cacheBuilder.build()
-            config = KonanConfig(project, configuration) // TODO: Just set freshly built caches.
+            config = NativeSecondStageCompilationConfig(project, configuration) // TODO: Just set freshly built caches.
         }
 
         if (!config.produce.isHeaderCache) {
@@ -156,7 +156,7 @@ class KonanDriver(
         NativeCompilerDriver(performanceManager).run(config, environment)
     }
 
-    private fun ensureModuleName(config: KonanConfig) {
+    private fun ensureModuleName(config: NativeSecondStageCompilationConfig) {
         if (environment.getSourceFiles().isEmpty()) {
             val libraries = config.resolvedLibraries.getFullList()
             val moduleName = config.moduleId
