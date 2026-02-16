@@ -193,12 +193,19 @@ internal object TestDataManagerRunner {
             println("  Depth ${group.variantDepth}: ${group.tests.size} tests, variants: ${group.uniqueVariantChains}")
         }
 
-        // Collect all unique variant chain configurations for summary
-        val allVariantChains: Set<TestVariantChain> = groupingResult.groups
-            .flatMap { it.uniqueVariantChains }
-            .toSet()
-
         // Phase 4: Run each group with convergence, aggregate results
+        executeTestGroups(incremental, goldenOnly, groupingResult, launcher, timingStats, discoveredTests)
+    }
+
+    context(_: LauncherSession)
+    private fun executeTestGroups(
+        incremental: Boolean,
+        goldenOnly: Boolean,
+        groupingResult: GroupingResult,
+        launcher: Launcher,
+        timingStats: TimingStats,
+        discoveredTests: List<DiscoveredTest>,
+    ) {
         val allMismatches = mutableMapOf<String, MutableSet<TestVariantChain>>()
         val allErrors = mutableSetOf<TestError>()
         val allFinalFailedTestIds = mutableSetOf<String>()
@@ -281,6 +288,11 @@ internal object TestDataManagerRunner {
         val totalTests = discoveredTests.size
         val failedTests = allFinalFailedTestIds.size
         val passedTests = totalTests - failedTests
+
+        // Collect all unique variant chain configurations for summary
+        val allVariantChains: Set<TestVariantChain> = groupingResult.groups
+            .flatMap { it.uniqueVariantChains }
+            .toSet()
 
         // Print summary and exit with appropriate code
         printSummary(allMismatches, allVariantChains, allErrors, totalTests, passedTests)
