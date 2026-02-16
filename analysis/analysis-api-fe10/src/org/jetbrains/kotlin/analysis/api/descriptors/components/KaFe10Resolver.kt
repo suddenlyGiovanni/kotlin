@@ -94,13 +94,14 @@ internal class KaFe10Resolver(
         error("Not supported")
     }
 
+    @OptIn(KtExperimentalApi::class)
     override fun performSymbolResolution(reference: KtReference): KaSymbolResolutionAttempt? = when (reference) {
         // Unsupported
         is Fe10SyntheticPropertyAccessorReference -> null
 
         is KtFe10InvokeFunctionReference -> tryResolveSymbolsForInvokeReference(reference)
         is Fe10KDocReference -> tryResolveSymbolsForKDocReference(reference)
-        else -> null
+        else -> tryResolveSymbolsForReferenceViaElement(reference)
     }
 
     override fun performSymbolResolution(psi: KtElement): KaSymbolResolutionAttempt? {

@@ -72,6 +72,7 @@ KtForExpression(115,161): 'for (i in 0..1) {'
   KtForLoopInReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       0: (in kotlin.collections.IntIterator) override operator fun next(): kotlin.Int
       1: (in kotlin.collections.Iterator) operator fun hasNext(): kotlin.Boolean

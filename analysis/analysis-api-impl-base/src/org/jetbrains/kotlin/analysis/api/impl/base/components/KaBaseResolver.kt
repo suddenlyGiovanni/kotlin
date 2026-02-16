@@ -201,6 +201,10 @@ abstract class KaBaseResolver<T : KaSession> : KaBaseSessionComponent<T>(), KaRe
         collectCallCandidatesImpl().map(KaCallCandidate::asKaCallCandidateInfo)
     }
 
+    protected fun tryResolveSymbolsForReferenceViaElement(reference: KtReference): KaSymbolResolutionAttempt? {
+        return (reference.element as? KtResolvable)?.tryResolveSymbols()
+    }
+
     protected fun tryResolveSymbolsForInvokeReference(reference: KtInvokeFunctionReference): KaSymbolResolutionAttempt? =
         when (val callResult = reference.element.tryResolveCall()) {
             // There is no way to distinguish between the error regular and implicit calls, so by default only relevant errors are shown

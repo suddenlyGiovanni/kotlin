@@ -181,6 +181,7 @@ internal class KaFirResolver(
         }
     }
 
+    @OptIn(KtExperimentalApi::class)
     override fun performSymbolResolution(reference: KtReference): KaSymbolResolutionAttempt? {
         // Non-fir references are not supported explicitly
         // In particular, KtDefaultAnnotationArgumentReference won't work for now
@@ -189,8 +190,7 @@ internal class KaFirResolver(
         }
 
         return when (reference) {
-            is KaFirInvokeFunctionReference -> tryResolveSymbolsForInvokeReference(reference)
-            is KaFirKDocReference -> tryResolveSymbolsForKDocReference(reference)
+            // For most constructions the element could be used instead
             is KaFirArrayAccessReference,
             is KaFirCollectionLiteralReference,
             is KaFirConstructorDelegationReference,
@@ -198,7 +198,10 @@ internal class KaFirResolver(
             is KaFirForLoopInReference,
             is KaFirPropertyDelegationMethodsReference,
             is KaFirSimpleNameReference,
-                -> null
+                -> tryResolveSymbolsForReferenceViaElement(reference)
+
+            is KaFirInvokeFunctionReference -> tryResolveSymbolsForInvokeReference(reference)
+            is KaFirKDocReference -> tryResolveSymbolsForKDocReference(reference)
         }
     }
 
