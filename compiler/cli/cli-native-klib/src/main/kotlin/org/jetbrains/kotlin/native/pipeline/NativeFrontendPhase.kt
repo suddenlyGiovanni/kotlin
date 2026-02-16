@@ -29,7 +29,7 @@ import org.jetbrains.kotlin.konan.config.konanPrintFiles
 import org.jetbrains.kotlin.library.metadata.isCInteropLibrary
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.native.NativeFirstStagePhaseContext
-import org.jetbrains.kotlin.native.createNativeKlibConfig
+import org.jetbrains.kotlin.native.createFirstStageCompilationConfig
 
 object NativeFrontendPhase : PipelinePhase<NativeConfigurationArtifact, NativeFrontendArtifact>(
     name = "NativeFrontendPhase",
@@ -38,7 +38,7 @@ object NativeFrontendPhase : PipelinePhase<NativeConfigurationArtifact, NativeFr
 ) {
     override fun executePhase(input: NativeConfigurationArtifact): NativeFrontendArtifact {
         val (configuration, environment) = input
-        val config = createNativeKlibConfig(configuration)
+        val config = createFirstStageCompilationConfig(configuration)
         val phaseContext = NativeFirstStagePhaseContext(config)
         val firOutput = phaseContext.firFrontend(environment)
         return NativeFrontendArtifact(

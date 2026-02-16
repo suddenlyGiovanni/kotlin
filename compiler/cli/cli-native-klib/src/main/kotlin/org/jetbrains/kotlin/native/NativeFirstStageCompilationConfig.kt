@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.konan.target.HostManager
 import org.jetbrains.kotlin.konan.target.KonanTarget
 import org.jetbrains.kotlin.util.PerformanceManager
 
-class NativeKlibConfig(
+class NativeFirstStageCompilationConfig(
     override val configuration: CompilerConfiguration,
     override val target: KonanTarget,
     val loadedKlibs: LoadedNativeKlibs,
@@ -39,7 +39,7 @@ class NativeKlibConfig(
 }
 
 class NativeFirstStagePhaseContext(
-    override val config: NativeKlibConfig,
+    override val config: NativeFirstStageCompilationConfig,
 ) : NativePhaseContext {
     override var inVerbosePhase: Boolean = false
 
@@ -52,7 +52,7 @@ class NativeFirstStagePhaseContext(
     override fun dispose() {}
 }
 
-internal fun createNativeKlibConfig(configuration: CompilerConfiguration): NativeKlibConfig {
+internal fun createFirstStageCompilationConfig(configuration: CompilerConfiguration): NativeFirstStageCompilationConfig {
     val targetName = configuration.konanTarget
     val target = if (targetName != null) {
         KonanTarget.predefinedTargets[targetName]
@@ -61,7 +61,7 @@ internal fun createNativeKlibConfig(configuration: CompilerConfiguration): Nativ
         HostManager.host
     }
 
-    return NativeKlibConfig(
+    return NativeFirstStageCompilationConfig(
         configuration = configuration,
         target = target,
         loadedKlibs = loadNativeKlibsInProductionPipeline(configuration, target),
