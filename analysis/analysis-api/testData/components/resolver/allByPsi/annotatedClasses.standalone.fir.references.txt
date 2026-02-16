@@ -198,7 +198,10 @@ KtConstructorDelegationReferenceExpression(427,427): ''
   KtConstructorDelegationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
+      (in kotlin.Any) constructor()
+    resolveToSymbols:
       Nothing (Unresolved reference)
 
 KtNameReferenceExpression(481,485): 'Anno'

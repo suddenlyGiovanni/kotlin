@@ -16,7 +16,10 @@ KtConstructorDelegationReferenceExpression(61,61): ''
   KtConstructorDelegationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
+      (in kotlin.Any) constructor()
+    resolveToSymbols:
       Nothing (Unresolved reference)
 
 KtNameReferenceExpression(81,87): 'String'
@@ -30,7 +33,10 @@ KtConstructorDelegationReferenceExpression(88,88): ''
   KtConstructorDelegationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
+      (in kotlin.Any) constructor()
+    resolveToSymbols:
       Nothing (Unresolved reference)
 
 KtNameReferenceExpression(131,140): 'BaseClass'
@@ -51,6 +57,7 @@ KtConstructorDelegationReferenceExpression(170,175): 'super'
   KtConstructorDelegationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in r.BaseClass) constructor(i: kotlin.Int)
 
@@ -72,6 +79,7 @@ KtConstructorDelegationReferenceExpression(210,215): 'super'
   KtConstructorDelegationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in r.BaseClass) constructor(s: kotlin.String)
 
@@ -122,6 +130,7 @@ KtConstructorDelegationReferenceExpression(339,343): 'this'
   KtConstructorDelegationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in r.ChildWithPrimary) constructor()
 
@@ -150,5 +159,6 @@ KtConstructorDelegationReferenceExpression(446,451): 'super'
   KtConstructorDelegationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in r.ClassWithType) constructor <T>(i: kotlin.Int)

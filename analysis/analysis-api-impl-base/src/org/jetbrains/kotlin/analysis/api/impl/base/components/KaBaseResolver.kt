@@ -82,6 +82,7 @@ abstract class KaBaseResolver<T : KaSession> : KaBaseSessionComponent<T>(), KaRe
     final override fun KtDestructuringDeclarationEntry.resolveSymbol(): KaCallableSymbol? = resolveSymbolSafe()
     final override fun KtInvokeFunctionReference.resolveSymbol(): KaNamedFunctionSymbol? = resolveSymbolSafe()
     final override fun KtDestructuringDeclarationReference.resolveSymbol(): KaCallableSymbol? = resolveSymbolSafe()
+    final override fun KtConstructorDelegationReference.resolveSymbol(): KaConstructorSymbol? = resolveSymbolSafe()
 
     final override fun KtReference.resolveToSymbol(): KaSymbol? = withPsiValidityAssertion(element) {
         return resolveToSymbols().singleOrNull()

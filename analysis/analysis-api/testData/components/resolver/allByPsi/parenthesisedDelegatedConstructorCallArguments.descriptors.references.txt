@@ -23,6 +23,7 @@ KtConstructorDelegationReferenceExpression(61,65): 'this'
   KtConstructorDelegationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in A) constructor(i: T)
 
@@ -57,6 +58,7 @@ KtConstructorDelegationReferenceExpression(111,115): 'this'
   KtConstructorDelegationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in A) constructor(i: T)
 
@@ -104,6 +106,7 @@ KtConstructorDelegationReferenceExpression(177,182): 'super'
   KtConstructorDelegationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in A) constructor(i: T)
 
@@ -118,6 +121,7 @@ KtConstructorDelegationReferenceExpression(221,226): 'super'
   KtConstructorDelegationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in A) constructor(i: T)
 
@@ -158,6 +162,7 @@ KtConstructorDelegationReferenceExpression(276,281): 'super'
   KtConstructorDelegationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in A) constructor(i: T)
 
