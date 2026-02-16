@@ -269,6 +269,7 @@ Run `get_file_problems` with `errorsOnly=false` on each modified file. Fix any w
 
 Read the newly generated/updated golden `.txt` files and sanity-check:
 - `.symbol.txt` — should contain `KaSymbolResolutionSuccess` with the expected symbol type matching `SYMBOL_TYPE`
+- `.references.txt` — should contain `KaSymbolResolutionSuccess` with the expected symbol representing `SYMBOL_TYPE`
 - `.call.txt` — (if `KtResolvableCall`) should contain `KaCallResolutionSuccess` with the expected call type
 - If any file shows `null` or unexpected resolution failures, investigate whether FIR/FE10 changes (Step 4 in Phase 3) are missing
 

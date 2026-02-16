@@ -18,6 +18,7 @@ import org.jetbrains.kotlin.analysis.api.signatures.KaCallableSignature
 import org.jetbrains.kotlin.analysis.api.symbols.*
 import org.jetbrains.kotlin.analysis.api.types.KaType
 import org.jetbrains.kotlin.analysis.utils.printer.parentOfType
+import org.jetbrains.kotlin.idea.references.KDocReference
 import org.jetbrains.kotlin.idea.references.KtDefaultAnnotationArgumentReference
 import org.jetbrains.kotlin.idea.references.KtReference
 import org.jetbrains.kotlin.lexer.KtSingleValueToken
@@ -25,6 +26,7 @@ import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.resolution.KtResolvable
 import org.jetbrains.kotlin.resolution.KtResolvableCall
+import org.jetbrains.kotlin.utils.addToStdlib.ifNotEmpty
 import org.jetbrains.kotlin.utils.exceptions.ExceptionAttachmentBuilder
 import org.jetbrains.kotlin.utils.exceptions.checkWithAttachment
 import org.jetbrains.kotlin.utils.exceptions.withPsiEntry
@@ -36,12 +38,21 @@ import kotlin.contracts.contract
 abstract class KaBaseResolver<T : KaSession> : KaBaseSessionComponent<T>(), KaResolver {
     protected abstract fun performSymbolResolution(psi: KtElement): KaSymbolResolutionAttempt?
 
+    protected abstract fun performSymbolResolution(reference: KtReference): KaSymbolResolutionAttempt?
+
     final override fun KtResolvable.tryResolveSymbols(): KaSymbolResolutionAttempt? = withValidityAssertion {
-        if (this is KtElement) {
-            checkValidity()
-            performSymbolResolution(this)
-        } else {
-            null
+        when (this) {
+            is KtElement -> {
+                checkValidity()
+                performSymbolResolution(this)
+            }
+
+            is KtReference -> {
+                element.checkValidity()
+                performSymbolResolution(this)
+            }
+
+            else -> null
         }
     }
 
@@ -187,6 +198,16 @@ abstract class KaBaseResolver<T : KaSession> : KaBaseSessionComponent<T>(), KaRe
     final override fun KtElement.resolveToCallCandidates(): List<KaCallCandidateInfo> = withPsiValidityAssertion {
         collectCallCandidatesImpl().map(KaCallCandidate::asKaCallCandidateInfo)
     }
+
+    /**
+     * KDocs cannot have diagnostics, so effectively they always successfully resolved.
+     * This means that a special handling is not needed (at least yet) and the references'
+     * result could be reused fully with no contradictions
+     */
+    protected fun tryResolveSymbolsForKDocReference(reference: KDocReference): KaSymbolResolutionAttempt? =
+        reference.resolveToSymbols().ifNotEmpty {
+            KaBaseSymbolResolutionSuccess(backingSymbols = this.toList(), token = token)
+        }
 
     // TODO: remove this workaround after KT-68499
     protected fun resolveDefaultAnnotationArgumentReference(

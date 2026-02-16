@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.KtSourceElement
 import org.jetbrains.kotlin.analysis.api.KaNonPublicApi
 import org.jetbrains.kotlin.analysis.api.diagnostics.KaDiagnostic
 import org.jetbrains.kotlin.analysis.api.fir.*
-import org.jetbrains.kotlin.analysis.api.fir.references.ClassicKDocReferenceResolver
+import org.jetbrains.kotlin.analysis.api.fir.references.*
 import org.jetbrains.kotlin.analysis.api.fir.symbols.KaFirArrayOfSymbolProvider.arrayOfSymbol
 import org.jetbrains.kotlin.analysis.api.fir.utils.firSymbol
 import org.jetbrains.kotlin.analysis.api.fir.utils.processEqualsFunctions
@@ -178,6 +178,27 @@ internal class KaFirResolver(
     override fun performSymbolResolution(psi: KtElement): KaSymbolResolutionAttempt? = wrapError(psi) {
         analysisSession.cacheStorage.resolveSymbolCache.value.getOrPut(psi) {
             resolveSymbol(psi)
+        }
+    }
+
+    override fun performSymbolResolution(reference: KtReference): KaSymbolResolutionAttempt? {
+        // Non-fir references are not supported explicitly
+        // In particular, KtDefaultAnnotationArgumentReference won't work for now
+        if (reference !is KaFirReference) {
+            return null
+        }
+
+        return when (reference) {
+            is KaFirKDocReference -> tryResolveSymbolsForKDocReference(reference)
+            is KaFirArrayAccessReference,
+            is KaFirCollectionLiteralReference,
+            is KaFirConstructorDelegationReference,
+            is KaFirDestructuringDeclarationReference,
+            is KaFirForLoopInReference,
+            is KaFirPropertyDelegationMethodsReference,
+            is KaFirSimpleNameReference,
+            is KaFirInvokeFunctionReference,
+                -> null
         }
     }
 

@@ -39,6 +39,8 @@ import org.jetbrains.kotlin.idea.references.KtSimpleNameReference
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.parentsWithSelf
+import org.jetbrains.kotlin.references.fe10.Fe10KDocReference
+import org.jetbrains.kotlin.references.fe10.Fe10SyntheticPropertyAccessorReference
 import org.jetbrains.kotlin.references.fe10.base.KtFe10Reference
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.DelegatingBindingTrace
@@ -89,6 +91,14 @@ internal class KaFe10Resolver(
     @KaNonPublicApi
     override fun KDocReference.resolveToSymbolWithClassicKDocResolver(): KaSymbol = withValidityAssertion {
         error("Not supported")
+    }
+
+    override fun performSymbolResolution(reference: KtReference): KaSymbolResolutionAttempt? = when (reference) {
+        // Unsupported
+        is Fe10SyntheticPropertyAccessorReference -> null
+
+        is Fe10KDocReference -> tryResolveSymbolsForKDocReference(reference)
+        else -> null
     }
 
     override fun performSymbolResolution(psi: KtElement): KaSymbolResolutionAttempt? {
