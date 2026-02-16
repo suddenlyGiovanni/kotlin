@@ -25,7 +25,7 @@ import kotlin.test.*
 
 // CHECK_BREAKS_COUNT: function=box count=0
 // CHECK_LABELS_COUNT: function=box name=$l$block count=0
-public fun box(): String {
+fun box(): String {
     val a = A()
     a.setParam(10)
     assertEquals(10, a.param)
