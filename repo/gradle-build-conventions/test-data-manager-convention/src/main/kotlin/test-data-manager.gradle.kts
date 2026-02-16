@@ -48,8 +48,9 @@ tasks.register<TestDataManagerModuleTask>(manageTestDataTaskName) {
     // Note: taskProvider.map creates a task dependency, so we capture the value directly
     val testTask = tasks.named<Test>("test").get()
 
-    // Copy all test task dependencies - more robust than manually listing them
+    // Copy all test task dependencies and inputs, so tests run the same way in the manager as they run normally
     dependsOn(testTask.dependsOn)
+    dependsOn(testTask.inputs)
 
     // Inherit ordering from test task, but convert :test references to :manageTestData
     // This ensures proper ordering when running manageTestDataGlobally
