@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2025 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
@@ -7,19 +7,23 @@ package org.jetbrains.kotlin.idea.references
 
 import com.intellij.openapi.util.TextRange
 import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.psi.KtExperimentalApi
 import org.jetbrains.kotlin.psi.KtImplementationDetail
 import org.jetbrains.kotlin.psi.KtPropertyDelegate
+import org.jetbrains.kotlin.resolution.KtResolvable
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
+@OptIn(KtExperimentalApi::class)
 @SubclassOptInRequired(KtImplementationDetail::class)
-abstract class KtPropertyDelegationMethodsReference(element: KtPropertyDelegate) : KtMultiReference<KtPropertyDelegate>(element) {
+abstract class KtPropertyDelegationMethodsReference(element: KtPropertyDelegate) : KtMultiReference<KtPropertyDelegate>(element),
+    KtResolvable {
     override fun getRangeInElement(): TextRange {
         val byKeywordNode = expression.byKeywordNode
         val offset = byKeywordNode.psi!!.startOffsetInParent
         return TextRange(offset, offset + byKeywordNode.textLength)
     }
 
-       override val resolvesByNames: Collection<Name> get() = NAMES
+    override val resolvesByNames: Collection<Name> get() = NAMES
 
     companion object {
         private val NAMES = listOf(
