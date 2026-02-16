@@ -9,7 +9,6 @@ import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.config.metadataKlib
 import org.jetbrains.kotlin.konan.config.NativeConfigurationKeys
 import org.jetbrains.kotlin.konan.config.konanFriendLibraries
-import org.jetbrains.kotlin.konan.config.konanGeneratedHeaderKlibPath
 import org.jetbrains.kotlin.konan.config.konanIncludedBinaries
 import org.jetbrains.kotlin.konan.config.konanNativeLibraries
 import org.jetbrains.kotlin.konan.config.konanOutputPath
@@ -40,9 +39,6 @@ interface NativeKlibCompilationConfig {
 
     val metadataKlib: Boolean
         get() = configuration.metadataKlib
-
-    val headerKlibPath: String?
-        get() = configuration.konanGeneratedHeaderKlibPath?.removeSuffixIfPresent(".klib")
 
     val friendModuleFiles: Set<File>
         get() = configuration.konanFriendLibraries.map { File(it) }.toSet()
