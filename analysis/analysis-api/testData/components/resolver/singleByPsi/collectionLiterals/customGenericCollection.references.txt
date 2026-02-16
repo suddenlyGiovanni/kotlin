@@ -9,5 +9,6 @@ KtCallExpression(192,227): 'acceptList<String>(["1", "2", "3"])'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)

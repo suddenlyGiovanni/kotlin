@@ -76,6 +76,7 @@ KtCallExpression(372,532): 'receiveMyClass('
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 

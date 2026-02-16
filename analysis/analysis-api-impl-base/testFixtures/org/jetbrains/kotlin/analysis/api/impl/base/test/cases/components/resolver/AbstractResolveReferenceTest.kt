@@ -165,6 +165,11 @@ abstract class AbstractResolveReferenceTest : AbstractResolveTest<KtReference?>(
                 resolvesByNamesViolations?.let(::appendLine)
                 if (symbolsResult != null) {
                     val attempt = symbolsResult.attempt
+
+                    // This call mustn't be suppressed as this is the API contracts
+                    @OptIn(KtExperimentalApi::class)
+                    assertSpecificResolutionApi(testServices, attempt, reference as KtResolvable)
+
                     append("attempt: ")
                     appendLine(attempt?.let(::renderFrontendIndependentKClassNameOf) ?: "null")
                     if (attempt is KaSymbolResolutionError) {

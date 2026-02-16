@@ -100,6 +100,7 @@ KtCallExpression(316,338): 'arrayOf("A", "B", "C")'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
@@ -128,6 +129,7 @@ KtCallExpression(381,400): 'arrayOf(("A"), "B")'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 

@@ -254,6 +254,7 @@ KtCallExpression(805,808): 'A()'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
@@ -268,6 +269,7 @@ KtCallExpression(821,838): 'SimpleOperators()'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
@@ -282,6 +284,7 @@ KtCallExpression(843,1229): 'with(A()){'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
@@ -296,6 +299,7 @@ KtCallExpression(848,851): 'A()'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
@@ -430,6 +434,7 @@ KtCallExpression(1001,1004): 'A()'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
@@ -467,6 +472,7 @@ KtCallExpression(1020,1023): 'A()'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
@@ -481,6 +487,7 @@ KtCallExpression(1032,1042): 'thisProp()'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in ROOT) context(a@A)
       operator fun A.invoke()
@@ -496,6 +503,7 @@ KtCallExpression(1051,1054): 'a()'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in ROOT) context(a@A)
       operator fun A.invoke()
@@ -679,6 +687,7 @@ KtCallExpression(1181,1184): 'A()'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
@@ -693,6 +702,7 @@ KtCallExpression(1193,1196): 'b()'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       (in SimpleOperators) context(a@A)
       operator fun invoke()
@@ -751,6 +761,7 @@ KtCallExpression(1268,1271): 'A()'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
@@ -765,6 +776,7 @@ KtCallExpression(1284,1301): 'SimpleOperators()'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
@@ -847,6 +859,7 @@ KtCallExpression(1340,1343): 'A()'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
@@ -861,6 +874,8 @@ KtCallExpression(1348,1351): 'a()'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionError
+    diagnostic: ERROR<NO_CONTEXT_ARGUMENT: No context argument for 'a: A' found.>
     symbols:
       (in ROOT) context(a@A)
       operator fun A.invoke()
@@ -987,6 +1002,7 @@ KtCallExpression(1409,1412): 'A()'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
@@ -1001,6 +1017,8 @@ KtCallExpression(1417,1420): 'b()'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionError
+    diagnostic: ERROR<NO_CONTEXT_ARGUMENT: No context argument for 'a: A' found.>
     symbols:
       (in SimpleOperators) context(a@A)
       operator fun invoke()

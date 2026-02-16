@@ -20,6 +20,7 @@ import org.jetbrains.kotlin.analysis.api.types.KaType
 import org.jetbrains.kotlin.analysis.utils.printer.parentOfType
 import org.jetbrains.kotlin.idea.references.KDocReference
 import org.jetbrains.kotlin.idea.references.KtDefaultAnnotationArgumentReference
+import org.jetbrains.kotlin.idea.references.KtInvokeFunctionReference
 import org.jetbrains.kotlin.idea.references.KtReference
 import org.jetbrains.kotlin.lexer.KtSingleValueToken
 import org.jetbrains.kotlin.lexer.KtTokens
@@ -82,6 +83,7 @@ abstract class KaBaseResolver<T : KaSession> : KaBaseSessionComponent<T>(), KaRe
     final override fun KtReturnExpression.resolveSymbol(): KaFunctionSymbol? = resolveSymbolSafe()
     final override fun KtWhenConditionInRange.resolveSymbol(): KaNamedFunctionSymbol? = resolveSymbolSafe()
     final override fun KtDestructuringDeclarationEntry.resolveSymbol(): KaCallableSymbol? = resolveSymbolSafe()
+    final override fun KtInvokeFunctionReference.resolveSymbol(): KaNamedFunctionSymbol? = resolveSymbolSafe()
 
     final override fun KtReference.resolveToSymbol(): KaSymbol? = withPsiValidityAssertion(element) {
         return resolveToSymbols().singleOrNull()
@@ -198,6 +200,25 @@ abstract class KaBaseResolver<T : KaSession> : KaBaseSessionComponent<T>(), KaRe
     final override fun KtElement.resolveToCallCandidates(): List<KaCallCandidateInfo> = withPsiValidityAssertion {
         collectCallCandidatesImpl().map(KaCallCandidate::asKaCallCandidateInfo)
     }
+
+    protected fun tryResolveSymbolsForInvokeReference(reference: KtInvokeFunctionReference): KaSymbolResolutionAttempt? =
+        when (val callResult = reference.element.tryResolveCall()) {
+            // There is no way to distinguish between the error regular and implicit calls, so by default only relevant errors are shown
+            is KaCallResolutionError -> callResult.candidateCalls.filterIsInstance<KaImplicitInvokeCall>().map { it.signature.symbol }
+                .ifNotEmpty {
+                    KaBaseSymbolResolutionError(
+                        backingDiagnostic = callResult.diagnostic,
+                        backingCandidateSymbols = this,
+                    )
+                }
+
+            is KaCallResolutionSuccess -> when (val call = callResult.call) {
+                is KaImplicitInvokeCall -> KaBaseSymbolResolutionSuccess(backingSymbol = call.signature.symbol)
+                else -> null
+            }
+
+            null -> null
+        }
 
     /**
      * KDocs cannot have diagnostics, so effectively they always successfully resolved.

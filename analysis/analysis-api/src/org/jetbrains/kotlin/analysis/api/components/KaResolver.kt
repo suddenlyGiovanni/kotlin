@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.analysis.api.*
 import org.jetbrains.kotlin.analysis.api.resolution.*
 import org.jetbrains.kotlin.analysis.api.symbols.*
 import org.jetbrains.kotlin.idea.references.KDocReference
+import org.jetbrains.kotlin.idea.references.KtInvokeFunctionReference
 import org.jetbrains.kotlin.idea.references.KtReference
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.resolution.KtResolvable
@@ -412,6 +413,34 @@ public interface KaResolver : KaSessionComponent {
      */
     @KaExperimentalApi
     public fun KtDestructuringDeclarationEntry.resolveSymbol(): KaCallableSymbol?
+
+    /**
+     * Resolves the invoke operator function symbol targeted by the given [KtInvokeFunctionReference].
+     *
+     * #### Example
+     *
+     * ```kotlin
+     * class A {
+     *     operator fun invoke() {}
+     * }
+     *
+     * fun test(a: A) {
+     *     a()
+     * //  ^^^ the implicit invoke reference resolves to the `invoke` operator function
+     * }
+     * ```
+     *
+     * Calling `resolveSymbol()` on a [KtInvokeFunctionReference] (the implicit `invoke` operator reference from `a()`)
+     * returns the [KaNamedFunctionSymbol] of the `invoke` operator if resolution succeeds; otherwise, it returns `null`
+     * (e.g., when unresolved or ambiguous).
+     *
+     * This is a specialized counterpart of [KtResolvable.resolveSymbol] focused specifically on invoke function references
+     *
+     * @see tryResolveSymbols
+     * @see KtResolvable.resolveSymbol
+     */
+    @KaExperimentalApi
+    public fun KtInvokeFunctionReference.resolveSymbol(): KaNamedFunctionSymbol?
 
     /**
      * Attempts to resolve the call for the given [KtResolvableCall].
@@ -1395,6 +1424,41 @@ public fun KtWhenConditionInRange.resolveSymbol(): KaNamedFunctionSymbol? {
 @KaContextParameterApi
 context(session: KaSession)
 public fun KtDestructuringDeclarationEntry.resolveSymbol(): KaCallableSymbol? {
+    return with(session) {
+        resolveSymbol()
+    }
+}
+
+/**
+ * Resolves the invoke operator function symbol targeted by the given [KtInvokeFunctionReference].
+ *
+ * #### Example
+ *
+ * ```kotlin
+ * class A {
+ *     operator fun invoke() {}
+ * }
+ *
+ * fun test(a: A) {
+ *     a()
+ * //  ^^^ the implicit invoke reference resolves to the `invoke` operator function
+ * }
+ * ```
+ *
+ * Calling `resolveSymbol()` on a [KtInvokeFunctionReference] (the implicit `invoke` operator reference from `a()`)
+ * returns the [KaNamedFunctionSymbol] of the `invoke` operator if resolution succeeds; otherwise, it returns `null`
+ * (e.g., when unresolved or ambiguous).
+ *
+ * This is a specialized counterpart of [KtResolvable.resolveSymbol] focused specifically on invoke function references
+ *
+ * @see tryResolveSymbols
+ * @see KtResolvable.resolveSymbol
+ */
+// Auto-generated bridge. DO NOT EDIT MANUALLY!
+@KaExperimentalApi
+@KaContextParameterApi
+context(session: KaSession)
+public fun KtInvokeFunctionReference.resolveSymbol(): KaNamedFunctionSymbol? {
     return with(session) {
         resolveSymbol()
     }

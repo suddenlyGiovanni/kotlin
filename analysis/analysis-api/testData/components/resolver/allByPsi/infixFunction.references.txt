@@ -93,6 +93,7 @@ KtCallExpression(208,249): 'plus(parameter.myMinus(oneMoreParameter))'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
@@ -114,6 +115,7 @@ KtCallExpression(223,248): 'myMinus(oneMoreParameter)'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 

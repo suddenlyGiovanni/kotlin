@@ -189,6 +189,7 @@ internal class KaFirResolver(
         }
 
         return when (reference) {
+            is KaFirInvokeFunctionReference -> tryResolveSymbolsForInvokeReference(reference)
             is KaFirKDocReference -> tryResolveSymbolsForKDocReference(reference)
             is KaFirArrayAccessReference,
             is KaFirCollectionLiteralReference,
@@ -197,7 +198,6 @@ internal class KaFirResolver(
             is KaFirForLoopInReference,
             is KaFirPropertyDelegationMethodsReference,
             is KaFirSimpleNameReference,
-            is KaFirInvokeFunctionReference,
                 -> null
         }
     }

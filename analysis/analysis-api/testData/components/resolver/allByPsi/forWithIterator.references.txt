@@ -142,6 +142,7 @@ KtCallExpression(297,318): 'IntProgression(1, 10)'
   KtInvokeFunctionReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
