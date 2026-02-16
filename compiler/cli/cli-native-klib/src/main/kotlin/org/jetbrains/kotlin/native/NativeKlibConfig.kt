@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.native
 
 import org.jetbrains.kotlin.backend.common.LoadedNativeKlibs
-import org.jetbrains.kotlin.backend.konan.NativeKlibCompilationConfig
+import org.jetbrains.kotlin.backend.konan.NativeCompilationConfig
 import org.jetbrains.kotlin.backend.konan.driver.NativePhaseContext
 import org.jetbrains.kotlin.backend.konan.serialization.loadNativeKlibsInProductionPipeline
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
@@ -27,7 +27,7 @@ class NativeKlibConfig(
     override val configuration: CompilerConfiguration,
     override val target: KonanTarget,
     val loadedKlibs: LoadedNativeKlibs,
-) : NativeKlibCompilationConfig {
+) : NativeCompilationConfig {
 
     override val moduleId: String
         get() = configuration.moduleName ?: File(outputPath).name

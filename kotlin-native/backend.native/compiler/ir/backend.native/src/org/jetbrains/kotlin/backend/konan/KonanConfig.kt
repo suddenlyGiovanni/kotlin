@@ -64,7 +64,7 @@ import java.nio.file.Paths
 class KonanConfig(
         val project: Project,
         override val configuration: CompilerConfiguration
-) : NativeKlibCompilationConfig {
+) : NativeCompilationConfig {
     /**
      * Determine if we compile for iOS target with Mac ABI (Catalyst).
      * Avoid using this property if possible. Instead, use [TargetTriple.isMacabi] as it is more direct.

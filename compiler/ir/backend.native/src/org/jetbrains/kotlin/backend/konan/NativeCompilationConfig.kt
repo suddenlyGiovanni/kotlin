@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.util.removeSuffixIfPresent
  * This interface exists not because it is a good abstraction. Rather, it emerged
  * from the need to extract src -> klib compilation from the /kotlin-native directory.
  */
-interface NativeKlibCompilationConfig {
+interface NativeCompilationConfig {
     val configuration: CompilerConfiguration
 
     val target: KonanTarget
