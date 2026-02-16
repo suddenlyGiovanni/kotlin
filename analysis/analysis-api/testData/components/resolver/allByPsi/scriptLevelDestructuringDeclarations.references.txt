@@ -205,7 +205,10 @@ KtDestructuringDeclarationEntry(404,422): '@Anno("a $prop") a'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
+      (in util.Pair) operator fun component1(): @util.Anno(str = "a type s") kotlin.collections.List<@util.Anno(str = "a nested type s") kotlin.collections.Collection<@util.Anno(str = "a nested nested type s") kotlin.String>>?
+    resolveToSymbols:
       0: (in util) val a: @util.Anno(str = "a type s") kotlin.collections.List<@util.Anno(str = "a nested type s") kotlin.collections.Collection<@util.Anno(str = "a nested nested type s") kotlin.String>>?
       1: (in util.Pair) operator fun component1(): @util.Anno(str = "a type s") kotlin.collections.List<@util.Anno(str = "a nested type s") kotlin.collections.Collection<@util.Anno(str = "a nested nested type s") kotlin.String>>?
 
@@ -234,7 +237,10 @@ KtDestructuringDeclarationEntry(424,442): '@Anno("b $prop") b'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
+      (in util.Pair) operator fun component2(): @util.Anno(str = "b type s") kotlin.Array<@util.Anno(str = "b nested type s") kotlin.collections.List<@util.Anno(str = "b nested nested type s") kotlin.Int>>?
+    resolveToSymbols:
       0: (in util) val b: @util.Anno(str = "b type s") kotlin.Array<@util.Anno(str = "b nested type s") kotlin.collections.List<@util.Anno(str = "b nested nested type s") kotlin.Int>>?
       1: (in util.Pair) operator fun component2(): @util.Anno(str = "b type s") kotlin.Array<@util.Anno(str = "b nested type s") kotlin.collections.List<@util.Anno(str = "b nested nested type s") kotlin.Int>>?
 
@@ -299,7 +305,10 @@ KtDestructuringDeclarationEntry(492,510): '@Anno("c $prop") c'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
+      (in util.Pair) operator fun component1(): @util.Anno(str = "a type s") kotlin.collections.List<@util.Anno(str = "a nested type s") kotlin.collections.Collection<@util.Anno(str = "a nested nested type s") kotlin.String>>?
+    resolveToSymbols:
       0: (in util) val c: @util.Anno(str = "a type s") kotlin.collections.List<@util.Anno(str = "a nested type s") kotlin.collections.Collection<@util.Anno(str = "a nested nested type s") kotlin.String>>?
       1: (in util.Pair) operator fun component1(): @util.Anno(str = "a type s") kotlin.collections.List<@util.Anno(str = "a nested type s") kotlin.collections.Collection<@util.Anno(str = "a nested nested type s") kotlin.String>>?
 
@@ -328,7 +337,10 @@ KtDestructuringDeclarationEntry(512,530): '@Anno("d $prop") d'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
+      (in util.Pair) operator fun component2(): @util.Anno(str = "b type s") kotlin.Array<@util.Anno(str = "b nested type s") kotlin.collections.List<@util.Anno(str = "b nested nested type s") kotlin.Int>>?
+    resolveToSymbols:
       0: (in util) val d: @util.Anno(str = "b type s") kotlin.Array<@util.Anno(str = "b nested type s") kotlin.collections.List<@util.Anno(str = "b nested nested type s") kotlin.Int>>?
       1: (in util.Pair) operator fun component2(): @util.Anno(str = "b type s") kotlin.Array<@util.Anno(str = "b nested type s") kotlin.collections.List<@util.Anno(str = "b nested nested type s") kotlin.Int>>?
 

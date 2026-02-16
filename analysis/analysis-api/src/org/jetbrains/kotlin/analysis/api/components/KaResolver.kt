@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.analysis.api.*
 import org.jetbrains.kotlin.analysis.api.resolution.*
 import org.jetbrains.kotlin.analysis.api.symbols.*
 import org.jetbrains.kotlin.idea.references.KDocReference
+import org.jetbrains.kotlin.idea.references.KtDestructuringDeclarationReference
 import org.jetbrains.kotlin.idea.references.KtInvokeFunctionReference
 import org.jetbrains.kotlin.idea.references.KtReference
 import org.jetbrains.kotlin.psi.*
@@ -441,6 +442,33 @@ public interface KaResolver : KaSessionComponent {
      */
     @KaExperimentalApi
     public fun KtInvokeFunctionReference.resolveSymbol(): KaNamedFunctionSymbol?
+
+    /**
+     * Resolves the callable symbol targeted by the given [KtDestructuringDeclarationReference].
+     *
+     * #### Example
+     *
+     * ```kotlin
+     * data class Point(val x: Int, val y: Int)
+     *
+     * fun test(p: Point) {
+     *     val (x, y) = p
+     * //       ^ resolves to `component1`
+     * //          ^ resolves to `component2`
+     * }
+     * ```
+     *
+     * Calling `resolveSymbol()` on a [KtDestructuringDeclarationReference] returns the [KaCallableSymbol] of the corresponding
+     * `componentN` function (for positional destructuring) or the accessed property (for name-based destructuring)
+     * if resolution succeeds; otherwise, it returns `null` (e.g., when unresolved or ambiguous).
+     *
+     * This is a specialized counterpart of [KtResolvable.resolveSymbol] focused specifically on destructuring declaration references
+     *
+     * @see tryResolveSymbols
+     * @see KtResolvable.resolveSymbol
+     */
+    @KaExperimentalApi
+    public fun KtDestructuringDeclarationReference.resolveSymbol(): KaCallableSymbol?
 
     /**
      * Attempts to resolve the call for the given [KtResolvableCall].
@@ -1459,6 +1487,40 @@ public fun KtDestructuringDeclarationEntry.resolveSymbol(): KaCallableSymbol? {
 @KaContextParameterApi
 context(session: KaSession)
 public fun KtInvokeFunctionReference.resolveSymbol(): KaNamedFunctionSymbol? {
+    return with(session) {
+        resolveSymbol()
+    }
+}
+
+/**
+ * Resolves the callable symbol targeted by the given [KtDestructuringDeclarationReference].
+ *
+ * #### Example
+ *
+ * ```kotlin
+ * data class Point(val x: Int, val y: Int)
+ *
+ * fun test(p: Point) {
+ *     val (x, y) = p
+ * //       ^ resolves to `component1`
+ * //          ^ resolves to `component2`
+ * }
+ * ```
+ *
+ * Calling `resolveSymbol()` on a [KtDestructuringDeclarationReference] returns the [KaCallableSymbol] of the corresponding
+ * `componentN` function (for positional destructuring) or the accessed property (for name-based destructuring)
+ * if resolution succeeds; otherwise, it returns `null` (e.g., when unresolved or ambiguous).
+ *
+ * This is a specialized counterpart of [KtResolvable.resolveSymbol] focused specifically on destructuring declaration references
+ *
+ * @see tryResolveSymbols
+ * @see KtResolvable.resolveSymbol
+ */
+// Auto-generated bridge. DO NOT EDIT MANUALLY!
+@KaExperimentalApi
+@KaContextParameterApi
+context(session: KaSession)
+public fun KtDestructuringDeclarationReference.resolveSymbol(): KaCallableSymbol? {
     return with(session) {
         resolveSymbol()
     }

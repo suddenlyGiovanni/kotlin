@@ -23,14 +23,20 @@ KtDestructuringDeclarationEntry(188,189): 'a'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: declaration) val a: ERROR(component1() return type)
 
 KtDestructuringDeclarationEntry(191,197): 'second'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: declaration) val second: ERROR(component2() return type)
 
 KtNameReferenceExpression(202,203): 'x'
@@ -50,7 +56,10 @@ KtDestructuringDeclarationEntry(227,232): 'first'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: declaration) var first: ERROR(component1() return type)
 
 KtNameReferenceExpression(236,237): 'x'
@@ -70,7 +79,10 @@ KtDestructuringDeclarationEntry(261,274): 'first: String'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: declaration) val first: ERROR(component1() return type)
 
 KtNameReferenceExpression(268,274): 'String'
@@ -97,14 +109,20 @@ KtDestructuringDeclarationEntry(303,308): 'first'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: declaration) val first: ERROR(component1() return type)
 
 KtDestructuringDeclarationEntry(333,339): 'a: Int'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: declaration) val a: ERROR(component1() return type)
 
 KtNameReferenceExpression(336,339): 'Int'
@@ -118,7 +136,10 @@ KtDestructuringDeclarationEntry(341,350): 'b: String'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: declaration) val b: ERROR(component2() return type)
 
 KtNameReferenceExpression(344,350): 'String'
@@ -145,7 +166,10 @@ KtDestructuringDeclarationEntry(379,393): 'first: Int = a'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: declaration) val first: ERROR(component1() return type)
 
 KtNameReferenceExpression(386,389): 'Int'
@@ -172,7 +196,10 @@ KtDestructuringDeclarationEntry(395,413): 'second: String = b'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: declaration) val second: ERROR(component2() return type)
 
 KtNameReferenceExpression(403,409): 'String'
@@ -212,7 +239,10 @@ KtDestructuringDeclarationEntry(442,443): '_'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: declaration) val `<underscore local var>`: ERROR(component1() return type)
 
 KtNameReferenceExpression(447,448): 'x'
@@ -232,7 +262,10 @@ KtDestructuringDeclarationEntry(472,481): '_: String'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: declaration) val `<underscore local var>`: ERROR(component1() return type)
 
 KtNameReferenceExpression(475,481): 'String'
@@ -259,7 +292,10 @@ KtDestructuringDeclarationEntry(526,536): 'aa = first'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: declaration) val aa: ERROR(component1() return type)
 
 KtNameReferenceExpression(531,536): 'first'
@@ -292,7 +328,10 @@ KtDestructuringDeclarationEntry(565,583): 'aa: String = first'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: declaration) val aa: ERROR(component1() return type)
 
 KtNameReferenceExpression(569,575): 'String'
@@ -332,7 +371,10 @@ KtDestructuringDeclarationEntry(612,621): 'a = first'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: declaration) val a: ERROR(component1() return type)
 
 KtNameReferenceExpression(616,621): 'first'
@@ -352,7 +394,10 @@ KtDestructuringDeclarationEntry(646,660): 'first: Int = a'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: declaration) val first: ERROR(component1() return type)
 
 KtNameReferenceExpression(653,656): 'Int'
@@ -379,7 +424,10 @@ KtDestructuringDeclarationEntry(662,680): 'second: String = b'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: declaration) val second: ERROR(component2() return type)
 
 KtNameReferenceExpression(670,676): 'String'
@@ -443,14 +491,20 @@ KtDestructuringDeclarationEntry(728,733): 'first'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: loop) val first: ERROR(component1() return type)
 
 KtDestructuringDeclarationEntry(735,741): 'second'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: loop) val second: ERROR(component2() return type)
 
 KtNameReferenceExpression(747,748): 'x'
@@ -480,7 +534,10 @@ KtDestructuringDeclarationEntry(763,768): 'first'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: loop) val first: ERROR(component1() return type)
 
 KtNameReferenceExpression(773,774): 'x'
@@ -510,7 +567,10 @@ KtDestructuringDeclarationEntry(789,802): 'first: String'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: loop) val first: ERROR(component1() return type)
 
 KtNameReferenceExpression(796,802): 'String'
@@ -547,7 +607,10 @@ KtDestructuringDeclarationEntry(823,829): 'a: Int'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: loop) val a: ERROR(component1() return type)
 
 KtNameReferenceExpression(826,829): 'Int'
@@ -561,7 +624,10 @@ KtDestructuringDeclarationEntry(831,840): 'b: String'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: loop) val b: ERROR(component2() return type)
 
 KtNameReferenceExpression(834,840): 'String'
@@ -598,7 +664,10 @@ KtDestructuringDeclarationEntry(861,862): '_'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: loop) val `<underscore local var>`: ERROR(component1() return type)
 
 KtNameReferenceExpression(867,868): 'x'
@@ -628,7 +697,10 @@ KtDestructuringDeclarationEntry(883,892): '_: String'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: loop) val `<underscore local var>`: ERROR(component1() return type)
 
 KtNameReferenceExpression(886,892): 'String'
@@ -665,7 +737,10 @@ KtDestructuringDeclarationEntry(930,940): 'aa = first'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: loop) val aa: ERROR(component1() return type)
 
 KtNameReferenceExpression(935,940): 'first'
@@ -708,7 +783,10 @@ KtDestructuringDeclarationEntry(961,979): 'aa: String = first'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: loop) val aa: ERROR(component1() return type)
 
 KtNameReferenceExpression(965,971): 'String'
@@ -758,7 +836,10 @@ KtDestructuringDeclarationEntry(1000,1014): 'first: Int = a'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: loop) val first: ERROR(component1() return type)
 
 KtNameReferenceExpression(1007,1010): 'Int'
@@ -785,7 +866,10 @@ KtDestructuringDeclarationEntry(1016,1034): 'second: String = b'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: loop) val second: ERROR(component2() return type)
 
 KtNameReferenceExpression(1024,1030): 'String'
@@ -860,14 +944,20 @@ KtDestructuringDeclarationEntry(1110,1115): 'first'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: lambda.<no name>) val first: ERROR(component1() return type)
 
 KtDestructuringDeclarationEntry(1117,1123): 'second'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: lambda.<no name>) val second: ERROR(component2() return type)
 
 KtCallExpression(1135,1153): 'foo { (first) -> }'
@@ -895,7 +985,10 @@ KtDestructuringDeclarationEntry(1142,1147): 'first'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: lambda.<no name>) val first: ERROR(component1() return type)
 
 KtCallExpression(1158,1184): 'foo { (first: String) -> }'
@@ -923,7 +1016,10 @@ KtDestructuringDeclarationEntry(1165,1178): 'first: String'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: lambda.<no name>) val first: ERROR(component1() return type)
 
 KtNameReferenceExpression(1172,1178): 'String'
@@ -958,7 +1054,10 @@ KtDestructuringDeclarationEntry(1196,1202): 'a: Int'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: lambda.<no name>) val a: ERROR(component1() return type)
 
 KtNameReferenceExpression(1199,1202): 'Int'
@@ -972,7 +1071,10 @@ KtDestructuringDeclarationEntry(1204,1213): 'b: String'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: lambda.<no name>) val b: ERROR(component2() return type)
 
 KtNameReferenceExpression(1207,1213): 'String'
@@ -1007,7 +1109,10 @@ KtDestructuringDeclarationEntry(1231,1232): '_'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: lambda.<no name>) val `<underscore local var>`: ERROR(component1() return type)
 
 KtCallExpression(1243,1265): 'foo { (_: String) -> }'
@@ -1035,7 +1140,10 @@ KtDestructuringDeclarationEntry(1250,1259): '_: String'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: lambda.<no name>) val `<underscore local var>`: ERROR(component1() return type)
 
 KtNameReferenceExpression(1253,1259): 'String'
@@ -1070,7 +1178,10 @@ KtDestructuringDeclarationEntry(1294,1304): 'aa = first'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: lambda.<no name>) val aa: ERROR(component1() return type)
 
 KtNameReferenceExpression(1299,1304): 'first'
@@ -1111,7 +1222,10 @@ KtDestructuringDeclarationEntry(1322,1340): 'aa: String = first'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: lambda.<no name>) val aa: ERROR(component1() return type)
 
 KtNameReferenceExpression(1326,1332): 'String'
@@ -1159,7 +1273,10 @@ KtDestructuringDeclarationEntry(1358,1372): 'first: Int = a'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: lambda.<no name>) val first: ERROR(component1() return type)
 
 KtNameReferenceExpression(1365,1368): 'Int'
@@ -1186,7 +1303,10 @@ KtDestructuringDeclarationEntry(1374,1392): 'second: String = b'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
+      Nothing (Unresolved reference)
+    resolveToSymbols:
       (in <local>: lambda.<no name>) val second: ERROR(component2() return type)
 
 KtNameReferenceExpression(1382,1388): 'String'

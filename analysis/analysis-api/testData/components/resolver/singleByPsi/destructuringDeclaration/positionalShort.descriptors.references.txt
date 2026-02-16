@@ -1,4 +1,4 @@
-KtDestructuringDeclarationEntry(137,146): 'val prop2'
+KtDestructuringDeclarationEntry(139,144): 'prop2'
   KtDestructuringDeclarationReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
@@ -7,4 +7,4 @@ KtDestructuringDeclarationEntry(137,146): 'val prop2'
       Nothing (Unresolved reference)
     resolveToSymbols:
       0: (in <local>: usage) val prop2: kotlin.String
-      1: (in foo.MyDataClass) operator fun component2(): T
+      1: (in foo.MyDataClass) operator fun component2(): kotlin.String
