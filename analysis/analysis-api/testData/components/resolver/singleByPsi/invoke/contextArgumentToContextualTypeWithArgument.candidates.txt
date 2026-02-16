@@ -2,7 +2,11 @@ KtCallExpression(101,123): 'block(regularArgument)'
   KaApplicableCallCandidate:
     candidate = KaImplicitInvokeCall:
       contextArgumentMapping = {}
-      contextArguments = []
+      contextArguments = [
+        KaImplicitReceiverValue:
+          symbol = str: kotlin.String
+          type = kotlin.String
+      ]
       dispatchReceiver = KaExplicitReceiverValue:
         expression = block
         isSafeNavigation = false

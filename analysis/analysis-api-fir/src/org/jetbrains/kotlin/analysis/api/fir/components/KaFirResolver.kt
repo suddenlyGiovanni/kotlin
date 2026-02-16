@@ -726,7 +726,8 @@ internal class KaFirResolver(
             unsubstitutedSignature.substitute(substitutor)
         }
 
-        var firstArgIsExtensionReceiver = false
+        var argumentsHaveExtensionReceiver = false
+        var argumentsContextParameterCount = 0
         var isImplicitInvoke = false
 
         fun buildFunctionCall(
@@ -787,9 +788,10 @@ internal class KaFirResolver(
                     }
             }
 
-            // Specially handle @ExtensionFunctionType
-            if (dispatchReceiver?.resolvedType?.isExtensionFunctionType == true) {
-                firstArgIsExtensionReceiver = true
+            // Specially handle @ExtensionFunctionType and @ContextFunctionTypeParams
+            dispatchReceiver?.resolvedType?.let { resolvedType ->
+                argumentsHaveExtensionReceiver = resolvedType.isExtensionFunctionType
+                argumentsContextParameterCount = resolvedType.contextParameterNumberForFunctionType
             }
 
             val dispatchReceiverValue: KaReceiverValue?
@@ -811,9 +813,9 @@ internal class KaFirResolver(
                         isSafeNavigation = false,
                     )
 
-                    extensionReceiverValue = if (firstArgIsExtensionReceiver) {
+                    extensionReceiverValue = if (argumentsHaveExtensionReceiver) {
                         when (fir) {
-                            is FirFunctionCall -> fir.arguments.firstOrNull()?.toKaReceiverValue()
+                            is FirFunctionCall -> fir.arguments.drop(argumentsContextParameterCount).firstOrNull()?.toKaReceiverValue()
                             is FirPropertyAccessExpression -> fir.explicitReceiver?.toKaReceiverValue()
                             else -> null
                         }
@@ -849,11 +851,18 @@ internal class KaFirResolver(
                     }
                 }
             }
+
+            // In regular invoke functions (explicitly declared operator invoke functions) context arguments are available on the fir call,
+            // while for functional types they explicitly passed as regular arguments
+            val adjustedContextArguments = contextArguments.ifEmpty {
+                (fir as? FirFunctionCall)?.arguments?.take(argumentsContextParameterCount).orEmpty()
+            }
+
             return KaBasePartiallyAppliedSymbol(
                 backingSignature = signature,
                 dispatchReceiver = dispatchReceiverValue,
                 extensionReceiver = extensionReceiverValue,
-                contextArguments = contextArguments.toKaContextParameterValues(),
+                contextArguments = adjustedContextArguments.toKaContextParameterValues(),
             )
         }
 
@@ -986,17 +995,13 @@ internal class KaFirResolver(
                     fir.resolvedArgumentMappingIncludingContextArguments
                 }
 
-                val argumentMappingWithoutExtensionReceiver =
-                    if (firstArgIsExtensionReceiver) {
-                        argumentMapping?.entries?.drop(1)
-                    } else {
-                        argumentMapping?.entries
-                    }
+                val argumentCountToDrop = argumentsContextParameterCount + (if (argumentsHaveExtensionReceiver) 1 else 0)
+                val argumentMappingWithoutExtensionReceiverAndContextArguments = argumentMapping?.entries?.drop(argumentCountToDrop)
 
                 @Suppress("UNCHECKED_CAST") // safe because of the above check on targetKtSymbol
                 buildFunctionCall(
                     partiallyAppliedSymbol = partiallyAppliedSymbol as KaPartiallyAppliedFunctionSymbol<KaFunctionSymbol>,
-                    argumentMapping = argumentMappingWithoutExtensionReceiver
+                    argumentMapping = argumentMappingWithoutExtensionReceiverAndContextArguments
                         ?.createArgumentMapping(partiallyAppliedSymbol.signature)
                         .orEmpty(),
                     typeArgumentsMapping = typeArgumentsMapping,

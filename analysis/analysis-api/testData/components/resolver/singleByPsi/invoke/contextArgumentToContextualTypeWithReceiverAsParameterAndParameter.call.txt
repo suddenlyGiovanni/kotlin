@@ -2,14 +2,19 @@ KtCallExpression(141,181): 'block(regularReceiver, regularParameter)'
   KaCallResolutionSuccess:
     call = KaImplicitInvokeCall:
       contextArgumentMapping = {}
-      contextArguments = []
+      contextArguments = [
+        KaImplicitReceiverValue:
+          symbol = str: kotlin.String
+          type = kotlin.String
+      ]
       dispatchReceiver = KaExplicitReceiverValue:
         expression = block
         isSafeNavigation = false
         type = context(kotlin.String) kotlin.Int.(kotlin.Boolean) -> kotlin.Unit
-      extensionReceiver = KaImplicitReceiverValue:
-        symbol = str: kotlin.String
-        type = kotlin.String
+      extensionReceiver = KaExplicitReceiverValue:
+        expression = regularReceiver
+        isSafeNavigation = false
+        type = kotlin.Int
       signature = KaFunctionSignature:
         receiverType = null
         returnType = kotlin.Unit
@@ -41,13 +46,6 @@ KtCallExpression(141,181): 'block(regularReceiver, regularParameter)'
         callableId = kotlin/Function3.invoke
       typeArgumentsMapping = {}
       valueArgumentMapping = {
-        regularReceiver -> (KaVariableSignature:
-          name = p2
-          receiverType = null
-          returnType = kotlin.Int
-          symbol = p2: P2
-          contextParameters = []
-          callableId = null),
         regularParameter -> (KaVariableSignature:
           name = p3
           receiverType = null
