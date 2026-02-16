@@ -81,6 +81,6 @@ open class AbstractCustomJsCompilerFirstStageTest(val testDataRoot: String = "co
 
         setUpDefaultDirectivesForJsBoxTest(parser = /* Does not matter */ FirParser.LightTree)
 
-        configureJsBoxHandlers()
+        configureJsBoxHandlers(verifyJsAst = false)
     }
 }

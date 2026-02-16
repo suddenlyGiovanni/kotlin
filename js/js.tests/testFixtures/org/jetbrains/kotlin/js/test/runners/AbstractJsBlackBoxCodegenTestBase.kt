@@ -38,6 +38,7 @@ import org.jetbrains.kotlin.test.services.configuration.JsFirstStageEnvironmentC
 import org.jetbrains.kotlin.test.services.configuration.JsSecondStageEnvironmentConfigurator
 import org.jetbrains.kotlin.test.services.sourceProviders.AdditionalDiagnosticsSourceFilesProvider
 import org.jetbrains.kotlin.test.services.sourceProviders.CoroutineHelpersSourceFilesProvider
+import org.jetbrains.kotlin.utils.addToStdlib.runIf
 import org.jetbrains.kotlin.utils.bind
 import java.lang.Boolean.getBoolean
 
@@ -191,14 +192,16 @@ fun <FO : ResultingArtifact.FrontendOutput<FO>> TestConfigurationBuilder.commonC
 /**
  * Configures handlers for JS box testing
  */
-fun TestConfigurationBuilder.configureJsBoxHandlers() {
+fun TestConfigurationBuilder.configureJsBoxHandlers(verifyJsAst: Boolean = true) {
     configureJsArtifactsHandlersStep {
         useHandlers(
             ::JsTypeScriptCompilationHandler,
             ::NodeJsGeneratorHandler,
             ::JsBoxRunner,
-            ::JsAstHandler
         )
+        runIf(verifyJsAst) {
+            useHandlers(::JsAstHandler)
+        }
     }
 }
 
