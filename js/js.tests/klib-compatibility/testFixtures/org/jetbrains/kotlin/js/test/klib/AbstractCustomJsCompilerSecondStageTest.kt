@@ -94,7 +94,7 @@ open class AbstractCustomJsCompilerSecondStageTest : AbstractKotlinCompilerWithT
  * In the pure test pipeline the same is done in `JsIrLoweringFacade.compileIrToJs()` by passing `exportedDeclarations` param to `jsCompileKt.compileIr()`
  */
 class JsExportBoxPreprocessor(testServices: TestServices) : SourceFilePreprocessor(testServices) {
-    private val topLevelBoxRegex = Regex("(^|\n)fun box\\(\\)")
+    private val topLevelBoxRegex = Regex("(^|\n|public\\s+)fun box\\(\\)")
     private val topLevelBoxReplacement = "\n@JsExport fun box()"
 
     override fun process(file: TestFile, content: String): String {
