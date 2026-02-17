@@ -335,6 +335,12 @@ public class SourceResolveCandidatesFirTreeConsistencyTestGenerated extends Abst
   }
 
   @Test
+  @TestMetadata("defaultJavaAnnotationArgument.kt")
+  public void testDefaultJavaAnnotationArgument() {
+    run("defaultJavaAnnotationArgument.kt");
+  }
+
+  @Test
   @TestMetadata("DefaultObjectAsExtensionReceiverForFunction.kt")
   public void testDefaultObjectAsExtensionReceiverForFunction() {
     run("DefaultObjectAsExtensionReceiverForFunction.kt");

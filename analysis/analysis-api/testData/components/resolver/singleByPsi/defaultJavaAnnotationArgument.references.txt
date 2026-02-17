@@ -1,0 +1,6 @@
+KtValueArgument(41,46): '"str"'
+  KtDefaultAnnotationArgumentReference:
+    isImplicitReferenceToCompanion: false
+    usesContextSensitiveResolution: false
+    symbols:
+      Nothing (Unresolved reference)

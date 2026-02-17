@@ -357,6 +357,12 @@ public class Fe10IdeNormalAnalysisSourceModuleResolveReferenceTestGenerated exte
   }
 
   @Test
+  @TestMetadata("defaultJavaAnnotationArgument.kt")
+  public void testDefaultJavaAnnotationArgument() {
+    run("defaultJavaAnnotationArgument.kt");
+  }
+
+  @Test
   @TestMetadata("DefaultObjectAsExtensionReceiverForFunction.kt")
   public void testDefaultObjectAsExtensionReceiverForFunction() {
     run("DefaultObjectAsExtensionReceiverForFunction.kt");
