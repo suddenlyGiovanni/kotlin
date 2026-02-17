@@ -8,5 +8,6 @@ KtNameReferenceExpression(118,123): 'block'
   SyntheticPropertyAccessorReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)

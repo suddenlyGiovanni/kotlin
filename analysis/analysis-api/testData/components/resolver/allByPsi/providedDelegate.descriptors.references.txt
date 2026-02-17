@@ -100,6 +100,7 @@ KtNameReferenceExpression(246,256): 'MyDelegate'
   SyntheticPropertyAccessorReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
@@ -186,6 +187,7 @@ KtNameReferenceExpression(446,456): 'ResourceID'
   SyntheticPropertyAccessorReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: null
     symbols:
       Nothing (Unresolved reference)
 
