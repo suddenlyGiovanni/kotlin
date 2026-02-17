@@ -10,7 +10,7 @@ KtValueArgument(46,73): 'AnnotationTarget.EXPRESSION'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      vararg allowedTargets: kotlin.annotation.AnnotationTarget
 
 KtNameReferenceExpression(46,62): 'AnnotationTarget'
   KtSimpleNameReference:
@@ -52,7 +52,7 @@ KtValueArgument(86,112): 'AnnotationRetention.SOURCE'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      value: kotlin.annotation.AnnotationRetention
 
 KtNameReferenceExpression(86,105): 'AnnotationRetention'
   KtSimpleNameReference:
@@ -101,7 +101,7 @@ KtValueArgument(178,189): '0 + integer'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      number: kotlin.Int
 
 KtOperationReferenceExpression(180,181): '+'
   KtSimpleNameReference:
@@ -136,7 +136,7 @@ KtValueArgument(198,205): 'integer'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      number: kotlin.Int
 
 KtNameReferenceExpression(198,205): 'integer'
   KtSimpleNameReference:

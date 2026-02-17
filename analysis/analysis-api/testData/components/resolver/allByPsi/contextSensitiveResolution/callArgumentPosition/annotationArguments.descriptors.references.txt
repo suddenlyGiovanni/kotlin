@@ -17,7 +17,7 @@ KtValueArgument(161,162): 'X'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      value: MyEnum
 
 KtNameReferenceExpression(161,162): 'X'
   KtSimpleNameReference:
@@ -87,7 +87,7 @@ KtValueArgument(263,270): '*[X, Y]'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      vararg value: MyEnum
 
 KtCollectionLiteralExpression(264,270): '[X, Y]'
   KtCollectionLiteralReference:
@@ -152,7 +152,7 @@ KtValueArgument(346,349): '[X]'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      value: kotlin.Array<MyEnum>
 
 KtCollectionLiteralExpression(346,349): '[X]'
   KtCollectionLiteralReference:
@@ -189,7 +189,7 @@ KtValueArgument(371,381): 'arrayOf(X)'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      value: kotlin.Array<MyEnum>
 
 KtCallExpression(371,381): 'arrayOf(X)'
   KtInvokeFunctionReference:
@@ -218,7 +218,7 @@ KtValueArgument(379,380): 'X'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      value: kotlin.Array<MyEnum>
 
 KtNameReferenceExpression(379,380): 'X'
   KtSimpleNameReference:
@@ -253,7 +253,7 @@ KtValueArgument(447,456): 'MAX_VALUE'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      value: kotlin.Int
 
 KtNameReferenceExpression(447,456): 'MAX_VALUE'
   KtSimpleNameReference:
@@ -281,7 +281,7 @@ KtValueArgument(484,491): 'RUNTIME'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      value: kotlin.annotation.AnnotationRetention
 
 KtNameReferenceExpression(484,491): 'RUNTIME'
   KtSimpleNameReference:

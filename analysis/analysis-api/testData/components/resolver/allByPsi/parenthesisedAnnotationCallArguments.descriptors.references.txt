@@ -45,7 +45,7 @@ KtValueArgument(175,182): '(("A"))'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      value: kotlin.String
 
 KtNameReferenceExpression(200,206): 'MyAnno'
   KtSimpleNameReference:
@@ -80,7 +80,7 @@ KtValueArgument(247,268): '(((("A")) as String))'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      value: kotlin.String
 
 KtOperationReferenceExpression(257,259): 'as'
   KtSimpleNameReference:
@@ -173,14 +173,14 @@ KtValueArgument(389,394): '("A")'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      vararg value: kotlin.String
 
 KtValueArgument(396,399): '"B"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      vararg value: kotlin.String
 
 KtNameReferenceExpression(420,432): 'MyAnnoKClass'
   KtSimpleNameReference:
@@ -194,7 +194,7 @@ KtValueArgument(433,452): '(((String::class)))'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      value: kotlin.reflect.KClass<*>
 
 KtNameReferenceExpression(436,442): 'String'
   KtSimpleNameReference:

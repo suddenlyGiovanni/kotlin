@@ -33,7 +33,6 @@ import org.jetbrains.kotlin.analysis.utils.printer.parentOfType
 import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.diagnostics.*
 import org.jetbrains.kotlin.idea.references.KDocReference
-import org.jetbrains.kotlin.idea.references.KtDefaultAnnotationArgumentReference
 import org.jetbrains.kotlin.idea.references.KtReference
 import org.jetbrains.kotlin.idea.references.KtSimpleNameReference
 import org.jetbrains.kotlin.lexer.KtTokens
@@ -169,10 +168,6 @@ internal class KaFe10Resolver(
     }
 
     private fun doResolveToSymbols(reference: KtReference): Collection<KaSymbol> {
-        if (reference is KtDefaultAnnotationArgumentReference) {
-            return resolveDefaultAnnotationArgumentReference(reference)
-        }
-
         checkWithAttachment(
             reference is KtFe10Reference,
             { "${reference::class.simpleName} is not extends ${KtFe10Reference::class.simpleName}" },

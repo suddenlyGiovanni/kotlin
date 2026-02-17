@@ -5,9 +5,7 @@
 
 package org.jetbrains.kotlin.analysis.api.impl.base.components
 
-import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiMember
 import org.jetbrains.kotlin.analysis.api.KaImplementationDetail
 import org.jetbrains.kotlin.analysis.api.KaSession
 import org.jetbrains.kotlin.analysis.api.components.KaResolver
@@ -234,20 +232,6 @@ abstract class KaBaseResolver<T : KaSession> : KaBaseSessionComponent<T>(), KaRe
         reference.resolveToSymbols().ifNotEmpty {
             KaBaseSymbolResolutionSuccess(backingSymbols = this.toList(), token = token)
         }
-
-    // TODO: remove this workaround after KT-68499
-    protected fun resolveDefaultAnnotationArgumentReference(
-        reference: KtDefaultAnnotationArgumentReference,
-    ): Collection<KaSymbol> = with(analysisSession) {
-        val symbol = when (val psi = reference.resolve()) {
-            is KtDeclaration -> psi.symbol
-            is PsiClass -> psi.namedClassSymbol
-            is PsiMember -> psi.callableSymbol
-            else -> null
-        }
-
-        listOfNotNull(symbol)
-    }
 
     protected fun KtBinaryExpression.getCompoundAssignKind(): KaCompoundAssignOperation.Kind = when (operationToken) {
         KtTokens.PLUSEQ -> KaCompoundAssignOperation.Kind.PLUS_ASSIGN

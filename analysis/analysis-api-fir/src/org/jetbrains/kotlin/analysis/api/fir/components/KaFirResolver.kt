@@ -72,7 +72,6 @@ import org.jetbrains.kotlin.fir.utils.exceptions.withFirSymbolEntry
 import org.jetbrains.kotlin.fir.visitors.FirTransformer
 import org.jetbrains.kotlin.fir.visitors.FirVisitor
 import org.jetbrains.kotlin.idea.references.KDocReference
-import org.jetbrains.kotlin.idea.references.KtDefaultAnnotationArgumentReference
 import org.jetbrains.kotlin.idea.references.KtReference
 import org.jetbrains.kotlin.idea.references.KtSimpleNameReference
 import org.jetbrains.kotlin.kdoc.psi.impl.KDocName
@@ -183,8 +182,6 @@ internal class KaFirResolver(
 
     @OptIn(KtExperimentalApi::class)
     override fun performSymbolResolution(reference: KtReference): KaSymbolResolutionAttempt? {
-        // Non-fir references are not supported explicitly
-        // In particular, KtDefaultAnnotationArgumentReference won't work for now
         if (reference !is KaFirReference) {
             return null
         }
@@ -200,6 +197,7 @@ internal class KaFirResolver(
             is KaFirSimpleNameReference,
                 -> tryResolveSymbolsForReferenceViaElement(reference)
 
+            is KaFirDefaultAnnotationArgumentReference -> null
             is KaFirInvokeFunctionReference -> tryResolveSymbolsForInvokeReference(reference)
             is KaFirKDocReference -> tryResolveSymbolsForKDocReference(reference)
         }
@@ -242,10 +240,6 @@ internal class KaFirResolver(
     }
 
     private fun doResolveToSymbols(reference: KtReference): Collection<KaSymbol> {
-        if (reference is KtDefaultAnnotationArgumentReference) {
-            return resolveDefaultAnnotationArgumentReference(reference)
-        }
-
         checkWithAttachment(
             reference is KaSymbolBasedReference,
             { "${reference::class.simpleName} is not extends ${KaSymbolBasedReference::class.simpleName}" },

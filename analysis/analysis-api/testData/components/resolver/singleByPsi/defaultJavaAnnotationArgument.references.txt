@@ -3,4 +3,4 @@ KtValueArgument(41,46): '"str"'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      {psi: PsiAnnotationMethodImpl} value: kotlin.String

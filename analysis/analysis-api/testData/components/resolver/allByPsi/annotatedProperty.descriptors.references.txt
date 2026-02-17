@@ -227,7 +227,7 @@ KtValueArgument(356,372): '"property $prop"'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      position: kotlin.String
 
 KtNameReferenceExpression(367,371): 'prop'
   KtSimpleNameReference:
@@ -255,7 +255,7 @@ KtValueArgument(385,407): '"type parameter $prop"'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      position: kotlin.String
 
 KtNameReferenceExpression(402,406): 'prop'
   KtSimpleNameReference:
@@ -283,7 +283,7 @@ KtValueArgument(419,432): '"bound $prop"'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      position: kotlin.String
 
 KtNameReferenceExpression(427,431): 'prop'
   KtSimpleNameReference:
@@ -318,7 +318,7 @@ KtValueArgument(445,465): '"nested bound $prop"'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      position: kotlin.String
 
 KtNameReferenceExpression(460,464): 'prop'
   KtSimpleNameReference:
@@ -346,7 +346,7 @@ KtValueArgument(491,507): '"receiver $prop"'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      position: kotlin.String
 
 KtNameReferenceExpression(502,506): 'prop'
   KtSimpleNameReference:
@@ -374,7 +374,7 @@ KtValueArgument(515,536): '"receiver type $prop"'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      position: kotlin.String
 
 KtNameReferenceExpression(531,535): 'prop'
   KtSimpleNameReference:
@@ -409,7 +409,7 @@ KtValueArgument(549,577): '"nested receiver type $prop"'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      position: kotlin.String
 
 KtNameReferenceExpression(572,576): 'prop'
   KtSimpleNameReference:
@@ -437,7 +437,7 @@ KtValueArgument(607,626): '"return type $prop"'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      position: kotlin.String
 
 KtNameReferenceExpression(621,625): 'prop'
   KtSimpleNameReference:
@@ -472,7 +472,7 @@ KtValueArgument(645,671): '"nested return type $prop"'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      position: kotlin.String
 
 KtNameReferenceExpression(666,670): 'prop'
   KtSimpleNameReference:
@@ -500,7 +500,7 @@ KtValueArgument(684,717): '"nested nested return type $prop"'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      position: kotlin.String
 
 KtNameReferenceExpression(712,716): 'prop'
   KtSimpleNameReference:
@@ -528,7 +528,7 @@ KtValueArgument(736,750): '"getter $prop"'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      position: kotlin.String
 
 KtNameReferenceExpression(745,749): 'prop'
   KtSimpleNameReference:
@@ -556,7 +556,7 @@ KtValueArgument(779,793): '"setter $prop"'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      position: kotlin.String
 
 KtNameReferenceExpression(788,792): 'prop'
   KtSimpleNameReference:
@@ -584,7 +584,7 @@ KtValueArgument(809,833): '"setter parameter $prop"'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      position: kotlin.String
 
 KtNameReferenceExpression(828,832): 'prop'
   KtSimpleNameReference:

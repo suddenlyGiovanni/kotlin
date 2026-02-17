@@ -88,7 +88,7 @@ KtValueArgument(145,157): '"SOME_ERROR"'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      vararg names: kotlin.String
 
 KtArrayAccessExpression(159,166): 'list[1]'
   KtArrayAccessReference:

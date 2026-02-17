@@ -70,7 +70,7 @@ KtValueArgument(165,177): '0 + constant'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      str: kotlin.String
+      Nothing (Unresolved reference)
 
 KtOperationReferenceExpression(167,168): '+'
   KtSimpleNameReference:
@@ -105,7 +105,7 @@ KtValueArgument(190,202): '1 + constant'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      str: kotlin.String
+      Nothing (Unresolved reference)
 
 KtOperationReferenceExpression(192,193): '+'
   KtSimpleNameReference:
@@ -140,7 +140,7 @@ KtValueArgument(215,227): '2 + constant'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      str: kotlin.String
+      Nothing (Unresolved reference)
 
 KtOperationReferenceExpression(217,218): '+'
   KtSimpleNameReference:

@@ -17,4 +17,4 @@ KtValueArgument(131,143): 'Annotation()'
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
     symbols:
-      Nothing (Unresolved reference)
+      value: Annotation
