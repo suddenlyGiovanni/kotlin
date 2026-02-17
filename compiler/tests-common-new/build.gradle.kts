@@ -46,7 +46,7 @@ dependencies {
     testFixturesApi(jpsModelImpl()) { isTransitive = false }
     testFixturesApi(libs.junit4)
 
-    testFixturesApi(toolsJarApi())
+    testFixturesCompileOnly(toolsJarApi())
     testRuntimeOnly(toolsJar())
 
     thirdPartyAnnotationsClasspath(commonDependency("jakarta.annotation", "jakarta.annotation-api"))
