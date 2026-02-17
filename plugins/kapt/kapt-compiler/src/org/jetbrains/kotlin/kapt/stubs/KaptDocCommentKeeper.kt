@@ -124,16 +124,20 @@ private fun escapeNestedComments(text: String): String {
         val currentChar = text[index]
         fun nextChar() = text.getOrNull(index + 1)
 
-        if (currentChar == '/' && nextChar() == '*') {
-            commentLevel++
-            index++
-            result.append("/ *")
-        } else if (currentChar == '*' && nextChar() == '/') {
-            commentLevel = maxOf(0, commentLevel - 1)
-            index++
-            result.append("* /")
-        } else {
-            result.append(currentChar)
+        when (currentChar) {
+            '/' if nextChar() == '*' -> {
+                commentLevel++
+                index++
+                result.append("/ *")
+            }
+            '*' if nextChar() == '/' -> {
+                commentLevel = maxOf(0, commentLevel - 1)
+                index++
+                result.append("* /")
+            }
+            else -> {
+                result.append(currentChar)
+            }
         }
 
         index++

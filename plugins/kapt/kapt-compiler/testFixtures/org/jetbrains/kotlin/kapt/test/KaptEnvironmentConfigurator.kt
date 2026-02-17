@@ -49,7 +49,7 @@ class KaptEnvironmentConfigurator(
 
             for (option in module.directives[CodegenTestDirectives.JAVAC_OPTIONS]) {
                 val (key, value) = option.split('=').map { it.trim() }.also { assert(it.size == 2) }
-                javacOptions.put(key, value)
+                javacOptions[key] = value
             }
 
             for (directive in KaptTestDirectives.flagDirectives) {
