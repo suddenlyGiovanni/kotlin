@@ -15,13 +15,21 @@ fun demo(): Flow<Foo> = TODO()
 
 val flowFoo: Flow<Foo> = TODO()
 
-fun closure_returning_flow(i: (Flow<Foo>)->Unit): Unit = TODO()
+fun closure_returning_flow(i: (Flow<Foo>) -> Unit): Unit = TODO()
 
-fun demo_ft_produce(): suspend (Int) -> Int = TODO()
+fun produce_flow(): Flow<Int> = TODO()
+
+fun produce_function(): suspend (Int) -> Int = TODO()
 
 typealias AliasedFunctionType = (Float) -> Int
 
 suspend fun produce_function_typealias(): AliasedFunctionType = TODO()
+
+suspend fun produce_suspend_function(): suspend (Double) -> Int = TODO()
+
+typealias AliasedAsyncFunctionType = suspend (Float) -> Long
+
+suspend fun produce_suspend_function_typealias(): AliasedAsyncFunctionType = TODO()
 
 // MODULE: flow_overrides
 // FILE: flow_overrides.kt
