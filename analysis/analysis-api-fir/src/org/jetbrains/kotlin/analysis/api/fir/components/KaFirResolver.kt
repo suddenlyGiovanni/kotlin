@@ -197,7 +197,7 @@ internal class KaFirResolver(
             is KaFirSimpleNameReference,
                 -> tryResolveSymbolsForReferenceViaElement(reference)
 
-            is KaFirDefaultAnnotationArgumentReference -> null
+            is KaFirDefaultAnnotationArgumentReference -> tryResolveSymbolsForDefaultAnnotationArgumentReference(reference)
             is KaFirInvokeFunctionReference -> tryResolveSymbolsForInvokeReference(reference)
             is KaFirKDocReference -> tryResolveSymbolsForKDocReference(reference)
         }

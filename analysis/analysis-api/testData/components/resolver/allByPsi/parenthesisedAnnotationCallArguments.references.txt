@@ -44,6 +44,7 @@ KtValueArgument(175,182): '(("A"))'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       value: kotlin.String
 
@@ -72,6 +73,7 @@ KtValueArgument(247,268): '(((("A")) as String))'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       value: kotlin.String
 
@@ -144,6 +146,7 @@ KtValueArgument(389,394): '("A")'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       vararg value: kotlin.String
 
@@ -151,6 +154,7 @@ KtValueArgument(396,399): '"B"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       vararg value: kotlin.String
 
@@ -165,6 +169,7 @@ KtValueArgument(433,452): '(((String::class)))'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       value: kotlin.reflect.KClass<*>
 

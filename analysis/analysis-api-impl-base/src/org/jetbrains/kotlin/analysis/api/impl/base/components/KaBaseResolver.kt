@@ -83,6 +83,7 @@ abstract class KaBaseResolver<T : KaSession> : KaBaseSessionComponent<T>(), KaRe
     final override fun KtConstructorDelegationReference.resolveSymbol(): KaConstructorSymbol? = resolveSymbolSafe()
     final override fun KtCollectionLiteralReference.resolveSymbol(): KaNamedFunctionSymbol? = resolveSymbolSafe()
     final override fun KtArrayAccessReference.resolveSymbol(): KaNamedFunctionSymbol? = resolveSymbolSafe()
+    final override fun KtDefaultAnnotationArgumentReference.resolveSymbol(): KaValueParameterSymbol? = resolveSymbolSafe()
 
     final override fun KtReference.resolveToSymbol(): KaSymbol? = withPsiValidityAssertion(element) {
         return resolveToSymbols().singleOrNull()
@@ -223,15 +224,24 @@ abstract class KaBaseResolver<T : KaSession> : KaBaseSessionComponent<T>(), KaRe
             null -> null
         }
 
+    private fun tryResolveSymbolsViaResolveToSymbols(
+        reference: KtReference,
+    ): KaSymbolResolutionAttempt? = reference.resolveToSymbols().ifNotEmpty {
+        KaBaseSymbolResolutionSuccess(backingSymbols = this.toList(), token = token)
+    }
+
     /**
      * KDocs cannot have diagnostics, so effectively they always successfully resolved.
      * This means that a special handling is not needed (at least yet) and the references'
      * result could be reused fully with no contradictions
      */
-    protected fun tryResolveSymbolsForKDocReference(reference: KDocReference): KaSymbolResolutionAttempt? =
-        reference.resolveToSymbols().ifNotEmpty {
-            KaBaseSymbolResolutionSuccess(backingSymbols = this.toList(), token = token)
-        }
+    protected fun tryResolveSymbolsForKDocReference(
+        reference: KDocReference,
+    ): KaSymbolResolutionAttempt? = tryResolveSymbolsViaResolveToSymbols(reference)
+
+    protected fun tryResolveSymbolsForDefaultAnnotationArgumentReference(
+        reference: KtDefaultAnnotationArgumentReference,
+    ): KaSymbolResolutionAttempt? = tryResolveSymbolsViaResolveToSymbols(reference)
 
     protected fun KtBinaryExpression.getCompoundAssignKind(): KaCompoundAssignOperation.Kind = when (operationToken) {
         KtTokens.PLUSEQ -> KaCompoundAssignOperation.Kind.PLUS_ASSIGN

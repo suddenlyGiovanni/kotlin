@@ -23,6 +23,7 @@ KtValueArgument(107,125): '"a type $constant"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       str: kotlin.String
 
@@ -51,6 +52,7 @@ KtValueArgument(138,163): '"a nested type $constant"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       str: kotlin.String
 
@@ -79,6 +81,7 @@ KtValueArgument(182,214): '"a nested nested type $constant"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       str: kotlin.String
 
@@ -107,6 +110,7 @@ KtValueArgument(240,258): '"b type $constant"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       str: kotlin.String
 
@@ -135,6 +139,7 @@ KtValueArgument(272,297): '"b nested type $constant"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       str: kotlin.String
 
@@ -163,6 +168,7 @@ KtValueArgument(310,342): '"b nested nested type $constant"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       str: kotlin.String
 
@@ -191,6 +197,7 @@ KtValueArgument(382,397): '"destr 1 $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       str: kotlin.String
 
@@ -223,6 +230,7 @@ KtValueArgument(410,419): '"a $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       str: kotlin.String
 
@@ -255,6 +263,7 @@ KtValueArgument(430,439): '"b $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       str: kotlin.String
 
@@ -291,6 +300,7 @@ KtValueArgument(470,485): '"destr 1 $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       str: kotlin.String
 
@@ -323,6 +333,7 @@ KtValueArgument(498,507): '"c $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       str: kotlin.String
 
@@ -355,6 +366,7 @@ KtValueArgument(518,527): '"d $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       str: kotlin.String
 

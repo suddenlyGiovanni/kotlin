@@ -561,6 +561,31 @@ public interface KaResolver : KaSessionComponent {
     public fun KtArrayAccessReference.resolveSymbol(): KaNamedFunctionSymbol?
 
     /**
+     * Resolves the annotation's default argument parameter targeted by the given [KtDefaultAnnotationArgumentReference].
+     *
+     * #### Example
+     *
+     * ```kotlin
+     * annotation class Anno(val value: String)
+     *
+     * @Anno("hello")
+     * //    ^^^^^^^ the implicit default argument reference resolves to the `value` parameter
+     * fun foo() {}
+     * ```
+     *
+     * Calling `resolveSymbol()` on a [KtDefaultAnnotationArgumentReference] returns the [KaValueParameterSymbol]
+     * of the annotation constructor's first parameter if resolution succeeds; otherwise, it returns `null`
+     * (e.g., when unresolved or ambiguous).
+     *
+     * This is a specialized counterpart of [KtResolvable.resolveSymbol] focused specifically on default annotation argument references
+     *
+     * @see tryResolveSymbols
+     * @see KtResolvable.resolveSymbol
+     */
+    @KaExperimentalApi
+    public fun KtDefaultAnnotationArgumentReference.resolveSymbol(): KaValueParameterSymbol?
+
+    /**
      * Attempts to resolve the call for the given [KtResolvableCall].
      *
      * ### Usage Example:
@@ -1725,6 +1750,38 @@ public fun KtCollectionLiteralReference.resolveSymbol(): KaNamedFunctionSymbol? 
 @KaContextParameterApi
 context(session: KaSession)
 public fun KtArrayAccessReference.resolveSymbol(): KaNamedFunctionSymbol? {
+    return with(session) {
+        resolveSymbol()
+    }
+}
+
+/**
+ * Resolves the annotation's default argument parameter targeted by the given [KtDefaultAnnotationArgumentReference].
+ *
+ * #### Example
+ *
+ * ```kotlin
+ * annotation class Anno(val value: String)
+ *
+ * @Anno("hello")
+ * //    ^^^^^^^ the implicit default argument reference resolves to the `value` parameter
+ * fun foo() {}
+ * ```
+ *
+ * Calling `resolveSymbol()` on a [KtDefaultAnnotationArgumentReference] returns the [KaValueParameterSymbol]
+ * of the annotation constructor's first parameter if resolution succeeds; otherwise, it returns `null`
+ * (e.g., when unresolved or ambiguous).
+ *
+ * This is a specialized counterpart of [KtResolvable.resolveSymbol] focused specifically on default annotation argument references
+ *
+ * @see tryResolveSymbols
+ * @see KtResolvable.resolveSymbol
+ */
+// Auto-generated bridge. DO NOT EDIT MANUALLY!
+@KaExperimentalApi
+@KaContextParameterApi
+context(session: KaSession)
+public fun KtDefaultAnnotationArgumentReference.resolveSymbol(): KaValueParameterSymbol? {
     return with(session) {
         resolveSymbol()
     }

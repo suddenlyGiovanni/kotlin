@@ -11,11 +11,9 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiMethod
 import org.jetbrains.kotlin.asJava.unwrapped
 import org.jetbrains.kotlin.name.Name
-import org.jetbrains.kotlin.psi.KtAnnotationEntry
-import org.jetbrains.kotlin.psi.KtImplementationDetail
-import org.jetbrains.kotlin.psi.KtParameter
-import org.jetbrains.kotlin.psi.KtValueArgument
+import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.getParentOfTypeAndBranch
+import org.jetbrains.kotlin.resolution.KtResolvable
 
 /**
  * A reference pointing to a single argument in annotation's constructor call.
@@ -31,8 +29,10 @@ import org.jetbrains.kotlin.psi.psiUtil.getParentOfTypeAndBranch
  * @Foo(name = "bar") // no reference, named argument is used
  * ```
  */
+@OptIn(KtExperimentalApi::class)
 @SubclassOptInRequired(KtImplementationDetail::class)
-abstract class KtDefaultAnnotationArgumentReference(element: KtValueArgument) : AbstractKtReference<KtValueArgument>(element) {
+abstract class KtDefaultAnnotationArgumentReference(element: KtValueArgument) : AbstractKtReference<KtValueArgument>(element),
+    KtResolvable {
     override val resolvesByNames: Collection<Name>
         get() = emptyList()
 

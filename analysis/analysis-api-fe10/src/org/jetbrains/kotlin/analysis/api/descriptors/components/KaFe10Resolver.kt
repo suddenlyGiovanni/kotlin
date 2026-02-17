@@ -40,6 +40,7 @@ import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.parentsWithSelf
 import org.jetbrains.kotlin.references.fe10.Fe10KDocReference
 import org.jetbrains.kotlin.references.fe10.Fe10SyntheticPropertyAccessorReference
+import org.jetbrains.kotlin.references.fe10.KtFe10DefaultAnnotationArgumentReference
 import org.jetbrains.kotlin.references.fe10.KtFe10InvokeFunctionReference
 import org.jetbrains.kotlin.references.fe10.base.KtFe10Reference
 import org.jetbrains.kotlin.resolve.BindingContext
@@ -100,6 +101,7 @@ internal class KaFe10Resolver(
 
         is KtFe10InvokeFunctionReference -> tryResolveSymbolsForInvokeReference(reference)
         is Fe10KDocReference -> tryResolveSymbolsForKDocReference(reference)
+        is KtFe10DefaultAnnotationArgumentReference -> tryResolveSymbolsForDefaultAnnotationArgumentReference(reference)
         else -> tryResolveSymbolsForReferenceViaElement(reference)
     }
 

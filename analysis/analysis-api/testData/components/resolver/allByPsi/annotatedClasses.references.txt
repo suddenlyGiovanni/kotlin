@@ -9,6 +9,7 @@ KtValueArgument(23,44): 'AnnotationTarget.TYPE'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       vararg allowedTargets: kotlin.annotation.AnnotationTarget
 
@@ -44,6 +45,7 @@ KtValueArgument(154,176): '"parameter type $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       position: kotlin.String
 
@@ -72,6 +74,7 @@ KtValueArgument(189,218): '"nested parameter type $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       position: kotlin.String
 
@@ -100,6 +103,7 @@ KtValueArgument(237,273): '"nested nested parameter type $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       position: kotlin.String
 
@@ -128,6 +132,7 @@ KtValueArgument(292,312): '"defaultValue $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       position: kotlin.String
 
@@ -149,6 +154,7 @@ KtValueArgument(327,367): '"anonymousFunction parameter type $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       position: kotlin.String
 
@@ -177,6 +183,7 @@ KtValueArgument(381,418): '"anonymousFunction return type $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       position: kotlin.String
 
@@ -215,6 +222,7 @@ KtValueArgument(486,509): '"super type call $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       position: kotlin.String
 
@@ -243,6 +251,7 @@ KtValueArgument(531,560): '"nested super type ref $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       position: kotlin.String
 
@@ -271,6 +280,7 @@ KtValueArgument(573,609): '"nested nested super type ref $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       position: kotlin.String
 
@@ -299,6 +309,7 @@ KtValueArgument(659,682): '"super type call $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       position: kotlin.String
 
@@ -327,6 +338,7 @@ KtValueArgument(704,733): '"nested super type ref $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       position: kotlin.String
 
@@ -355,6 +367,7 @@ KtValueArgument(746,782): '"nested nested super type ref $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       position: kotlin.String
 
@@ -383,6 +396,7 @@ KtValueArgument(846,868): '"super type ref $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       position: kotlin.String
 
@@ -411,6 +425,7 @@ KtValueArgument(881,910): '"nested super type ref $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       position: kotlin.String
 
@@ -439,6 +454,7 @@ KtValueArgument(923,959): '"nested nested super type ref $prop"'
   KtDefaultAnnotationArgumentReference:
     isImplicitReferenceToCompanion: false
     usesContextSensitiveResolution: false
+    attempt: KaSymbolResolutionSuccess
     symbols:
       position: kotlin.String
 
