@@ -18,9 +18,6 @@ import java.io.File
 import java.io.IOException
 
 object TestGeneratorForJUnit5 : AbstractTestGenerator() {
-
-    private val GENERATED_FILES = HashSet<String>()
-
     private fun Printer.generateMetadata(testDataSource: TestEntityModel) {
         val dataString = testDataSource.dataString
         if (dataString != null) {
@@ -91,12 +88,6 @@ object TestGeneratorForJUnit5 : AbstractTestGenerator() {
         private val suiteClassName: String = suiteTestClassFqName.substringAfterLast('.', suiteTestClassFqName)
         private val testSourceFilePath: String =
             baseDir + "/" + this.suiteClassPackage.replace(".", "/") + "/" + this.suiteClassName + ".java"
-
-        init {
-            if (!GENERATED_FILES.add(testSourceFilePath)) {
-                throw IllegalArgumentException("Same test file already generated in current session: $testSourceFilePath")
-            }
-        }
 
         @Throws(IOException::class)
         fun generateAndSave(dryRun: Boolean, allowGenerationOnTeamCity: Boolean): GenerationResult {
