@@ -19,8 +19,9 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
 
 @OptIn(KtExperimentalApi::class)
 @SubclassOptInRequired(KtImplementationDetail::class)
-abstract class KtCollectionLiteralReference(expression: KtCollectionLiteralExpression) :
-    KtSimpleReference<KtCollectionLiteralExpression>(expression), MultiRangeReference, KtResolvable {
+abstract class KtCollectionLiteralReference(
+    expression: KtCollectionLiteralExpression,
+) : KtSimpleReference<KtCollectionLiteralExpression>(expression), MultiRangeReference, KtResolvable {
     companion object {
         private val COLLECTION_LITERAL_CALL_NAMES: List<Name> = buildList {
             addAll(ArrayFqNames.ARRAY_CALL_NAMES)

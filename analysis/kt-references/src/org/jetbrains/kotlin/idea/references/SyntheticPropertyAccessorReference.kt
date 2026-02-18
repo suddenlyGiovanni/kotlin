@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.resolve.references.ReferenceAccess
 @SubclassOptInRequired(KtImplementationDetail::class)
 abstract class SyntheticPropertyAccessorReference(
     expression: KtNameReferenceExpression,
-    val getter: Boolean
+    val getter: Boolean,
 ) : KtSimpleReference<KtNameReferenceExpression>(expression), KtResolvable {
     protected fun isAccessorName(name: String): Boolean {
         if (getter) {

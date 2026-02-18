@@ -18,9 +18,9 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
 
 @OptIn(KtExperimentalApi::class)
 @SubclassOptInRequired(KtImplementationDetail::class)
-abstract class KtInvokeFunctionReference(expression: KtCallExpression) : KtSimpleReference<KtCallExpression>(expression),
-    MultiRangeReference,
-    KtResolvable {
+abstract class KtInvokeFunctionReference(
+    expression: KtCallExpression,
+) : KtSimpleReference<KtCallExpression>(expression), MultiRangeReference, KtResolvable {
 
     override val resolvesByNames: Collection<Name> get() = NAMES
 

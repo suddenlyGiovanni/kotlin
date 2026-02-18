@@ -31,8 +31,9 @@ import org.jetbrains.kotlin.resolution.KtResolvable
  */
 @OptIn(KtExperimentalApi::class)
 @SubclassOptInRequired(KtImplementationDetail::class)
-abstract class KtDefaultAnnotationArgumentReference(element: KtValueArgument) : AbstractKtReference<KtValueArgument>(element),
-    KtResolvable {
+abstract class KtDefaultAnnotationArgumentReference(
+    element: KtValueArgument,
+) : AbstractKtReference<KtValueArgument>(element), KtResolvable {
     override val resolvesByNames: Collection<Name>
         get() = emptyList()
 

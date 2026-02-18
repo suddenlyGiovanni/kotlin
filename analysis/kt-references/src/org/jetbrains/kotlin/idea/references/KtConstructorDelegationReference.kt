@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.resolution.KtResolvable
 @OptIn(KtExperimentalApi::class)
 @SubclassOptInRequired(KtImplementationDetail::class)
 abstract class KtConstructorDelegationReference(
-    expression: KtConstructorDelegationReferenceExpression
+    expression: KtConstructorDelegationReferenceExpression,
 ) : KtSimpleReference<KtConstructorDelegationReferenceExpression>(expression), KtResolvable {
     override fun getRangeInElement(): TextRange {
         return TextRange(0, element.textLength)
