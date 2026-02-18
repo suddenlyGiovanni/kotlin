@@ -11,6 +11,7 @@
 # Directive SPACE_TO_GITHUB_OWNER specifies Space team to GitHub username mapping with format: <team_name> <username1> <username2> [...]
 # Directive UNKNOWN specifies that path is unclaimed
 # Directive NO_OWNER specifies that path requires no reviewer, even fallback does not apply
+# Directive GITHUB_BRANCH_RULE specifies per-branch ownership with format: <branch-glob-pattern> <path-pattern> <owners...>
 # Ownership must be exhaustive modulo UNKNOWN
 
 # SPACE_OWNER: "Kotlin"
