@@ -1169,18 +1169,30 @@ internal class KaFirResolver(
         val nextCall: FirFunctionCall,
     )
 
+    private fun FirExpression.asFunctionOperatorCall(
+        expectedSourceKind: KtFakeSourceElementKind,
+    ): FirFunctionCall? = (this as? FirFunctionCall)?.takeIf {
+        it.origin == FirFunctionCallOrigin.Operator && it.source?.kind == expectedSourceKind
+    }
+
     private fun extractFirForLoopCalls(firLoop: FirWhileLoop): FirForLoopCalls? {
-        val hasNextCall = firLoop.condition as? FirFunctionCall ?: return null
+        val hasNextCall = firLoop.condition.asFunctionOperatorCall(KtFakeSourceElementKind.DesugaredForLoop) ?: return null
 
         val iteratorPropertyAccess = hasNextCall.explicitReceiver as? FirQualifiedAccessExpression ?: return null
         val iteratorPropertySymbol = (iteratorPropertyAccess.calleeReference as? FirResolvedNamedReference)
             ?.resolvedSymbol as? FirPropertySymbol ?: return null
 
         @OptIn(SymbolInternals::class)
-        val iteratorCall = iteratorPropertySymbol.fir.initializer as? FirFunctionCall ?: return null
+        val iteratorCall = iteratorPropertySymbol.fir
+            .initializer
+            ?.asFunctionOperatorCall(KtFakeSourceElementKind.DesugaredForLoop)
+            ?: return null
 
         @OptIn(SymbolInternals::class)
-        val nextCall = (firLoop.block.statements.firstOrNull() as? FirProperty)?.initializer as? FirFunctionCall ?: return null
+        val nextCall = (firLoop.block.statements.firstOrNull() as? FirProperty)
+            ?.initializer
+            ?.asFunctionOperatorCall(KtFakeSourceElementKind.DesugaredForLoop)
+            ?: return null
 
         return FirForLoopCalls(
             iteratorCall = iteratorCall,
@@ -1241,11 +1253,14 @@ internal class KaFirResolver(
         if (firProperty.delegate == null) return null
 
         val getValueCall = (firProperty.getter?.body?.statements?.singleOrNull() as? FirReturnExpression)
-            ?.result as? FirFunctionCall
+            ?.result
+            ?.asFunctionOperatorCall(KtFakeSourceElementKind.DelegatedPropertyAccessor)
+
         val setValueCall = (firProperty.setter?.body?.statements?.singleOrNull() as? FirReturnExpression)
-            ?.result as? FirFunctionCall
-        val provideDelegateCall = (firProperty.delegate as? FirFunctionCall)
-            ?.takeIf { it.origin == FirFunctionCallOrigin.Operator }
+            ?.result
+            ?.asFunctionOperatorCall(KtFakeSourceElementKind.DelegatedPropertyAccessor)
+
+        val provideDelegateCall = firProperty.delegate?.asFunctionOperatorCall(KtFakeSourceElementKind.DelegatedPropertyAccessor)
 
         return FirPropertyDelegateCalls(
             getValueCall = getValueCall,
