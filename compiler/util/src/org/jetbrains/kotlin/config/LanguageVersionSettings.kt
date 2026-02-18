@@ -459,7 +459,6 @@ enum class LanguageFeature(
     ForbidExposingLessVisibleTypesInInline(KOTLIN_2_4, enabledInProgressiveMode = true, "KTLC-283"),
     ForbidCaptureInlinableLambdasInJsCode(KOTLIN_2_4, enabledInProgressiveMode = true, "KT-69297"),
     ForbidInitializationBeforeDeclarationInAnonymous(KOTLIN_2_4, enabledInProgressiveMode = true, "KTLC-290"),
-    ForbidUpperBoundsViolationOnTypeOperatorAndParameterBounds(KOTLIN_2_4, enabledInProgressiveMode = true, "KTLC-358"),
     ForbidPrivateToThisUnboundCallableReferences(KOTLIN_2_4, enabledInProgressiveMode = true, "KTLC-383"),
     AllowReifiedTypeInCatchClause(KOTLIN_2_4, issue = "KT-54363"),
     ApproximateLocalTypesInPublicDeclarations(KOTLIN_2_4, issue = "KT-82454"),
@@ -505,6 +504,7 @@ enum class LanguageFeature(
     ForbidReturnInExpressionBodyWithoutExplicitTypeEdgeCases(sinceVersion = KOTLIN_2_5, "KTLC-288"),
     ForbidExternalEnumEntriesAndPrimaryConstructorProperties(sinceVersion = KOTLIN_2_5, enabledInProgressiveMode = true, "KTLC-389"),
     ProperSupportOfInnerClassesInCallableReferenceLHS(sinceVersion = KOTLIN_2_5, "KTLC-388"),
+    ForbidUpperBoundsViolationOnTypeOperatorAndParameterBounds(KOTLIN_2_5, enabledInProgressiveMode = true, "KTLC-358"),
     ForbidUselessTypeArgumentsIn25(sinceVersion = KOTLIN_2_5, enabledInProgressiveMode = true, "KTLC-390"),
 
     // End of 2.* language features --------------------------------------------------
