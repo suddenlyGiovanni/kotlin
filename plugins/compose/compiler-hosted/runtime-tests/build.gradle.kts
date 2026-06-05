@@ -34,7 +34,7 @@ kotlin {
             implementation(kotlinTest("junit5"))
         }
 
-        val jvmTest by getting {
+        val jvmTest = getByName("jvmTest") {
             dependsOn(commonTest.get())
 
             dependencies {

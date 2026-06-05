@@ -6,7 +6,7 @@ plugins {
     kotlin("jvm")
 }
 
-val antlrTool by configurations.creating
+val antlrTool = configurations.create("antlrTool")
 
 dependencies {
     antlrTool(libs.antlr)
@@ -17,7 +17,7 @@ dependencies {
     compileOnly(intellijCore())
 }
 
-val generateJsParser by tasks.registering(JavaExec::class) {
+val generateJsParser = tasks.register("generateJsParser", JavaExec::class) {
     val outputPackage = "org.jetbrains.kotlin.js.parser.antlr.generated"
     val genSourceSet = layout.projectDirectory.dir("gen")
     val outputDir = genSourceSet.dir(outputPackage.replace('.', '/'))

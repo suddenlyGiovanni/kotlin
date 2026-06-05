@@ -19,12 +19,12 @@ plugins {
     alias(libs.plugins.gradle.crypto.checksum)
 }
 
-val nativeImageClasspath by configurations.creating {
+val nativeImageClasspath = configurations.create("nativeImageClasspath") {
     isCanBeConsumed = false
     isCanBeResolved = true
 }
 
-val pluginsRuntime by configurations.creating {
+val pluginsRuntime = configurations.create("pluginsRuntime") {
     isCanBeConsumed = false
     isCanBeResolved = true
 }
