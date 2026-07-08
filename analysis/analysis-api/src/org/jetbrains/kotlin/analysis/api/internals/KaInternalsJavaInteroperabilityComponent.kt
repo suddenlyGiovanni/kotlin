@@ -15,9 +15,7 @@ import org.jetbrains.kotlin.analysis.api.symbols.KaNamedClassSymbol
 import org.jetbrains.kotlin.analysis.api.symbols.KaPropertySymbol
 import org.jetbrains.kotlin.analysis.api.types.KaType
 import org.jetbrains.kotlin.analysis.api.types.KaTypeMappingMode
-import org.jetbrains.kotlin.load.kotlin.TypeMappingMode
 import org.jetbrains.kotlin.name.Name
-import org.jetbrains.org.objectweb.asm.Type
 
 @KaImplementationDetail
 @SubclassOptInRequired(KaImplementationDetail::class)
@@ -36,8 +34,6 @@ public interface KaInternalsJavaInteroperabilityComponent {
     public fun asKaType(psiType: PsiType, useSitePosition: PsiElement): KaType?
 
     public fun mapToJvmTypeDescriptor(type: KaType): String
-
-    public fun mapToJvmType(type: KaType, mode: TypeMappingMode): Type
 
     public fun isPrimitiveBacked(type: KaType): Boolean
 

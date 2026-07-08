@@ -48,7 +48,6 @@ import org.jetbrains.kotlin.descriptors.java.JavaVisibilities
 import org.jetbrains.kotlin.fileClasses.javaFileFacadeFqName
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.backend.jvm.FirJvmTypeMapper
-import org.jetbrains.kotlin.fir.backend.jvm.jvmTypeMapper
 import org.jetbrains.kotlin.fir.declarations.DirectDeclarationsAccess
 import org.jetbrains.kotlin.fir.declarations.FirProperty
 import org.jetbrains.kotlin.fir.declarations.hasAnnotation
@@ -86,21 +85,11 @@ import org.jetbrains.kotlin.psi.psiUtil.parentsWithSelf
 import org.jetbrains.kotlin.types.model.RigidTypeMarker
 import org.jetbrains.kotlin.types.updateArgumentModeFromAnnotations
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
-import org.jetbrains.org.objectweb.asm.Type
 
 internal class KaFirJavaInteroperabilityComponent(
     override val analysisSessionProvider: () -> KaFirSession,
 ) : KaBaseSessionComponent<KaFirSession>(), KaInternalsJavaInteroperabilityComponent, KaFirSessionComponent {
-    private val jvmTypeMapper: FirJvmTypeMapper by lazy {
-        when {
-            analysisSession.targetPlatform.has<JvmPlatform>() -> rootModuleSession.jvmTypeMapper
-            else -> {
-                // Type mapper is not registered in non-JVM sessions.
-                // Here we use its custom instance for generating Java-like types in multiplatform source-sets.
-                FirJvmTypeMapper(rootModuleSession)
-            }
-        }
-    }
+    private val jvmTypeMapper: FirJvmTypeMapper by lazy { createFirJvmTypeMapper(analysisSession) }
 
     /**
      * [useSitePosition] is used as pure psi, so there is no need to validate it.
@@ -287,10 +276,6 @@ internal class KaFirJavaInteroperabilityComponent(
 
     override fun mapToJvmTypeDescriptor(type: KaType): String {
         return jvmTypeMapper.mapType(type.coneType, TypeMappingMode.DEFAULT, sw = null, unresolvedQualifierRemapper = null).descriptor
-    }
-
-    override fun mapToJvmType(type: KaType, mode: TypeMappingMode): Type = withValidityAssertion {
-        return jvmTypeMapper.mapType(type.coneType, mode, sw = null, unresolvedQualifierRemapper = null)
     }
 
     override fun isPrimitiveBacked(type: KaType): Boolean = withValidityAssertion {

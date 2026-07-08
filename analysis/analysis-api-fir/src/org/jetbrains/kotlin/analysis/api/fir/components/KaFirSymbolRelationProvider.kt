@@ -484,26 +484,6 @@ internal class KaFirSymbolRelationProvider(
         }
     }
 
-    override fun getImplementationStatus(
-        symbol: KaCallableSymbol,
-        parentClassSymbol: KaClassSymbol,
-    ): ImplementationStatus? = symbol.withValidityAssertion {
-        if (symbol is KaReceiverParameterSymbol) return null
-
-        require(symbol is KaFirSymbol<*>)
-        require(parentClassSymbol is KaFirSymbol<*>)
-
-        // Inspecting implementation status requires resolving to status
-        val memberFir = symbol.firSymbol.fir as? FirCallableDeclaration ?: return null
-        val parentClassFir = parentClassSymbol.firSymbol.fir as? FirClass ?: return null
-        memberFir.lazyResolveToPhase(FirResolvePhase.STATUS)
-
-        val scopeSession = symbol.analysisSession.getScopeSessionFor(symbol.analysisSession.firSession)
-        return with(SessionHolderImpl(rootModuleSession, scopeSession)) {
-            memberFir.symbol.getImplementationStatus(parentClassFir.symbol)
-        }
-    }
-
     override fun implementationState(
         symbol: KaCallableSymbol,
         implementerClassSymbol: KaClassSymbol,
