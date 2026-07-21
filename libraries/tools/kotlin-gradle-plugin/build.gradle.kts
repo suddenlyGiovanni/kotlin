@@ -684,6 +684,9 @@ tasks.register<Test>("functionalTest") {
     systemProperty("org.gradle.project.android.builtInKotlin", "false")
     systemProperty("org.gradle.project.android.newDsl", "false")
 
+    // Fixme: KT-87883
+    systemProperty("org.gradle.project.android.sourceset.disallowProvider", "false")
+
     /* Provide a temp kotlin native distribution for the tests */
     useProvidedNativeBootstrapDistribution { distribution ->
         doFirst {
