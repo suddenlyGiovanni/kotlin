@@ -680,6 +680,9 @@ tasks.register<Test>("functionalTest") {
     @OptIn(TemporaryTestFederationApi::class)
     smokeTestConfig = SmokeTestConfig.RunAllTests
 
+    // These two lines are required for AGP 9+ to work with current KGP in tests
+    systemProperty("org.gradle.project.android.builtInKotlin", "false")
+    systemProperty("org.gradle.project.android.newDsl", "false")
 
     /* Provide a temp kotlin native distribution for the tests */
     useProvidedNativeBootstrapDistribution { distribution ->
@@ -738,9 +741,12 @@ tasks.withType<Test>().configureEach {
 dependencies {
     val implementation = project.configurations.getByName(functionalTestSourceSet.implementationConfigurationName)
     val compileOnly = project.configurations.getByName(functionalTestSourceSet.compileOnlyConfigurationName)
+    val runtimeOnly = project.configurations.getByName(functionalTestSourceSet.runtimeOnlyConfigurationName)
 
-    implementation(libs.android.gradle.plugin.gradle)
-    implementation(libs.android.gradle.plugin.gradle.api)
+    compileOnly(libs.android.gradle.plugin.gradle)
+    compileOnly(libs.android.gradle.plugin.gradle.api)
+    runtimeOnly(libs.android.gradle.plugin.gradle.latest)
+    runtimeOnly(libs.android.gradle.plugin.gradle.api.latest)
     compileOnly(libs.android.tools.common)
     implementation(gradleKotlinDsl())
     implementation(project(":kotlin-gradle-plugin-tcs-android"))
