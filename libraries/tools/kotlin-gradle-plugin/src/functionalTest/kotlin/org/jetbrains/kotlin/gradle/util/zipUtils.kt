@@ -20,6 +20,9 @@ internal fun zipTo(destination: File, contentDirectory: File) {
     ZipOutputStream(destination.outputStream().buffered()).use { out ->
         contentDirectory.walkTopDown().forEach { file ->
             val path = file.relativeTo(contentDirectory).path
+                .replace(File.separatorChar, '/') // Zip Entries always use '/' even on Windows
+                .takeIf { it.isNotEmpty() } // avoid creating a root `/` entry
+                ?: return@forEach
             if (file.isDirectory) {
                 out.putNextEntry(ZipEntry("$path/"))
                 return@forEach
@@ -39,7 +42,7 @@ internal fun unzipTo(destination: File, zipFile: File) {
         zip.stream().asSequence().forEach { entry ->
             val target = destination.resolve(entry.name)
             if (entry.isDirectory) {
-                target.mkdir()
+                target.mkdirs()
             } else {
                 @Suppress("DEPRECATION")
                 target.ensureParentDirsCreated()
