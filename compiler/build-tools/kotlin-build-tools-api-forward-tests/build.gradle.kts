@@ -1,7 +1,4 @@
 import org.gradle.kotlin.dsl.invoke
-import org.jetbrains.kotlin.testFederation.SmokeTestConfig
-import org.jetbrains.kotlin.testFederation.TemporaryTestFederationApi
-import org.jetbrains.kotlin.testFederation.smokeTestConfig
 import org.jetbrains.kotlin.tooling.core.KotlinToolingVersion
 
 plugins {
@@ -322,9 +319,6 @@ testing {
                         javaLauncher = JdkMajorVersion.JDK_1_8,
                         skipInLocalBuild = false
                     ) {
-                        @OptIn(TemporaryTestFederationApi::class)
-                        smokeTestConfig = SmokeTestConfig.RunAllTests
-
                         systemProperty("kotlin.build-tools-api.log.level", "DEBUG")
                         systemProperty(
                             "kotlin.daemon.custom.run.files.path.for.tests",

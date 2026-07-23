@@ -12,6 +12,8 @@ import org.jetbrains.kotlin.buildtools.tests.compilation.scenario.jsScenario
 import org.jetbrains.kotlin.buildtools.tests.compilation.scenario.jvmScenario
 import org.jetbrains.kotlin.buildtools.tests.compilation.scenario.wasmScenario
 import org.jetbrains.kotlin.buildtools.tests.compilation.util.btaClassloader
+import org.jetbrains.kotlin.testFederation.TestFederationMode
+import org.jetbrains.kotlin.testFederation.testFederationMode
 import org.jetbrains.kotlin.tooling.core.KotlinToolingVersion
 import org.jetbrains.kotlin.tooling.core.toKotlinVersion
 import org.junit.jupiter.api.Named
@@ -94,10 +96,14 @@ class DefaultStrategyAgnosticCompilationTestArgumentProvider : ArgumentsProvider
     companion object {
         fun namedStrategyArguments(): List<Named<Pair<KotlinToolchains, ExecutionPolicy>>> {
             return BtaVersionsCompilationTestArgumentProvider.namedStrategyArguments().flatMap { namedArgument ->
-                listOf(
+                listOfNotNull(
                     named(
                         "${namedArgument.name}[in-process]", namedArgument.payload to namedArgument.payload.createInProcessExecutionPolicy()
-                    ), named("${namedArgument.name}[daemon]", namedArgument.payload to namedArgument.payload.daemonExecutionPolicy())
+                    ),
+                    // We do not test the daemon when running in Smoke test mode
+                    if (testFederationMode != TestFederationMode.Smoke) {
+                        named("${namedArgument.name}[daemon]", namedArgument.payload to namedArgument.payload.daemonExecutionPolicy())
+                    } else null
                 )
             }
         }

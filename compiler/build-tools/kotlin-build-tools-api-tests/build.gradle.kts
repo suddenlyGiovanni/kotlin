@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.testFederation.SmokeTestConfig
-import org.jetbrains.kotlin.testFederation.TemporaryTestFederationApi
-import org.jetbrains.kotlin.testFederation.smokeTestConfig
 import org.jetbrains.kotlin.tooling.core.KotlinToolingVersion
 
 plugins {
@@ -89,6 +86,7 @@ dependencies {
     compileOnly(project(":compiler:build-tools:kotlin-build-tools-api"))
     compileOnly(project(":compiler:build-tools:kotlin-build-tools-compat"))
     api(testFixtures(project(":compiler:test-infrastructure-utils"))) // for `@TestDataPath`/`@TestMetadata`
+    api(testFederationRuntime)
 
     api(platform(libs.junit.bom))
     compileOnly(libs.junit.jupiter.engine)
@@ -278,9 +276,6 @@ testing {
                             javaLauncher = JdkMajorVersion.JDK_1_8,
                             skipInLocalBuild = false
                         ) {
-                            @OptIn(TemporaryTestFederationApi::class)
-                            smokeTestConfig = SmokeTestConfig.RunAllTests
-
                             ensureExecutedAgainstExpectedBuildToolsImplVersion(implVersion)
                             systemProperty("kotlin.build-tools-api.log.level", "DEBUG")
                         }
